@@ -1,17 +1,23 @@
-nav {
+.nav {
   width: 100vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 0 0 0 3.13rem;
+  padding: 2.5rem 0 0 3.13rem;
   justify-content: space-between;
   position: fixed;
   top: 0;
   left: 0;
 }
 
+@media screen and (max-width: 1339px) {
+  .nav {
+    padding-top: 0;
+  }
+}
+
 @media screen and (max-width: 767px) {
-  nav {
+  .nav {
     padding: 1.56rem;
   }
 }
