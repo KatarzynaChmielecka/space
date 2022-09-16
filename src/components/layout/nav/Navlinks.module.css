@@ -54,7 +54,7 @@ span {
   display: none;
 }
 
-@media screen and (max-width: 1339px) {
+@media screen and (max-width: 1439px) {
   .navlinks-wrapper {
     width: 28.13rem;
     padding: 2.5rem 2.94rem;

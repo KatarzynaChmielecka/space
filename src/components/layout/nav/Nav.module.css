@@ -1,16 +1,15 @@
 .nav {
-  width: 100vw;
+  width: 100%;
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  padding: 2.5rem 0 0 3.13rem;
   justify-content: space-between;
+  padding: 2.5rem 0 0 3.13rem;
   position: fixed;
   top: 0;
   left: 0;
 }
 
-@media screen and (max-width: 1339px) {
+@media screen and (max-width: 1439px) {
   .nav {
     padding-top: 0;
   }
