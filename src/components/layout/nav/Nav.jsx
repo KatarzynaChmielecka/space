@@ -1,12 +1,13 @@
-import { NavLink } from 'react-router-dom';
+import Logo from '../../../assets/shared/logo.svg';
+import Navlinks from './Navlinks';
+import classes from './Nav.module.css';
 
 const Nav = () => {
   return (
-    <nav>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/crew">Crew</NavLink>
-      <NavLink to="/destination">Destination</NavLink>
-      <NavLink to="/technology">Technology</NavLink>
+    <nav className={classes.nav}>
+      <img src={Logo} alt="App logo" />
+
+      <Navlinks />
     </nav>
   );
 };

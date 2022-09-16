@@ -1,16 +1,15 @@
 import { Outlet } from 'react-router-dom';
 
-import Footer from './footer/Footer';
 import Nav from './nav/Nav';
+import classes from './Layout.module.css';
 
 const Layout = () => {
   return (
     <>
       <Nav />
-      <main>
+      <main className={classes.layout}>
         <Outlet />
       </main>
-      <Footer />
     </>
   );
 };
