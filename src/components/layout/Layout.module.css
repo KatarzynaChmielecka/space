@@ -1,9 +1,12 @@
+
 .layout {
-  max-width: 1440px;
- /* width: fit-content; */
-  padding: 100px 0 0 0;
-  height: 100vh;
-  display:flex;
-  justify-content: center;
-  /* width: 100%; */
+  width: '100%';
+  /* max-width: 1440px; */
+  display: flex;
+  /* justify-content: flex-end; */
+  padding: 13.48rem 0 0 0;
+  background-image: url("../../assets/home/background-home-desktop.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
 }

@@ -1,7 +1,7 @@
 const Home = () => {
   return (
     <>
-      <div>Home</div>
+      <div style={{ width: '100%' }}>Home</div>
     </>
   );
 };
