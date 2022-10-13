@@ -1,19 +1,25 @@
-
-
 a {
   text-decoration: none;
-  color:inherit}
+  color: inherit;
+}
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: 'Bellefair', serif;
+  /* color: yellow; */
 }
 
-body{
-  background-image:url('../src/assets/home/background-home-mobile.jpg');
-  /* background-size: contain; */
-  display: flex;
-  /* justify-content: flex-end;
+/* body { */
+  /* background-image:url('../src/assets/home/background-home-mobile.jpg');
+  background-size: cover;
+  background-repeat: no-repeat; */
+  /* display: flex;
+  justify-content: center;
   width: 100%; */
+/* } */
+
+.App {
+  display: flex;
+  justify-content: center;
 }

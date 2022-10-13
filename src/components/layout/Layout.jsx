@@ -7,6 +7,7 @@ const Layout = () => {
   return (
     <>
       <Nav />
+
       <main className={classes.layout}>
         <Outlet />
       </main>
