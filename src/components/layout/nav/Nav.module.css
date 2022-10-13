@@ -7,7 +7,7 @@
   padding: 2.5rem 0 0 3.13rem;
   position: fixed;
   top: 0;
-  left: calc(50%-50%);
+  /* left: calc(50%-50%); */
 }
 
 @media screen and (max-width: 1439px) {
