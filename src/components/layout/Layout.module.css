@@ -1,11 +1,13 @@
-
 .layout {
-  width: '100%';
-  /* max-width: 1440px; */
+  height: 100vh;
+  max-width: 90rem;
+  width: 100%;
   display: flex;
-  /* justify-content: flex-end; */
+  justify-content: center;
   padding: 13.48rem 0 0 0;
-  background-image: url("../../assets/home/background-home-desktop.jpg");
+
+  /* background only for tests */
+  background-image: url('../../assets/home/background-home-desktop.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   color: #fff;
