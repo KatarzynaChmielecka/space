@@ -2,11 +2,11 @@ import './App.css';
 
 import { Route, Routes } from 'react-router-dom';
 
-import Crew from './pages/Crew';
-import Destination from './pages/Destination';
-import Home from './pages/Home';
+import Crew from './pages/CrewPage';
+import Destination from './pages/DestinationPage';
+import Home from './pages/HomePage';
 import Layout from './components/layout/Layout';
-import Technology from './pages/Technology';
+import Technology from './pages/TechnologyPage';
 
 function App() {
   return (
