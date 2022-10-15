@@ -47,14 +47,13 @@ span {
   position: absolute;
   left: -28rem;
   top: 50%;
-  display: none;
 }
 
 .navlinks-wrapper-mobile {
   display: none;
 }
 
-@media screen and (max-width: 1439px) {
+@media screen and (max-width: 1440px) {
   .navlinks-wrapper {
     width: 28.13rem;
     padding: 2.5rem 2.94rem;
@@ -63,8 +62,11 @@ span {
   span {
     display: none;
   }
+  .hr {
+    display: none;
+  }
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .navlinks-wrapper {
     display: none;
   }

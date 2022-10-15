@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import classes from './HomePage.module.css';
 
 const Home = () => {
@@ -16,9 +18,12 @@ const Home = () => {
             world experience!
           </p>
         </div>
-        <div className={classes['home-page-wrapper__content-right']}>
+        <Link
+          to="/destination"
+          className={classes['home-page-wrapper__content-right']}
+        >
           <p className={classes['home-page-wrapper__explore']}>EXPLORE</p>
-        </div>
+        </Link>
       </div>
     </>
   );

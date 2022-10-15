@@ -42,6 +42,10 @@
   justify-content: center;
   align-items: center;
 }
+.home-page-wrapper__content-right:hover {
+  cursor: pointer;
+  outline: 5.5rem solid #25252f;
+}
 
 .home-page-wrapper__explore {
   color: #0b0d17;
@@ -102,7 +106,7 @@
   .home-page-wrapper__content-right {
     width: 9.38rem;
     height: 9.38rem;
-    margin:0 0 -2.81rem 0;
+    margin: 0 0 -2.81rem 0;
   }
   .home-page-wrapper__explore {
     font-size: 1.25rem;
