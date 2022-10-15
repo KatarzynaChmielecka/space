@@ -1,14 +1,14 @@
 .navlinks-wrapper {
+  backdrop-filter: blur(5rem);
+  background: rgba(255, 255, 255, 0.04);
   color: #fff;
   display: flex;
-  width: 51.88rem;
-  justify-content: space-between;
   font-weight: 400;
-  position: relative;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(5rem);
+  justify-content: space-between;
   padding: 2.5rem 10.31rem 2.5rem 7.81rem;
   position: relative;
+  position: relative;
+  width: 51.88rem;
 }
 .menu-button {
   display: none;
@@ -20,21 +20,21 @@
   position: relative;
 }
 .active::after {
-  content: '';
-  width: 100%;
   border-bottom: 0.19rem solid #fff;
-  position: absolute;
   bottom: -2.5rem;
+  content: '';
   left: 0;
+  position: absolute;
+  width: 100%;
 }
 
 .link:hover::after {
-  content: '';
-  width: 100%;
   border-bottom: 0.19rem solid #8a8b90;
-  position: absolute;
   bottom: -2.5rem;
+  content: '';
   left: 0;
+  position: absolute;
+  width: 100%;
 }
 
 span {
@@ -42,11 +42,11 @@ span {
 }
 
 .hr {
+  left: -28rem;
+  position: absolute;
+  top: 50%;
   width: 30rem;
   z-index: 100;
-  position: absolute;
-  left: -28rem;
-  top: 50%;
 }
 
 .navlinks-wrapper-mobile {
@@ -55,9 +55,9 @@ span {
 
 @media screen and (max-width: 1440px) {
   .navlinks-wrapper {
-    width: 28.13rem;
-    padding: 2.5rem 2.94rem;
     font-size: 0.88rem;
+    padding: 2.5rem 2.94rem;
+    width: 28.13rem;
   }
   span {
     display: none;
@@ -72,18 +72,18 @@ span {
   }
 
   .navlinks-wrapper-mobile {
+    backdrop-filter: blur(5.1rem);
+    background: #ffffff0a;
+    color: #fff;
     display: flex;
     flex-direction: column;
-    z-index: 300;
-    width: 15.88rem;
     height: 100vh;
+    letter-spacing: 3px;
     position: fixed;
     right: 0;
     top: 0;
-    background: #ffffff0a;
-    backdrop-filter: blur(5.1rem);
-    color: #fff;
-    letter-spacing: 3px;
+    width: 15.88rem;
+    z-index: 300;
   }
 
   .navlinks-wrapper-mobile .link {
@@ -100,28 +100,28 @@ span {
   }
 
   .active-mobile::after {
+    border-right: 0.19rem solid #fff;
     content: '';
     height: 2rem;
-    border-right: 0.19rem solid #fff;
     position: absolute;
     right: 0;
     top: -0.44rem;
   }
 
   .backdrop {
-    width: 100vw;
     height: 100vh;
-    z-index: 200;
+    left: 0;
     position: fixed;
     top: 0;
-    left: 0;
+    width: 100vw;
+    z-index: 200;
   }
 
   .menu-button {
-    color: #d0d6f9;
-    display: block;
     background: none;
     border: none;
+    color: #d0d6f9;
+    display: block;
   }
   button .icon {
     font-size: 2.5rem;

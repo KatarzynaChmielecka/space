@@ -1,8 +1,8 @@
 .layout {
+  color: #fff;
+  display: flex;
   height: 100vh;
+  justify-content: center;
   max-width: 90rem;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  color: #fff;
 }
