@@ -4,11 +4,5 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 13.48rem 0 0 0;
-
-  /* background only for tests */
-  background-image: url('../../assets/home/background-home-desktop.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
   color: #fff;
 }
