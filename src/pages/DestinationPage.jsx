@@ -57,7 +57,7 @@ const Destination = () => {
             </TabPanelUnstyled>
           ))} */}
 
-        <TabPanelUnstyled value={0} style={{  display: 'flex' }}>
+        <TabPanelUnstyled value={0} style={{ display: 'flex' }}>
           <DestinationTab
             src={data.destinations[0].images.webp}
             alt={data.destinations[0].name}
@@ -68,7 +68,7 @@ const Destination = () => {
           />
         </TabPanelUnstyled>
 
-        <TabPanelUnstyled value={1} style={{  display: 'flex' }}>
+        <TabPanelUnstyled value={1} style={{ display: 'flex' }}>
           <DestinationTab
             src={data.destinations[1].images.webp}
             alt={data.destinations[1].name}
@@ -79,7 +79,7 @@ const Destination = () => {
           />
         </TabPanelUnstyled>
 
-        <TabPanelUnstyled value={2} style={{  display: 'flex' }}>
+        <TabPanelUnstyled value={2} style={{ display: 'flex' }}>
           <DestinationTab
             src={data.destinations[2].images.webp}
             alt={data.destinations[2].name}
