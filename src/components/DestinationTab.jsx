@@ -26,19 +26,47 @@ const DestinationTab = ({ src, alt, name, description, distance, travel }) => {
         >
           {description}
         </p>
-        <hr style={{ border: '1px solid #383B4B' }} />
-        <div style={{ display: 'flex' }}>
+        <hr style={{ border: '1px solid #383B4B', margin: '54px 0 28px 0' }} />
+        <div style={{ display: 'flex', gap: '80px' }}>
           <div>
-            <p style={{ fontFamily: 'Barlow Condensed, sans-serif' }}>
+            <p
+              style={{
+                fontFamily: 'Barlow Condensed, sans-serif',
+                color: '#D0D6F9',
+                fontSize: '14px',
+              }}
+            >
               AVG. DISTANCE
             </p>
-            <p>{distance}</p>
+            <p
+              style={{
+                margin: '12px 0 0 0',
+                fontSize: '28px',
+                textTransform: 'uppercase',
+              }}
+            >
+              {distance}
+            </p>
           </div>
           <div>
-            <p style={{ fontFamily: 'Barlow Condensed, sans-serif' }}>
+            <p
+              style={{
+                fontFamily: 'Barlow Condensed, sans-serif',
+                color: '#D0D6F9',
+                fontSize: '14px',
+              }}
+            >
               EST. TRAVEL TIME
             </p>
-            <p>{travel}</p>
+            <p
+              style={{
+                margin: '12px 0 0 0',
+                fontSize: '28px',
+                textTransform: 'uppercase',
+              }}
+            >
+              {travel}
+            </p>
           </div>
         </div>
       </div>
