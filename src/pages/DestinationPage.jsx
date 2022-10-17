@@ -4,23 +4,60 @@ import TabsListUnstyled from '@mui/base/TabsListUnstyled';
 import TabsUnstyled from '@mui/base/TabsUnstyled';
 
 import DestinationTab from '../components/DestinationTab';
+import classes from './DestinationPage.module.css';
 import data from '../data.json';
-
-// import classes from './DestinationPage.module.css';
 
 const Destination = () => {
   return (
-    <div style={{ width: '100%', background: 'grey' }}>
-      <TabsUnstyled defaultValue={0} style={{ margin: '200px 0 0 0' }}>
-        <TabsListUnstyled style={{ textAlign: 'right' }}>
-          <TabUnstyled>{data.destinations[0].name}</TabUnstyled>
-          <TabUnstyled>{data.destinations[1].name}</TabUnstyled>
-          <TabUnstyled>{data.destinations[2].name}</TabUnstyled>
-          <TabUnstyled>{data.destinations[3].name}</TabUnstyled>
-        </TabsListUnstyled>
-
+    <div className={classes['destination-page-wrapper']}>
+      <h1 className={classes['destination-page-wrapper__title']}>
+        <span>01</span> PICK YOUR DESTINATION
+      </h1>
+      <TabsUnstyled defaultValue={0}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'end',
+            marginRight: '320px',
+          }}
+        >
+          <TabsListUnstyled
+            className={classes['destination-page-wrapper__menu']}
+          >
+            <TabUnstyled className={classes['destination-page-wrapper__tab']}>
+              {data.destinations[0].name}
+            </TabUnstyled>
+            <TabUnstyled className={classes['destination-page-wrapper__tab']}>
+              {data.destinations[1].name}
+            </TabUnstyled>
+            <TabUnstyled className={classes['destination-page-wrapper__tab']}>
+              {data.destinations[2].name}
+            </TabUnstyled>
+            <TabUnstyled className={classes['destination-page-wrapper__tab']}>
+              {data.destinations[3].name}
+            </TabUnstyled>
+          </TabsListUnstyled>
+        </div>
         {/* content of tabs */}
-        <TabPanelUnstyled value={0} style={{ color: 'red', display: 'flex' }}>
+
+        {/* {data &&
+          data.destinations.map((index) => (
+            <TabPanelUnstyled
+              key={index.name}
+              value={index.name ? index.name : ''}
+            >
+              <DestinationTab
+                src={index.images.webp}
+                alt={index.name}
+                name={index.name}
+                description={index.description}
+                distance={index.distance}
+                travel={index.travel}
+              />
+            </TabPanelUnstyled>
+          ))} */}
+
+        <TabPanelUnstyled value={0} style={{  display: 'flex' }}>
           <DestinationTab
             src={data.destinations[0].images.webp}
             alt={data.destinations[0].name}
@@ -31,7 +68,7 @@ const Destination = () => {
           />
         </TabPanelUnstyled>
 
-        <TabPanelUnstyled value={1} style={{ color: 'red', display: 'flex' }}>
+        <TabPanelUnstyled value={1} style={{  display: 'flex' }}>
           <DestinationTab
             src={data.destinations[1].images.webp}
             alt={data.destinations[1].name}
@@ -42,7 +79,7 @@ const Destination = () => {
           />
         </TabPanelUnstyled>
 
-        <TabPanelUnstyled value={2} style={{ color: 'red', display: 'flex' }}>
+        <TabPanelUnstyled value={2} style={{  display: 'flex' }}>
           <DestinationTab
             src={data.destinations[2].images.webp}
             alt={data.destinations[2].name}
