@@ -1,6 +1,13 @@
-import PropTypes from 'prop-types';
+import { DestinationTabInterface } from '../types/interfaces';
 
-const DestinationTab = ({ src, alt, name, description, distance, travel }) => {
+const DestinationTab = ({
+  src,
+  alt,
+  name,
+  description,
+  distance,
+  travel,
+}: DestinationTabInterface) => {
   return (
     <>
       <img src={src} alt={alt} style={{ margin: '0 160px 0 230px' }} />
@@ -72,15 +79,6 @@ const DestinationTab = ({ src, alt, name, description, distance, travel }) => {
       </div>
     </>
   );
-};
-
-DestinationTab.propTypes = {
-  src: PropTypes.string,
-  alt: PropTypes.string,
-  name: PropTypes.string,
-  description: PropTypes.string,
-  distance: PropTypes.string,
-  travel: PropTypes.string,
 };
 
 export default DestinationTab;
