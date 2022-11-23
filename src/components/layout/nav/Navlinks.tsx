@@ -26,7 +26,7 @@ const Navlinks = () => {
             key={item.id}
             to={item.href}
             className={({ isActive }) =>
-              isActive ? [classes.active] : [classes.link]
+              isActive ? classes.active : classes.link
             }
             style={{}}
           >
@@ -60,7 +60,7 @@ const Navlinks = () => {
                 key={item.id}
                 to={item.href}
                 className={({ isActive }) =>
-                  isActive ? `${classes['active-mobile']}` : [classes.link]
+                  isActive ? `${classes['active-mobile']}` : classes.link
                 }
                 onClick={closeMenu}
               >
