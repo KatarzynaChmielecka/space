@@ -1,0 +1,80 @@
+.planet-image {
+  margin: 0 160px 0 230px;
+}
+
+.destination-tab-content {
+  display: flex;
+  flex-direction: column;
+  /* align-items:center; */
+  width: 445px;
+}
+
+.destination-tab-content__planet {
+  font-size: 100px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  text-transform: uppercase;
+}
+
+.destination-tab-content__description {
+  color: #d0d6f9;
+  font-family: Barlow Condensed, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: center;
+}
+
+.destination-tab-content hr {
+  border: 1px solid #383b4b;
+  margin: 54px 0 28px 0;
+  width: 100%;
+}
+
+.destination-tab-content__fun-fact {
+  display: flex;
+  gap: 80px;
+}
+
+.destination-tab-content__fun-fact-title {
+  color: #d0d6f9;
+  font-family: Barlow Condensed, sans-serif;
+  font-size: 14px;
+}
+
+.destination-tab-content__fun-fact-value {
+  font-size: 28px;
+  margin: 12px 0 0 0;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 1440px) {
+  .planet-image {
+    height: auto;
+    margin: 0;
+    width: 300px;
+  }
+
+  .destination-tab-content {
+    align-items: center;
+  }
+
+  .destination-tab-content__planet {
+    font-size: 80px;
+    margin-bottom: 0;
+    margin-top: 20px;
+  }
+
+  .destination-tab-content__description {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .destination-tab-content hr {
+    margin: 50px 0 16px 0;
+  }
+
+  .destination-tab-content__fun-fact {
+    margin: 10px 0 0 0;
+  }
+}

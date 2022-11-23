@@ -1,3 +1,4 @@
+import classes from './DestinationTab.module.css';
 import { DestinationTabInterface } from '../types/interfaces';
 
 const DestinationTab = ({
@@ -10,68 +11,27 @@ const DestinationTab = ({
 }: DestinationTabInterface) => {
   return (
     <>
-      <img src={src} alt={alt} style={{ margin: '0 160px 0 230px' }} />
-      <div style={{ display: 'flex', flexDirection: 'column', width: '445px' }}>
-        <h1
-          style={{
-            textTransform: 'uppercase',
-            fontSize: '100px',
-            marginTop: '40px',
-            marginBottom: '40px',
-          }}
-        >
-          {name}
-        </h1>
-        <p
-          style={{
-            fontFamily: 'Barlow Condensed, sans-serif',
-            fontSize: '18px',
-            lineHeight: '32px',
-            fontWeight: '400',
-            color: '#D0D6F9',
-          }}
-        >
+      <img src={src} alt={alt} className={classes['planet-image']} />
+      <div className={classes['destination-tab-content']}>
+        <h1 className={classes['destination-tab-content__planet']}>{name}</h1>
+        <p className={classes['destination-tab-content__description']}>
           {description}
         </p>
-        <hr style={{ border: '1px solid #383B4B', margin: '54px 0 28px 0' }} />
-        <div style={{ display: 'flex', gap: '80px' }}>
+        <hr />
+        <div className={classes['destination-tab-content__fun-fact']}>
           <div>
-            <p
-              style={{
-                fontFamily: 'Barlow Condensed, sans-serif',
-                color: '#D0D6F9',
-                fontSize: '14px',
-              }}
-            >
+            <p className={classes['destination-tab-content__fun-fact-title']}>
               AVG. DISTANCE
             </p>
-            <p
-              style={{
-                margin: '12px 0 0 0',
-                fontSize: '28px',
-                textTransform: 'uppercase',
-              }}
-            >
+            <p className={classes['destination-tab-content__fun-fact-value']}>
               {distance}
             </p>
           </div>
           <div>
-            <p
-              style={{
-                fontFamily: 'Barlow Condensed, sans-serif',
-                color: '#D0D6F9',
-                fontSize: '14px',
-              }}
-            >
+            <p className={classes['destination-tab-content__fun-fact-title']}>
               EST. TRAVEL TIME
             </p>
-            <p
-              style={{
-                margin: '12px 0 0 0',
-                fontSize: '28px',
-                textTransform: 'uppercase',
-              }}
-            >
+            <p className={classes['destination-tab-content__fun-fact-value']}>
               {travel}
             </p>
           </div>

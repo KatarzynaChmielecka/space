@@ -41,7 +41,8 @@ const Destination = () => {
           <TabPanelUnstyled
             key={index.name}
             value={item}
-            style={{ display: 'flex' }}
+            // style={{ display: 'flex'}}
+            className={classes['destination-page-tab-panel']}
           >
             <DestinationTab
               src={index.images.webp}
