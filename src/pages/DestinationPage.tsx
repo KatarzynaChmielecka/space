@@ -14,13 +14,7 @@ const Destination = () => {
         <span>01</span> PICK YOUR DESTINATION
       </h1>
       <TabsUnstyled defaultValue={0}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'end',
-            marginRight: '320px',
-          }}
-        >
+        <div className={classes['destination-page__menu']}>
           <TabsListUnstyled
             className={classes['destination-page-wrapper__menu']}
           >
@@ -41,7 +35,6 @@ const Destination = () => {
           <TabPanelUnstyled
             key={index.name}
             value={item}
-            // style={{ display: 'flex'}}
             className={classes['destination-page-tab-panel']}
           >
             <DestinationTab

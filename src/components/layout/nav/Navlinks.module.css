@@ -37,7 +37,7 @@
   width: 100%;
 }
 
-span {
+.link span {
   font-weight: 700;
 }
 
@@ -59,7 +59,7 @@ span {
     padding: 2.5rem 2.94rem;
     width: 28.13rem;
   }
-  span {
+  .link span {
     display: none;
   }
   .hr {

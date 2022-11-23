@@ -1,58 +1,56 @@
 .planet-image {
-  margin: 0 160px 0 230px;
+  margin: 0 10rem 0 14.38rem;
 }
 
 .destination-tab-content {
   display: flex;
   flex-direction: column;
-  /* align-items:center; */
-  width: 445px;
+  width: 27.81rem;
 }
 
 .destination-tab-content__planet {
-  font-size: 100px;
-  margin-bottom: 40px;
-  margin-top: 40px;
+  font-size: 6.25rem;
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
   text-transform: uppercase;
 }
 
 .destination-tab-content__description {
   color: #d0d6f9;
   font-family: Barlow Condensed, sans-serif;
-  font-size: 18px;
+  font-size: 1.13rem;
   font-weight: 400;
-  line-height: 32px;
+  line-height: 2rem;
   text-align: center;
 }
 
 .destination-tab-content hr {
-  border: 1px solid #383b4b;
-  margin: 54px 0 28px 0;
+  border: 0.06rem solid #383b4b;
+  margin: 3.38rem 0 1.75rem 0;
   width: 100%;
 }
 
 .destination-tab-content__fun-fact {
   display: flex;
-  gap: 80px;
+  gap: 5rem;
 }
 
 .destination-tab-content__fun-fact-title {
   color: #d0d6f9;
   font-family: Barlow Condensed, sans-serif;
-  font-size: 14px;
+  font-size: 0.88rem;
 }
 
 .destination-tab-content__fun-fact-value {
-  font-size: 28px;
-  margin: 12px 0 0 0;
+  font-size: 1.75rem;
+  margin: 0.75rem 0 0 0;
   text-transform: uppercase;
 }
-
 @media screen and (max-width: 1440px) {
   .planet-image {
     height: auto;
     margin: 0;
-    width: 300px;
+    width: 18.75rem;
   }
 
   .destination-tab-content {
@@ -60,21 +58,21 @@
   }
 
   .destination-tab-content__planet {
-    font-size: 80px;
+    font-size: 5rem;
     margin-bottom: 0;
-    margin-top: 20px;
+    margin-top: 1.25rem;
   }
 
   .destination-tab-content__description {
-    font-size: 16px;
-    line-height: 28px;
+    font-size: 1rem;
+    line-height: 1.75rem;
   }
 
   .destination-tab-content hr {
-    margin: 50px 0 16px 0;
+    margin: 3.13rem 0 1rem 0;
   }
 
   .destination-tab-content__fun-fact {
-    margin: 10px 0 0 0;
+    margin: 0.63rem 0 0 0;
   }
 }
