@@ -5,7 +5,7 @@
 .destination-tab-content {
   display: flex;
   flex-direction: column;
- max-width: 27.81rem;
+  max-width: 27.81rem;
 }
 
 .destination-tab-content__planet {
@@ -22,7 +22,6 @@
   font-weight: 400;
   line-height: 2rem;
   text-align: center;
-  /* width: 100%; */
 }
 
 .destination-tab-content hr {

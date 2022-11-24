@@ -77,8 +77,8 @@
     color: #fff;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    letter-spacing: 3px;
+height:100vh;
+    letter-spacing: 0.19rem;
     position: fixed;
     right: 0;
     top: 0;

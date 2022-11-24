@@ -18,11 +18,10 @@ const Destination = () => {
           <TabsListUnstyled
             className={classes['destination-page-wrapper__menu']}
           >
-            {data.destinations.map((index, element) => (
+            {data.destinations.map((index) => (
               <TabUnstyled
                 key={index.name}
                 className={classes['destination-page-wrapper__tab']}
-                onClick={() => console.log(element)}
               >
                 {index.name}
               </TabUnstyled>
