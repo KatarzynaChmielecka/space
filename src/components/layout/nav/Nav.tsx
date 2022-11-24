@@ -1,4 +1,4 @@
-import Logo from '../../../assets/shared/logo.svg';
+import Logo from '../../../assets/logo.svg';
 import Navlinks from './Navlinks';
 import classes from './Nav.module.css';
 

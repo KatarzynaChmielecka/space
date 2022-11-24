@@ -26,7 +26,7 @@ const Navlinks = () => {
             key={item.id}
             to={item.href}
             className={({ isActive }) =>
-              isActive ? [classes.active] : [classes.link]
+              isActive ? classes.active : classes.link
             }
             style={{}}
           >
@@ -36,7 +36,7 @@ const Navlinks = () => {
       </div>
 
       {!open && (
-        <button className={classes['menu-button']}>
+        <button className={classes['menu-button']} aria-label="Open menu">
           <MenuIcon
             onClick={() => setOpen(true)}
             role="button"
@@ -47,7 +47,10 @@ const Navlinks = () => {
 
       {open && (
         <>
-          <div className={classes['navlinks-wrapper-mobile']}>
+          <div
+            className={classes['navlinks-wrapper-mobile']}
+            aria-label="Close menu"
+          >
             <CloseIcon
               onClick={() => setOpen(false)}
               role="button"
@@ -60,7 +63,7 @@ const Navlinks = () => {
                 key={item.id}
                 to={item.href}
                 className={({ isActive }) =>
-                  isActive ? `${classes['active-mobile']}` : [classes.link]
+                  isActive ? `${classes['active-mobile']}` : classes.link
                 }
                 onClick={closeMenu}
               >

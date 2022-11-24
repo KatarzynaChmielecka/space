@@ -37,7 +37,7 @@
   width: 100%;
 }
 
-span {
+.link span {
   font-weight: 700;
 }
 
@@ -52,16 +52,16 @@ span {
 .navlinks-wrapper-mobile {
   display: none;
 }
-
+.active span, .link span {
+  display: none;
+}
 @media screen and (max-width: 1440px) {
   .navlinks-wrapper {
     font-size: 0.88rem;
     padding: 2.5rem 2.94rem;
     width: 28.13rem;
   }
-  span {
-    display: none;
-  }
+  
   .hr {
     display: none;
   }
@@ -78,7 +78,7 @@ span {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    letter-spacing: 3px;
+    letter-spacing: 0.19rem;
     position: fixed;
     right: 0;
     top: 0;
@@ -90,6 +90,9 @@ span {
     padding: 0 0 2rem 2rem;
   }
 
+  .navlinks-wrapper-mobile span{
+    display:inline
+  }
   .active,
   .link:hover::after {
     display: none;

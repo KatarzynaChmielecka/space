@@ -5,7 +5,7 @@
   align-items: flex-end;
   justify-content: space-between;
   color: #d0d6f9;
-  background-image: url('../assets/home/background-home-desktop.jpg');
+  background-image: url('../../public/assets/home/background-home-desktop.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -58,7 +58,7 @@
     align-items: center;
     text-align: center;
     padding: 12.5rem 10.31rem 8.13rem;
-    background-image: url('../assets/home/background-home-tablet.jpg');
+    background-image: url('../../public/assets/home/background-home-tablet.jpg');
   }
 
   .home-page-wrapper__content-left {
@@ -84,7 +84,7 @@
 @media screen and (max-width: 768px) {
   .home-page-wrapper {
     justify-content: space-between;
-    background-image: url('../assets/home/background-home-mobile.jpg');
+    background-image: url('../../public/assets/home/background-home-mobile.jpg');
     padding: 7.19rem 10.31rem 8.13rem;
   }
   .home-page-wrapper__content-left {

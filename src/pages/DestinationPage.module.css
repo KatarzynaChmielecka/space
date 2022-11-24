@@ -1,0 +1,105 @@
+.destination-page-wrapper {
+  background: url('../../public/assets/destination/background-destination-desktop.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 13.13rem 0 0 0;
+  width: 100%;
+}
+
+.destination-page-wrapper__title {
+  font-family: Barlow Condensed, sans-serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: 0.3rem;
+  line-height: 2.13rem;
+  margin: 0 0 0 10.31rem;
+}
+
+.destination-page-wrapper__title span {
+  margin: 0 1rem 0 0;
+  opacity: 0.25;
+}
+
+.destination-page__menu {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20rem;
+}
+
+.destination-page-wrapper__menu {
+  display: flex;
+  justify-content: space-between;
+  margin: 4rem 0 0 0;
+  width: 17.81rem;
+}
+
+.destination-page-wrapper__tab {
+  background: none;
+  border: none;
+  color: #fff;
+  font-family: Barlow Condensed, sans-serif;
+  font-size: 1rem;
+  height: 2.13rem;
+  letter-spacing: 0.17rem;
+  padding: 0 0 2.5rem 0;
+  text-transform: uppercase;
+}
+
+.destination-page-wrapper__tab:hover {
+  border-bottom: 0.19rem solid #8a8b90;
+  cursor: pointer;
+  margin: 0 0 0 1.25rem;
+}
+.destination-page-wrapper__tab:focus {
+  border-bottom: 0.19rem solid #fff;
+}
+
+.destination-page-tab-panel {
+  display: flex;
+}
+@media screen and (max-width: 1440px) {
+  .destination-page-wrapper {
+    background: url('../../public/assets/destination/background-destination-tablet.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-y: auto;
+  }
+
+  .destination-page-wrapper__title {
+    font-size: 1.25rem;
+    margin: 0 0 0 2.5rem;
+  }
+
+  .destination-page__menu {
+    justify-content: center;
+    margin-right: 0;
+  }
+
+  .destination-page-wrapper__menu {
+    height: 3.13rem;
+    margin: 3.13rem 0 0 0;
+  }
+
+  .destination-page-tab-panel {
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .destination-page-wrapper {
+    background: url('../../public/assets/destination/background-destination-mobile.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 5.63rem 1.5rem 0 1.5rem;
+  }
+  .destination-page-wrapper__title {
+    font-size: 1rem;
+    margin: 0 0 -1.25rem 2.5rem;
+    text-align: center;
+  }
+
+  .destination-page-wrapper__tab {
+    font-size: 0.88rem;
+  }
+}
