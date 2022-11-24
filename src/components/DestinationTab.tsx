@@ -19,7 +19,7 @@ const DestinationTab = ({
         </p>
         <hr />
         <div className={classes['destination-tab-content__fun-fact']}>
-          <div>
+          <div className={classes['destination-tab-content__fun-fact-center']}>
             <p className={classes['destination-tab-content__fun-fact-title']}>
               AVG. DISTANCE
             </p>
@@ -27,7 +27,7 @@ const DestinationTab = ({
               {distance}
             </p>
           </div>
-          <div>
+          <div className={classes['destination-tab-content__fun-fact-center']}>
             <p className={classes['destination-tab-content__fun-fact-title']}>
               EST. TRAVEL TIME
             </p>

@@ -95,4 +95,8 @@
     flex-direction: column;
     gap: 2.25rem;
   }
+
+  .destination-tab-content__fun-fact-center{
+    text-align: center;
+  }
 }
