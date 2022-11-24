@@ -52,16 +52,16 @@
 .navlinks-wrapper-mobile {
   display: none;
 }
-
+.active span, .link span {
+  display: none;
+}
 @media screen and (max-width: 1440px) {
   .navlinks-wrapper {
     font-size: 0.88rem;
     padding: 2.5rem 2.94rem;
     width: 28.13rem;
   }
-  .link span {
-    display: none;
-  }
+  
   .hr {
     display: none;
   }
@@ -77,7 +77,7 @@
     color: #fff;
     display: flex;
     flex-direction: column;
-height:100vh;
+    height: 100vh;
     letter-spacing: 0.19rem;
     position: fixed;
     right: 0;
@@ -90,6 +90,9 @@ height:100vh;
     padding: 0 0 2rem 2rem;
   }
 
+  .navlinks-wrapper-mobile span{
+    display:inline
+  }
   .active,
   .link:hover::after {
     display: none;
