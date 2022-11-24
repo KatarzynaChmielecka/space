@@ -5,7 +5,7 @@
 .destination-tab-content {
   display: flex;
   flex-direction: column;
-  width: 27.81rem;
+ max-width: 27.81rem;
 }
 
 .destination-tab-content__planet {
@@ -22,6 +22,7 @@
   font-weight: 400;
   line-height: 2rem;
   text-align: center;
+  /* width: 100%; */
 }
 
 .destination-tab-content hr {
@@ -74,5 +75,25 @@
 
   .destination-tab-content__fun-fact {
     margin: 0.63rem 0 0 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .planet-image {
+    width: 10.63rem;
+  }
+
+  .destination-tab-content__planet {
+    font-size: 3.5rem;
+  }
+
+  .destination-tab-content__description {
+    font-size: 0.94rem;
+    line-height: 1.56rem;
+  }
+
+  .destination-tab-content__fun-fact {
+    flex-direction: column;
+    gap: 2.25rem;
   }
 }

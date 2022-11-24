@@ -78,3 +78,22 @@
     flex-direction: column;
   }
 }
+
+@media screen and (max-width: 768px) {
+
+  .destination-page-wrapper{
+    /* margin:0 24px */
+    /* padding-left: 24px;
+    padding-right: 24px; */
+    padding:13.13rem 1.5rem 0 1.5rem
+  }
+  .destination-page-wrapper__title {
+    font-size: 16px;
+    /* margin: 0 0 0 2.5rem; */
+    text-align: center;
+  }
+
+  .destination-page-wrapper__tab{
+    font-size: 14px;
+  }
+}
