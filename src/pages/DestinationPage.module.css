@@ -15,6 +15,9 @@
   margin: 0 0 0 10.31rem;
 }
 
+/* .destination-page-wrapper__tab.active{
+  color:red;
+} */
 .destination-page-wrapper__title span {
   margin: 0 1rem 0 0;
   opacity: 0.25;
@@ -50,7 +53,7 @@
   cursor: pointer;
   margin: 0 0 0 1.25rem;
 }
-.destination-page-wrapper__tab:focus {
+.destination-page-wrapper__tab.active {
   border-bottom: 0.19rem solid #fff;
 }
 
