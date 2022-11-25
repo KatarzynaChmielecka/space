@@ -1,5 +1,5 @@
 import classes from './DestinationTab.module.css';
-import { DestinationTabInterface } from '../types/interfaces';
+import { AltInterface } from '../types/interfaces';
 
 const DestinationTab = ({
   src,
@@ -8,7 +8,7 @@ const DestinationTab = ({
   description,
   distance,
   travel,
-}: DestinationTabInterface) => {
+}: AltInterface) => {
   return (
     <>
       <img src={src} alt={alt} className={classes['planet-image']} />
