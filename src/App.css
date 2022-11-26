@@ -13,3 +13,21 @@ a {
   display: flex;
   justify-content: center;
 }
+
+/* .rec-pagination{
+  flex-direction: column;
+  align-items:flex-start;
+  width:100%
+}
+
+.rec-pagination button.rec-dot_active{
+  width:50px;
+  height:50px;
+  outline: none;
+  border:none;
+  box-shadow: none;
+}
+
+.image{
+  height:200px;
+} */

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@itseasy21/react-elastic-carousel": "^0.12.3",
     "@mui/base": "^5.0.0-alpha.101",
     "@mui/icons-material": "^5.10.3",
     "@testing-library/jest-dom": "^5.16.5",
