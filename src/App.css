@@ -14,20 +14,39 @@ a {
   justify-content: center;
 }
 
-/* .rec-pagination{
-  flex-direction: column;
-  align-items:flex-start;
-  width:100%
+.crew-page-wrapper .rec-carousel {
+  bottom: 0;
+  display: flex;
+  height: 100%;
+  margin-left: -20px;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+}
+.crew-page-wrapper .rec.rec-item-wrapper {
+  justify-content: flex-start;
+}
+.rec-pagination {
+  bottom: 50px;
+  left: 0;
+
+  position: absolute;
 }
 
-.rec-pagination button.rec-dot_active{
-  width:50px;
-  height:50px;
-  outline: none;
-  border:none;
+.rec-pagination .rec-dot {
+  background: #fff;
   box-shadow: none;
+  height: 15px;
+  opacity: 0.17;
+  width: 15px;
 }
 
-.image{
-  height:200px;
-} */
+.rec-pagination .rec-dot_active {
+  opacity: 1;
+}
+
+.rec-pagination .rec-dot:hover,
+.rec-pagination .rec-dot:focus {
+  box-shadow: none;
+  opacity: 0.5;
+}
