@@ -68,3 +68,13 @@ a {
     justify-content: center;
   }
 }
+
+@media screen and (max-width: 1440px) {
+  .crew-page-wrapper .rec-carousel {
+    margin: 0;
+  }
+
+  .crew-page-wrapper .rec.rec-swipable > .rec-carousel-item {
+    align-items: flex-start;
+  }
+}
