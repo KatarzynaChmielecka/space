@@ -26,10 +26,9 @@ a {
 .crew-page-wrapper .rec.rec-item-wrapper {
   justify-content: flex-start;
 }
-.rec-pagination {
+.crew-page-wrapper .rec-pagination {
   bottom: 50px;
   left: 0;
-
   position: absolute;
 }
 
@@ -49,4 +48,19 @@ a {
 .rec-pagination .rec-dot:focus {
   box-shadow: none;
   opacity: 0.5;
+}
+
+@media screen and (max-width: 1440px) {
+  .crew-page-wrapper .rec-pagination {
+    left: auto;
+    top: 0;
+  }
+  .crew-page-wrapper .rec.rec-item-wrapper {
+    justify-content: center;
+  }
+
+  .rec-carousel-item.rec-carousel-item-visible {
+    align-items: flex-end;
+    display: flex;
+  }
 }

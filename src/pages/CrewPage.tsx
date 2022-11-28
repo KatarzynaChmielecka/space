@@ -25,7 +25,13 @@ const Crew = () => {
               </p>
               <p className={classes['crew-page-carousel__bio']}>{index.bio}</p>
             </div>
-            <img src={index.images.webp} alt={index.name} />
+            <div className={classes['crew-page-carousel__image-wrapper']}>
+              <img
+                src={index.images.webp}
+                alt={index.name}
+                className={classes['crew-page-carousel__image']}
+              />
+            </div>
           </div>
         ))}
       </Carousel>

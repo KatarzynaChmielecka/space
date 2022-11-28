@@ -11,7 +11,6 @@
   font-size: 1.75rem;
   font-weight: 400;
   letter-spacing: 0.3rem;
-  position: absolute;
 }
 
 .crew-page-wrapper__title span {
@@ -27,6 +26,7 @@
 
 .crew-page-carousel__item {
   display: flex;
+  height: 100%;
 }
 
 .crew-page-carousel__item-content {
@@ -58,4 +58,48 @@
   font-weight: 400;
   line-height: 32px;
   max-width: 444px;
+  text-align: center;
+}
+
+@media screen and (max-width: 1440px) {
+  .crew-page-wrapper {
+    height: 100%;
+    overflow-y: scroll;
+    padding: 136px 50px 0 50px;
+  }
+
+  .crew-page-wrapper .crew-page-carousel__item {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .crew-page-carousel__item-content {
+    margin: 0;
+    max-width: 458px;
+    padding: 0;
+  }
+  .crew-page-carousel__role {
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+  }
+  .crew-page-carousel__name {
+    font-size: 40px;
+    line-height: 46px;
+    text-align: center;
+  }
+
+  .crew-page-carousel__bio {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .crew-page-carousel__image-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  .crew-page-carousel__image {
+    margin-bottom: -120px;
+    transform: scale(0.66);
+  }
 }
