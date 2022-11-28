@@ -41,13 +41,22 @@ a {
 }
 
 .rec-pagination .rec-dot_active {
+  box-shadow: none;
   opacity: 1;
 }
 
-.rec-pagination .rec-dot:hover,
-.rec-pagination .rec-dot:focus {
+.rec-pagination .rec-dot:hover {
   box-shadow: none;
   opacity: 0.5;
+}
+
+.rec-pagination .rec-dot:focus {
+  box-shadow: none;
+}
+
+.crew-page-wrapper .rec.rec-swipable > .rec-carousel-item {
+  align-items: flex-end;
+  display: flex;
 }
 
 @media screen and (max-width: 1440px) {
@@ -57,10 +66,5 @@ a {
   }
   .crew-page-wrapper .rec.rec-item-wrapper {
     justify-content: center;
-  }
-
-  .rec-carousel-item.rec-carousel-item-visible {
-    align-items: flex-end;
-    display: flex;
   }
 }
