@@ -10,7 +10,6 @@ const Destination = lazy(() => import('./pages/DestinationPage'));
 const Crew = lazy(() => import('./pages/CrewPage'));
 const Technology = lazy(() => import('./pages/TechnologyPage'));
 
-//test for vercel
 function App() {
   return (
     <div className="App">

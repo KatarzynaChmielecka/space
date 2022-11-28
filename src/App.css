@@ -13,3 +13,68 @@ a {
   display: flex;
   justify-content: center;
 }
+
+.crew-page-wrapper .rec-carousel {
+  bottom: 0;
+  display: flex;
+  height: 100%;
+  margin-left: -1.25rem;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+}
+.crew-page-wrapper .rec.rec-item-wrapper {
+  justify-content: flex-start;
+}
+.crew-page-wrapper .rec-pagination {
+  bottom: 3.13rem;
+  left: 0;
+  position: absolute;
+}
+
+.rec-pagination .rec-dot {
+  background: #fff;
+  box-shadow: none;
+  height: 0.98rem;
+  opacity: 0.17;
+  width: 0.98rem;
+}
+
+.rec-pagination .rec-dot_active {
+  box-shadow: none;
+  opacity: 1;
+}
+
+.rec-pagination .rec-dot:hover {
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+.rec-pagination .rec-dot:focus {
+  box-shadow: none;
+}
+
+.crew-page-wrapper .rec.rec-swipable > .rec-carousel-item {
+  align-items: flex-end;
+  display: flex;
+}
+
+@media screen and (max-width: 1440px) {
+  .crew-page-wrapper .rec-pagination {
+    left: auto;
+    top: 0;
+  }
+  .crew-page-wrapper .rec.rec-item-wrapper {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .crew-page-wrapper .rec-carousel {
+    margin: 0;
+  }
+
+  .crew-page-wrapper .rec.rec-swipable > .rec-carousel-item {
+    align-items: flex-start;
+  }
+}
