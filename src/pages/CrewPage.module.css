@@ -58,7 +58,6 @@
   font-weight: 400;
   line-height: 32px;
   max-width: 444px;
-  text-align: center;
 }
 
 @media screen and (max-width: 1440px) {
@@ -92,6 +91,7 @@
   .crew-page-carousel__bio {
     font-size: 16px;
     line-height: 28px;
+    text-align: center;
   }
 
   .crew-page-carousel__image-wrapper {
