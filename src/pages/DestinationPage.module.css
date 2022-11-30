@@ -1,8 +1,5 @@
 .destination-page-wrapper {
-  background: url('../../public/assets/destination/background-destination-desktop.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding: 13.13rem 0 0 0;
+  padding: 5rem 0 0 0;
   width: 100%;
 }
 
@@ -59,9 +56,6 @@
 }
 @media screen and (max-width: 1440px) {
   .destination-page-wrapper {
-    background: url('../../public/assets/destination/background-destination-tablet.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
     overflow-y: auto;
   }
 
@@ -88,9 +82,6 @@
 
 @media screen and (max-width: 768px) {
   .destination-page-wrapper {
-    background: url('../../public/assets/destination/background-destination-mobile.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
     padding: 5.63rem 1.5rem 0 1.5rem;
   }
   .destination-page-wrapper__title {
