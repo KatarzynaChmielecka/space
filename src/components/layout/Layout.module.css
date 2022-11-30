@@ -4,7 +4,7 @@
   height: 100vh;
   justify-content: center;
   max-width: 90rem;
-  padding-top: 8.75rem;
+  padding: 8.75rem 0 0 0;
   width: 100%;
 }
 
@@ -29,6 +29,10 @@
 }
 
 @media screen and (max-width: 1440px) {
+  .layout {
+    padding-top: 6.25rem;
+  }
+
   .home {
     background: url('../../assets/home/background-home-tablet.jpg');
   }
@@ -48,7 +52,7 @@
 
 @media screen and (max-width: 768px) {
   .layout {
-    padding-top: 6.25rem;
+    padding-top: 5rem;
   }
 
   .home {

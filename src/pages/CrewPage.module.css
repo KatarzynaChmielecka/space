@@ -36,7 +36,7 @@
 .crew-page-carousel__role {
   font-size: 2rem;
   line-height: 2.31rem;
-  margin-bottom: 1.56rem;
+  margin: 0 0 1.56rem 0;
   opacity: 0.5;
   text-transform: uppercase;
 }
@@ -44,7 +44,7 @@
 .crew-page-carousel__name {
   font-size: 3.5rem;
   line-height: 4rem;
-  margin-bottom: 1.69rem;
+  margin: 0 0 1.69rem 0;
   text-transform: uppercase;
 }
 
@@ -61,7 +61,7 @@
 @media screen and (max-width: 1440px) {
   .crew-page-wrapper {
     height: 100%;
-    padding: 0 3.13rem 0 3.13rem;
+    padding: 0.63rem 3.13rem 0 3.13rem;
   }
 
   .crew-page-wrapper .crew-page-carousel__item {
