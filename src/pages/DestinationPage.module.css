@@ -1,5 +1,5 @@
 .destination-page-wrapper {
-  padding: 5rem 0 0 0;
+  padding: 4.38rem 0 0 0;
   width: 100%;
 }
 
@@ -20,13 +20,13 @@
 .destination-page__menu {
   display: flex;
   justify-content: flex-end;
-  margin-right: 20rem;
+  margin-right: 0 20rem 0 0;
 }
 
 .destination-page-wrapper__menu {
   display: flex;
   justify-content: space-between;
-  margin: 4rem 0 0 0;
+  margin: 2.75rem 0 0 0;
   width: 17.81rem;
 }
 
@@ -57,7 +57,7 @@
 @media screen and (max-width: 1440px) {
   .destination-page-wrapper {
     overflow-y: auto;
-    padding-top: 2.5rem;
+    padding-top: 0;
   }
 
   .destination-page-wrapper__title {
@@ -83,7 +83,7 @@
 
 @media screen and (max-width: 768px) {
   .destination-page-wrapper {
-    padding: 0.63rem 1.5rem 0 1.5rem;
+    padding: 0 1.5rem 3.75rem 1.5rem;
   }
   .destination-page-wrapper__title {
     font-size: 1rem;

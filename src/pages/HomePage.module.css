@@ -53,7 +53,7 @@
   .home-page-wrapper {
     align-items: center;
     flex-direction: column;
-    padding: 2.5rem 10.31rem 8.13rem 10.31rem;
+    padding: 3.75rem 10.31rem 8.13rem 10.31rem;
     text-align: center;
   }
 
@@ -80,11 +80,11 @@
 @media screen and (max-width: 768px) {
   .home-page-wrapper {
     justify-content: space-between;
-    padding: 0.63rem 10.31rem 8.13rem 10.31rem;
   }
+
   .home-page-wrapper__content-left {
     height: 17.25rem;
-    margin: 0 0 5rem 0;
+    margin: 0 0 4.38rem 0;
     width: 20.44rem;
   }
   .home-page-wrapper__text1 {
@@ -103,6 +103,7 @@
     margin: 0 0 -2.81rem 0;
     width: 9.38rem;
   }
+
   .home-page-wrapper__explore {
     font-size: 1.25rem;
   }
