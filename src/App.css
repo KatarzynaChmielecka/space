@@ -24,7 +24,7 @@ a {
 }
 
 .crew-page-wrapper .rec-pagination {
-  bottom: 50px;
+  bottom: 3.13rem;
   left: 0;
   position: absolute;
 }
@@ -63,6 +63,7 @@ a {
 @media screen and (max-width: 1440px) {
   .crew-page-wrapper .rec-pagination {
     left: auto;
+    top: 0;
   }
   .crew-page-wrapper .rec.rec-item-wrapper {
     justify-content: center;

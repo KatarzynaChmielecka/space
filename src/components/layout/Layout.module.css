@@ -4,7 +4,7 @@
   height: 100vh;
   justify-content: center;
   max-width: 90rem;
-  padding-top: 140px;
+  padding-top: 8.75rem;
   width: 100%;
 }
 
@@ -47,6 +47,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .layout {
+    padding-top: 6.25rem;
+  }
+
   .home {
     background: url('../../assets/home/background-home-mobile.jpg');
   }
@@ -55,11 +59,11 @@
     background: url('../../assets/destination/background-destination-mobile.jpg');
   }
 
-  .crew{
-    background: url('../../assets/crew/background-crew-mobile.jpg')
+  .crew {
+    background: url('../../assets/crew/background-crew-mobile.jpg');
   }
 
-  .technology{
-    background: url('../../assets/technology/background-technology-mobile.jpg')
+  .technology {
+    background: url('../../assets/technology/background-technology-mobile.jpg');
   }
 }
