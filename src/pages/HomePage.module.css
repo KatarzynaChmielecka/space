@@ -53,7 +53,7 @@
   .home-page-wrapper {
     align-items: center;
     flex-direction: column;
-    padding: 12.5rem 10.31rem 8.13rem;
+    padding: 2.5rem 10.31rem 8.13rem 10.31rem;
     text-align: center;
   }
 
@@ -80,7 +80,7 @@
 @media screen and (max-width: 768px) {
   .home-page-wrapper {
     justify-content: space-between;
-    padding: 7.19rem 10.31rem 8.13rem;
+    padding: 0.63rem 10.31rem 8.13rem 10.31rem;
   }
   .home-page-wrapper__content-left {
     height: 17.25rem;
