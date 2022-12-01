@@ -1,0 +1,36 @@
+.technology-page-carousel__item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.technology-page-carousel__item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 160px;
+  max-width: 470px;
+  outline: 1px solid green;
+}
+
+.technology-page-carousel__terminology {
+  font-family: Barlow Condensed;
+  font-size: 16px;
+  letter-spacing: 2.7px;
+  line-height: 19px;
+  margin-bottom: 10px;
+}
+
+.technology-page-carousel__name {
+  font-size: 3.5rem;
+  line-height: 4rem;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+}
+
+.technology-page-carousel__description {
+  color: #d0d6f9;
+  font-family: Barlow;
+  font-size: 1.13rem;
+  line-height: 2rem;
+}

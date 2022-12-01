@@ -1,0 +1,20 @@
+.active {
+  background: #fff;
+  color: #0b0d17;
+}
+
+.inactive {
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  font-size: 32px;
+  height: 80px;
+  justify-content: center;
+  outline: 1px solid #ffffff40;
+  width: 80px;
+}
+
+.inactive:hover {
+  cursor: pointer;
+  outline: 1px solid #fff;
+}

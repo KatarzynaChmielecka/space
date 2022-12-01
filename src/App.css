@@ -81,8 +81,11 @@ a {
 }
 
 .technology-page-wrapper .rec-slider-container {
-  border: 1px solid blue;
+  align-items: center;
+  display: flex;
+  height: 100%;
   margin: 0;
+  outline: 1px solid blue;
 }
 
 .technology-page-wrapper .rec-carousel-wrapper {

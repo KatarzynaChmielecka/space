@@ -1,17 +1,32 @@
-.active{
-    background:yellow
+.technology-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  outline: 1px solid yellow;
+  padding: 70px 0px 0 110px;
+  width: 100%;
 }
 
-.inactive{
-    background: blue
+.technology-page-wrapper__title {
+  font-family: Barlow Condensed, sans-serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: 0.3rem;
+  margin-bottom: 25px;
 }
-.technology-page-wrapper  {
 
-    border:1px solid yellow;
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    /* flex-direction: row; */
-    /* justify-content:space-between; */
-    /* gap:50% */
+.technology-page-wrapper__title span {
+  margin: 0 1rem 0 0;
+  opacity: 0.25;
+}
+
+
+
+.technology-page-carousel__pagination {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  left: 0;
+  position: absolute;
+  top: calc(50% - 50% / 2);
 }

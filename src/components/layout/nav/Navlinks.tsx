@@ -28,7 +28,6 @@ const Navlinks = () => {
             className={({ isActive }) =>
               isActive ? classes.active : classes.link
             }
-            style={{}}
           >
             <span>{item.id}</span> {item.name}
           </NavLink>
