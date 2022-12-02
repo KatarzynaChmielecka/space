@@ -60,6 +60,14 @@ a {
   display: flex;
 }
 
+.technology-page-wrapper .rec-slider-container {
+  margin: 0;
+}
+
+.technology-page-wrapper .rec-carousel-wrapper {
+  position: relative;
+}
+
 @media screen and (max-width: 1440px) {
   .crew-page-wrapper .rec-pagination {
     left: auto;
@@ -78,13 +86,4 @@ a {
   .crew-page-wrapper .rec.rec-swipable > .rec-carousel-item {
     align-items: flex-start;
   }
-}
-
-.technology-page-wrapper .rec-slider-container {
-  margin: 0;
-  outline: 1px solid blue;
-}
-
-.technology-page-wrapper .rec-carousel-wrapper {
-  position: relative;
 }

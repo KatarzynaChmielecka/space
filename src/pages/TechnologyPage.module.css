@@ -2,9 +2,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  outline: 1px solid yellow;
   overflow-y: auto;
-  padding: 70px 0px 0 110px;
+  padding: 4.38rem 0rem 0 6.88rem;
   width: 100%;
 }
 
@@ -13,7 +12,7 @@
   font-size: 1.75rem;
   font-weight: 400;
   letter-spacing: 0.3rem;
-  margin-bottom: 25px;
+  margin-bottom: 1.56rem;
 }
 
 .technology-page-wrapper__title span {
@@ -25,7 +24,7 @@
   bottom: 0;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 2rem;
   height: fit-content;
   left: 0;
   margin: auto 0;
@@ -35,23 +34,40 @@
 
 @media screen and (max-width: 1440px) {
   .technology-page-wrapper {
-    padding: 40px 0 0 0;
+    padding: 2.5rem 0 0 0;
   }
   .technology-page-wrapper__title {
-    font-size: 20px;
-    letter-spacing: 3.375px;
-    line-height: 24px;
-    margin-bottom: 60px;
-    margin-left: 50px;
+    font-size: 1.25rem;
+    letter-spacing: 0.21rem;
+    line-height: 1.5rem;
+    margin-bottom: 3.75rem;
+    margin-left: 3.13rem;
   }
 
   .technology-page-carousel__pagination {
     flex-direction: row;
-    gap: 16px;
+    gap: 1rem;
     left: 0;
     margin: 0 auto;
     right: 0;
     top: 50%;
     width: fit-content;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .technology-page-wrapper {
+    padding: 0.63rem 0 0 0;
+  }
+
+  .technology-page-wrapper__title {
+    font-size: 1rem;
+    letter-spacing: 0.17rem;
+    line-height: 1.19rem;
+    margin-bottom: 2rem;
+  }
+
+  .technology-page-carousel__pagination {
+    top: calc(50% - 50% / 5);
   }
 }

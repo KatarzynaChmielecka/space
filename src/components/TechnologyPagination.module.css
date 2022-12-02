@@ -7,11 +7,11 @@
   align-items: center;
   border-radius: 50%;
   display: flex;
-  font-size: 32px;
-  height: 80px;
+  font-size: 2rem;
+  height: 5rem;
   justify-content: center;
   outline: 1px solid #ffffff40;
-  width: 80px;
+  width: 5rem;
 }
 
 .inactive:hover {
@@ -21,8 +21,15 @@
 
 @media screen and (max-width: 1440px) {
   .inactive {
-    font-size: 24px;
-    height: 60px;
-    width: 60px;
+    font-size: 1.5rem;
+    height: 3.75rem;
+    width: 3.75rem;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .inactive{
+    height:2.5rem;
+    width:2.5rem
   }
 }

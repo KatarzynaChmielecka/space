@@ -8,39 +8,38 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 160px;
-  max-width: 470px;
-  outline: 1px solid green;
+  margin-left: 10rem;
+  max-width: 29.38rem;
 }
 
 .technology-page-carousel__terminology {
   color: #d0d6f9;
   font-family: Barlow Condensed;
-  font-size: 16px;
-  letter-spacing: 2.7px;
-  line-height: 19px;
-  margin-bottom: 10px;
+  font-size: 1rem;
+  letter-spacing: 0.17rem;
+  line-height: 1.19rem;
+  margin-bottom: 0.63rem;
 }
 
 .technology-page-carousel__name {
-  font-size: 56px;
-  line-height: 64px;
-  margin: 0 0 20px 0;
+  font-size: 3.5rem;
+  line-height: 4rem;
+  margin: 0 0 1.25rem 0;
   text-transform: uppercase;
 }
 
 .technology-page-carousel__description {
   color: #d0d6f9;
   font-family: Barlow;
-  font-size: 18.08px;
-  line-height: 32px;
+  font-size: 1.13rem;
+  line-height: 2rem;
 }
 
 @media screen and (max-width: 1440px) {
   .technology-page-carousel__item {
     align-items: center;
     flex-direction: column;
-    gap: 160px;
+    gap: 10rem;
     height: 100%;
   }
 
@@ -49,23 +48,56 @@
   }
 
   .technology-page-carousel__item-content {
-    height: 237px;
     margin: 0;
+    min-height: 14.81rem;
     text-align: center;
   }
 
   .technology-page-carousel__terminology {
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
   }
 
   .technology-page-carousel__name {
-    font-size: 40px;
-    line-height: 46px;
-    margin-bottom: 16px;
+    font-size: 2.5rem;
+    line-height: 2.88rem;
+    margin-bottom: 1rem;
   }
 
   .technology-page-carousel__description {
-    font-size: 16px;
-    line-height: 28px;
+    font-size: 1rem;
+    line-height: 1.75rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .technology-page-carousel__item {
+    gap: 6.25rem;
+  }
+  .technology-page-carousel__image-wrapper {
+    height: 10.63rem;
+  }
+
+  .technology-page-carousel__image {
+    height: 100%;
+  }
+
+  .technology-page-carousel__item-content {
+    padding: 0 1.5rem;
+  }
+
+  .technology-page-carousel__terminology {
+    font-size: 0.88rem;
+    letter-spacing: 0.15rem;
+    line-height: 1.06rem;
+  }
+
+  .technology-page-carousel__name {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+  }
+
+  .technology-page-carousel__description {
+    font-size: 0.94rem;
+    line-height: 1.56rem;
   }
 }
