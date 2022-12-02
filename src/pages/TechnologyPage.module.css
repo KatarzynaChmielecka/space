@@ -22,11 +22,15 @@
 }
 
 .technology-page-carousel__pagination {
+  bottom: 0;
   display: flex;
   flex-direction: column;
   gap: 32px;
+  height: fit-content;
   left: 0;
+  margin: auto 0;
   position: absolute;
+  top: 0;
 }
 
 @media screen and (max-width: 1440px) {

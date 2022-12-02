@@ -25,8 +25,9 @@ const Technology = () => {
       <h6 className={classes['technology-page-wrapper__title']}>
         <span>03</span> SPACE LAUNCH 101
       </h6>
+
       <Carousel
-        verticalMode
+        verticalMode={viewportWidth > 1440}
         showArrows={false}
         className={classes['technology-page-carousel']}
         isRTL={false}
@@ -53,7 +54,7 @@ const Technology = () => {
             name={index.name}
             description={index.description}
             src={
-              viewportWidth < 1440
+              viewportWidth <= 1440
                 ? index.images.landscape
                 : index.images.portrait
             }
