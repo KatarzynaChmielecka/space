@@ -18,3 +18,11 @@
   cursor: pointer;
   outline: 1px solid #fff;
 }
+
+@media screen and (max-width: 1440px) {
+  .inactive {
+    font-size: 24px;
+    height: 60px;
+    width: 60px;
+  }
+}

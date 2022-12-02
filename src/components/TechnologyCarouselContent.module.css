@@ -14,6 +14,7 @@
 }
 
 .technology-page-carousel__terminology {
+  color: #d0d6f9;
   font-family: Barlow Condensed;
   font-size: 16px;
   letter-spacing: 2.7px;
@@ -22,8 +23,8 @@
 }
 
 .technology-page-carousel__name {
-  font-size: 3.5rem;
-  line-height: 4rem;
+  font-size: 56px;
+  line-height: 64px;
   margin: 0 0 20px 0;
   text-transform: uppercase;
 }
@@ -31,6 +32,40 @@
 .technology-page-carousel__description {
   color: #d0d6f9;
   font-family: Barlow;
-  font-size: 1.13rem;
-  line-height: 2rem;
+  font-size: 18.08px;
+  line-height: 32px;
+}
+
+@media screen and (max-width: 1440px) {
+  .technology-page-carousel__item {
+    align-items: center;
+    flex-direction: column;
+    gap: 160px;
+    height: 100%;
+  }
+
+  .technology-page-carousel__image-wrapper {
+    order: -1;
+  }
+
+  .technology-page-carousel__item-content {
+    height: 237px;
+    margin: 0;
+    text-align: center;
+  }
+
+  .technology-page-carousel__terminology {
+    margin-bottom: 16px;
+  }
+
+  .technology-page-carousel__name {
+    font-size: 40px;
+    line-height: 46px;
+    margin-bottom: 16px;
+  }
+
+  .technology-page-carousel__description {
+    font-size: 16px;
+    line-height: 28px;
+  }
 }

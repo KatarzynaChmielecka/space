@@ -13,7 +13,7 @@ const TechnologyCarouselContent = ({
     <div className={classes['technology-page-carousel__item']}>
       <div className={classes['technology-page-carousel__item-content']}>
         <p className={classes['technology-page-carousel__terminology']}>
-          The therminology
+          THE TERMINOLOGY...
         </p>
         <p className={classes['technology-page-carousel__name']}>{name}</p>
         <p className={classes['technology-page-carousel__description']}>

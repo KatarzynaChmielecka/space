@@ -1,4 +1,5 @@
 import Carousel from '@itseasy21/react-elastic-carousel';
+import { useEffect, useState } from 'react';
 
 import TechnologyCarouselContent from '../components/TechnologyCarouselContent';
 import TechnologyPagination from '../components/TechnologyPagination';
@@ -6,6 +7,15 @@ import classes from './TechnologyPage.module.css';
 import data from '../data.json';
 
 const Technology = () => {
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+
+  const mediaQuery = () => {
+    setViewportWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener('resize', mediaQuery);
+  }, []);
+
   return (
     <div
       className={`${
@@ -42,7 +52,11 @@ const Technology = () => {
             key={index.name}
             name={index.name}
             description={index.description}
-            src={index.images.portrait}
+            src={
+              viewportWidth < 1440
+                ? index.images.landscape
+                : index.images.portrait
+            }
           />
         ))}
       </Carousel>

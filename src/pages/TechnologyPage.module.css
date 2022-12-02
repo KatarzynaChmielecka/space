@@ -3,6 +3,7 @@
   flex-direction: column;
   height: 100%;
   outline: 1px solid yellow;
+  overflow-y: auto;
   padding: 70px 0px 0 110px;
   width: 100%;
 }
@@ -20,13 +21,33 @@
   opacity: 0.25;
 }
 
-
-
 .technology-page-carousel__pagination {
   display: flex;
   flex-direction: column;
   gap: 32px;
   left: 0;
   position: absolute;
-  top: calc(50% - 50% / 2);
+}
+
+@media screen and (max-width: 1440px) {
+  .technology-page-wrapper {
+    padding: 40px 0 0 0;
+  }
+  .technology-page-wrapper__title {
+    font-size: 20px;
+    letter-spacing: 3.375px;
+    line-height: 24px;
+    margin-bottom: 60px;
+    margin-left: 50px;
+  }
+
+  .technology-page-carousel__pagination {
+    flex-direction: row;
+    gap: 16px;
+    left: 0;
+    margin: 0 auto;
+    right: 0;
+    top: 50%;
+    width: fit-content;
+  }
 }
