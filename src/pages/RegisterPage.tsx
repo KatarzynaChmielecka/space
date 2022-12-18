@@ -1,96 +1,77 @@
 import * as Yup from 'yup';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import classes from './RegisterPage.module.css';
+// import classes from './RegisterPage.module.css';
 
-// import ImageUpload from '../components/ImageUpload';
+interface RegisterFormValues {
+  username: string;
+  email: string;
+  password: string;
+  avatar: File | null;
+}
 
-// import { useFormikContext } from 'formik';
-
-// import { useState } from 'react';
-
-// interface RegisterFormValues {
-//   username: string;
-//   email: string;
-//   password: string;
-//   image: string | null
-// }
-
-const initialValues = {
-  username: '',
-  email: '',
-  password: '',
-  image: '',
-};
 const RegisterFormSchema = Yup.object({
-  username: Yup.string().min(2, 'Too Short!').required('Required'),
-  email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string().min(8, 'Too Short!').required('Required'),
-  image: Yup.mixed().required('Requiredaaa'),
+  username: Yup.string().min(2, 'Too Shortaaa!').required('Required'),
+  email: Yup.string().email('Invalid emailaaa').required('Required'),
 });
+
 const RegisterPage: React.FC = () => {
-  const [userData, setUserData] = useState(initialValues);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-  const [imagePreviewUrl, setImagePreviewUrl] = useState('');
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    const file = event.target.files![0];
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    // reset,
+  } = useForm<RegisterFormValues>({
+    resolver: yupResolver(RegisterFormSchema),
+  });
 
-    const reader = new FileReader();
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const file = e.target.files[0];
+      const objectUrl = URL.createObjectURL(file);
+      setPreviewUrl(objectUrl);
 
-    console.log(file);
-    console.log(event.target.value);
-    reader.onloadend = () => {
-      setImagePreviewUrl(reader.result as string);
-    };
-    // values.image = event?.target.value;
-    // console.log(Formik.children)
-    reader.readAsDataURL(file);
-    setUserData({ ...userData, image: event.target.value });
-    console.log(userData);
+      console.log(previewUrl);
+    }
   };
-  // console.log(initialValues);
+
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+  });
   return (
-    <div
-      className={classes['register-page-wrapper']}
-      style={{ width: '100%', outline: '1px solid green' }}
+    <form
+      onSubmit={onSubmit}
+      style={{ display: 'flex', flexDirection: 'column' }}
     >
-      <Formik
-        initialValues={userData}
-        validationSchema={RegisterFormSchema}
-        onSubmit={() => {
-          // const formData = new FormData();
-          // formData.append('username', values.username);
-          // formData.append('email', values.email);
-          // formData.append('password', values.password);
-          // formData.append('image', values.image);
-          // values.image = event?.target.value;
-          // console.log(formData);
-          console.log(userData);
-        }}
-      >
-        <Form>
-          <label htmlFor="username">Name</label>
-          <Field name="username" type="text" />
-          <ErrorMessage name="username" />
+      <label htmlFor="username">Name</label>
+      <input type="text" {...register('username')} />
+      <p>{errors.username?.message}</p>
 
-          <label htmlFor="email">Email</label>
-          <Field name="email" type="email" />
-          <ErrorMessage name="email" />
+      <label htmlFor="email">email</label>
+      <input type="email" {...register('email')} />
+      <p>{errors.email?.message}</p>
 
-          <label htmlFor="password">Password</label>
-          <Field name="password" type="password" />
-          <ErrorMessage name="password" />
+      <label htmlFor="password">Password</label>
+      <input type="password" {...register('password')} />
+      <p>{errors.password?.message}</p>
 
-          {/* <ImageUpload name="image" /> */}
-          <input name="image" type="file" onChange={handleImageChange} />
-          {imagePreviewUrl && <img src={imagePreviewUrl} alt="Preview" />}
-          <button type="submit">Submit</button>
-        </Form>
-      </Formik>
-    </div>
+      <label htmlFor="Avatar">Avatar</label>
+      <input type="file" {...register('avatar')} onChange={handleImageChange} />
+      <p>{errors.avatar?.message}</p>
+      {previewUrl && (
+        <img
+          src={previewUrl}
+          alt="Preview"
+          style={{ width: '50px', height: '50px' }}
+        />
+      )}
+
+      <button type="submit">Register</button>
+    </form>
   );
 };
-
 export default RegisterPage;
