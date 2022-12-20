@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import axios from 'axios';
 import { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -6,20 +7,23 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // import classes from './RegisterPage.module.css';
 
 interface RegisterFormValues {
+  files: any;
   username: string;
   email: string;
   password: string;
-  avatar: File | null;
+  avatar?: File | null | string;
 }
 
 const RegisterFormSchema = Yup.object({
   username: Yup.string().min(2, 'Too Shortaaa!').required('Required'),
   email: Yup.string().email('Invalid emailaaa').required('Required'),
+  password: Yup.string().min(8, 'Too Short!').required('Required'),
 });
 
 const RegisterPage: React.FC = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-
+  const [errora, setErrora] = useState(null);
+  const [ok, setOk] = useState(null);
   const {
     register,
     handleSubmit,
@@ -39,14 +43,40 @@ const RegisterPage: React.FC = () => {
     }
   };
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit(async (data) => {
     console.log(data);
+
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}user/signup`,
+        {
+          username: data.username,
+          email: data.email,
+          password: data.password,
+          avatar: data.avatar,
+        },
+      );
+      console.log(response.data.message);
+      setOk(response.data.message);
+    } catch (error) {
+      console.log(error);
+      if (axios.isAxiosError(error)) {
+        console.log('error messageaa: ', error.response?.data.message);
+        // return error.message;
+        setErrora(error.response?.data.message);
+      } else {
+        console.log('unexpected error: ', error);
+        return 'An unexpected error occurred';
+      }
+    }
   });
   return (
     <form
       onSubmit={onSubmit}
       style={{ display: 'flex', flexDirection: 'column' }}
     >
+      {errora && <p>{errora}</p>}
+      {ok && <p>{ok}</p>}
       <label htmlFor="username">Name</label>
       <input type="text" {...register('username')} />
       <p>{errors.username?.message}</p>
@@ -59,8 +89,13 @@ const RegisterPage: React.FC = () => {
       <input type="password" {...register('password')} />
       <p>{errors.password?.message}</p>
 
-      <label htmlFor="Avatar">Avatar</label>
-      <input type="file" {...register('avatar')} onChange={handleImageChange} />
+      <label htmlFor="avatar">Avatar</label>
+      <input
+        type="file"
+        {...register('avatar')}
+        onChange={handleImageChange}
+        placeholder="aaa"
+      />
       <p>{errors.avatar?.message}</p>
       {previewUrl && (
         <img
