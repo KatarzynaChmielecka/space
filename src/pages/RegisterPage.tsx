@@ -11,9 +11,15 @@ interface RegisterFormValues {
   username: string;
   email: string;
   password: string;
-  avatar?: File | null | string;
+  avatar: Blob | string;
 }
 
+interface SubmitData {
+  username: string;
+  email: string;
+  password: string;
+  avatar: Blob | string;
+}
 const RegisterFormSchema = Yup.object({
   username: Yup.string().min(2, 'Too Shortaaa!').required('Required'),
   email: Yup.string().email('Invalid emailaaa').required('Required'),
@@ -43,18 +49,27 @@ const RegisterPage: React.FC = () => {
     }
   };
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async (data: SubmitData) => {
     console.log(data);
-
+    const formData = new FormData();
+    Object.entries({
+      username: data.username,
+      email: data.email,
+      password: data.password,
+      avatar: data.avatar,
+    }).forEach(([key, value]) => {
+      formData.set(key, value);
+    });
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}user/signup`,
-        {
-          username: data.username,
-          email: data.email,
-          password: data.password,
-          avatar: data.avatar,
-        },
+        // {
+        //   username: data.username,
+        //   email: data.email,
+        //   password: data.password,
+        //   avatar: data.avatar,
+        // },
+        formData,
       );
       console.log(response.data.message);
       setOk(response.data.message);
@@ -72,13 +87,14 @@ const RegisterPage: React.FC = () => {
   });
   return (
     <form
+      // encType="multipart/form-data"
       onSubmit={onSubmit}
       style={{ display: 'flex', flexDirection: 'column' }}
     >
       {errora && <p>{errora}</p>}
       {ok && <p>{ok}</p>}
       <label htmlFor="username">Name</label>
-      <input type="text" {...register('username')} />
+      <input type="text" {...register('username')} name="username" />
       <p>{errors.username?.message}</p>
 
       <label htmlFor="email">email</label>
@@ -94,7 +110,7 @@ const RegisterPage: React.FC = () => {
         type="file"
         {...register('avatar')}
         onChange={handleImageChange}
-        placeholder="aaa"
+        name="avatar"
       />
       <p>{errors.avatar?.message}</p>
       {previewUrl && (
