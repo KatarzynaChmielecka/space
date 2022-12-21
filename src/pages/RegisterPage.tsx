@@ -7,34 +7,45 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // import classes from './RegisterPage.module.css';
 
 interface RegisterFormValues {
-  files: any;
   username: string;
   email: string;
   password: string;
-  avatar: Blob | string;
+  avatar: FileList[];
 }
 
 interface SubmitData {
   username: string;
   email: string;
   password: string;
-  avatar: Blob | string;
+  avatar: FileList[];
 }
 const RegisterFormSchema = Yup.object({
-  username: Yup.string().min(2, 'Too Shortaaa!').required('Required'),
-  email: Yup.string().email('Invalid emailaaa').required('Required'),
-  password: Yup.string().min(8, 'Too Short!').required('Required'),
+  username: Yup.string()
+    .min(2, 'Name should have at least 2 chars.')
+    .required('Your name is required.'),
+  email: Yup.string()
+    .email('Invalid email.')
+    .required('Your email is required.'),
+  password: Yup.string()
+    .min(8, 'Password should have at least 8 chars.')
+    .required('Password is required.'),
+  avatar: Yup.mixed().test('avatar', 'Your avatar is required.', (value) => {
+    if (value.length > 0) {
+      return true;
+    }
+    return false;
+  }),
 });
 
 const RegisterPage: React.FC = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [errora, setErrora] = useState(null);
-  const [ok, setOk] = useState(null);
+  const [errorBackend, setErrorBackend] = useState(null);
+  const [okResponse, setOkResponse] = useState(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
-    // reset,
+    reset,
   } = useForm<RegisterFormValues>({
     resolver: yupResolver(RegisterFormSchema),
   });
@@ -44,55 +55,45 @@ const RegisterPage: React.FC = () => {
       const file = e.target.files[0];
       const objectUrl = URL.createObjectURL(file);
       setPreviewUrl(objectUrl);
-
-      console.log(previewUrl);
     }
   };
 
   const onSubmit = handleSubmit(async (data: SubmitData) => {
-    console.log(data);
     const formData = new FormData();
     Object.entries({
       username: data.username,
       email: data.email,
       password: data.password,
-      avatar: data.avatar,
+      avatar: data.avatar[0] as unknown as Blob,
     }).forEach(([key, value]) => {
       formData.set(key, value);
     });
+
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}user/signup`,
-        // {
-        //   username: data.username,
-        //   email: data.email,
-        //   password: data.password,
-        //   avatar: data.avatar,
-        // },
         formData,
       );
-      console.log(response.data.message);
-      setOk(response.data.message);
+
+      setOkResponse(response.data.message);
+      setPreviewUrl(null);
+      reset();
     } catch (error) {
-      console.log(error);
       if (axios.isAxiosError(error)) {
-        console.log('error messageaa: ', error.response?.data.message);
-        // return error.message;
-        setErrora(error.response?.data.message);
+        setErrorBackend(error.response?.data.message);
       } else {
-        console.log('unexpected error: ', error);
         return 'An unexpected error occurred';
       }
     }
   });
+
   return (
     <form
-      // encType="multipart/form-data"
       onSubmit={onSubmit}
       style={{ display: 'flex', flexDirection: 'column' }}
     >
-      {errora && <p>{errora}</p>}
-      {ok && <p>{ok}</p>}
+      {errorBackend && <p>{errorBackend}</p>}
+      {okResponse && <p>{okResponse}</p>}
       <label htmlFor="username">Name</label>
       <input type="text" {...register('username')} name="username" />
       <p>{errors.username?.message}</p>
