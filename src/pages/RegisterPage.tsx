@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-// import classes from './RegisterPage.module.css';
+import classes from './RegisterPage.module.css';
 
 interface RegisterFormValues {
   username: string;
@@ -39,7 +39,7 @@ const RegisterFormSchema = Yup.object({
 
 const RegisterPage: React.FC = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [errorBackend, setErrorBackend] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [okResponse, setOkResponse] = useState(null);
   const {
     register,
@@ -75,55 +75,101 @@ const RegisterPage: React.FC = () => {
         formData,
       );
 
+      if (response.status === 201) {
+        console.log(response);
+      } else {
+        setError('aaddddbuuu');
+      }
       setOkResponse(response.data.message);
       setPreviewUrl(null);
       reset();
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        setErrorBackend(error.response?.data.message);
-      } else {
-        return 'An unexpected error occurred';
+        setError(error.response?.data.message);
       }
+
+      setError('Something went wrong. Please try again later');
     }
   });
 
   return (
-    <form
-      onSubmit={onSubmit}
-      style={{ display: 'flex', flexDirection: 'column' }}
-    >
-      {errorBackend && <p>{errorBackend}</p>}
-      {okResponse && <p>{okResponse}</p>}
-      <label htmlFor="username">Name</label>
-      <input type="text" {...register('username')} name="username" />
-      <p>{errors.username?.message}</p>
+    <div className={classes['register-page-wrapper']}>
+      <form
+        onSubmit={onSubmit}
+        className={classes['register-page-wrapper__form']}
+      >
+        {/* error and okResponse will be toasts */}
+        {error && <p>{error}</p>}
+        {okResponse && <p>{okResponse}</p>}
+        <fieldset>
+          <div className={classes['field-wrapper']}>
+            <div className={classes['input-wrapper']}>
+              <label htmlFor="username" className={classes.label}>
+                Name
+              </label>
+              <input
+                type="text"
+                {...register('username')}
+                name="username"
+                placeholder="name"
+              />
+            </div>
+            <p>{errors.username?.message}</p>
+          </div>
 
-      <label htmlFor="email">email</label>
-      <input type="email" {...register('email')} />
-      <p>{errors.email?.message}</p>
+          <div className={classes['field-wrapper']}>
+            <div className={classes['input-wrapper']}>
+              <label htmlFor="email" className={classes.label}>
+                Email
+              </label>
+              <input type="email" {...register('email')} placeholder="email" />
+            </div>
+            <p>{errors.email?.message}</p>
+          </div>
 
-      <label htmlFor="password">Password</label>
-      <input type="password" {...register('password')} />
-      <p>{errors.password?.message}</p>
+          <div className={classes['field-wrapper']}>
+            <div className={classes['input-wrapper']}>
+              <label htmlFor="password" className={classes.label}>
+                Password
+              </label>
+              <input
+                type="password"
+                {...register('password')}
+                placeholder="password"
+              />
+            </div>
+            <p>{errors.password?.message}</p>
+          </div>
 
-      <label htmlFor="avatar">Avatar</label>
-      <input
-        type="file"
-        {...register('avatar')}
-        onChange={handleImageChange}
-        name="avatar"
-      />
-      <p>{errors.avatar?.message}</p>
-      {previewUrl && (
-        <img
-          src={previewUrl}
-          alt="Preview"
-          style={{ width: '50px', height: '50px' }}
-        />
-      )}
+          <div className={classes['field-wrapper']}>
+            <div className={classes['input-wrapper']}>
+              <label htmlFor="avatar" className={classes.label}>
+                Avatar
+              </label>
+              <input
+                type="file"
+                {...register('avatar')}
+                onChange={handleImageChange}
+                name="avatar"
+                className={classes['custom-file-input']}
+              />
+            </div>
+            <p>{errors.avatar?.message}</p>
+          </div>
 
-      <button type="submit">Register</button>
-    </form>
+          {previewUrl && (
+            <img
+              src={previewUrl}
+              alt="Preview"
+              style={{ width: '50px', height: '50px' }}
+            />
+          )}
+        </fieldset>
+        <button type="submit" style={{ fontSize: '24px' }}>
+          Register
+        </button>
+      </form>
+    </div>
   );
 };
 export default RegisterPage;

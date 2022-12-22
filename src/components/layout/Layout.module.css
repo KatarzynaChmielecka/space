@@ -28,6 +28,9 @@
   background: url('../../assets/technology/background-technology-desktop.jpg');
 }
 
+.register{
+  background: url('../../assets/register/earth-1756274_1920.jpg');
+}
 @media screen and (max-width: 1440px) {
   .layout {
     padding-top: 6.25rem;

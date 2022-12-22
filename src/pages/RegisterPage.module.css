@@ -1,0 +1,46 @@
+.register-page-wrapper {
+  color: #000;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  width: 100%;
+}
+
+.register-page-wrapper__form {
+  background: #ffffffcc;
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  justify-content: space-between;
+  max-width: 500px;
+  padding: 20px;
+}
+
+fieldset {
+  border: none;
+}
+
+.register-page-wrapper__form .field-wrapper {
+  position: relative;
+}
+
+.input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.label {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.register-page-wrapper__form input {
+  margin-bottom: 32px;
+}
+
+p {
+  bottom: 8px;
+  color: #ff0000;
+  position: absolute;
+}
