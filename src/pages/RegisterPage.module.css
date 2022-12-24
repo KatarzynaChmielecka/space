@@ -12,8 +12,8 @@
   flex-direction: column;
   height: 350px;
   justify-content: space-between;
-  max-width: 500px;
   padding: 20px;
+  width: 300px;
 }
 
 fieldset {
@@ -31,16 +31,28 @@ fieldset {
 }
 
 .label {
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1;
 }
 
 .register-page-wrapper__form input {
   margin-bottom: 32px;
+  padding-left: 10px;
+  width: 150px;
+  /* text-overflow: ellipsis; */
 }
 
 p {
   bottom: 8px;
   color: #ff0000;
   position: absolute;
+}
+input[type='file'] {
+  padding: 0;
+}
+input[type='file']::-webkit-file-upload-button {
+  display: flex;
+  margin: 0;
+  padding-left: 10px;
+  width: 150px;
 }
