@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import classes from './RegisterPage.module.css';
+// import { useNavigate } from 'react-router-dom';
 
 interface RegisterFormValues {
   username: string;
@@ -19,6 +20,7 @@ interface SubmitData {
   password: string;
   avatar: FileList[];
 }
+
 const RegisterFormSchema = Yup.object({
   username: Yup.string()
     .min(2, 'Name should have at least 2 chars.')
@@ -41,6 +43,7 @@ const RegisterPage: React.FC = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [okResponse, setOkResponse] = useState(null);
+  // const navigate=useNavigate()
   const {
     register,
     handleSubmit,
@@ -77,10 +80,11 @@ const RegisterPage: React.FC = () => {
 
       if (response.status === 201) {
         console.log(response);
+        setOkResponse(response.data.message);
+        // navigate('/');
       } else {
-        setError('aaddddbuuu');
+        setError('Something went wrong');
       }
-      setOkResponse(response.data.message);
       setPreviewUrl(null);
       reset();
     } catch (error) {
@@ -88,7 +92,7 @@ const RegisterPage: React.FC = () => {
         setError(error.response?.data.message);
       }
 
-      setError('Something went wrong. Please try again later');
+      setError('Something went wrong. Please try again later.');
     }
   });
 
@@ -112,9 +116,10 @@ const RegisterPage: React.FC = () => {
                 {...register('username')}
                 name="username"
                 placeholder="name"
+                className={classes.input}
               />
             </div>
-            <p>{errors.username?.message}</p>
+            <p className={classes.error}>{errors.username?.message}</p>
           </div>
 
           <div className={classes['field-wrapper']}>
@@ -122,9 +127,14 @@ const RegisterPage: React.FC = () => {
               <label htmlFor="email" className={classes.label}>
                 Email
               </label>
-              <input type="email" {...register('email')} placeholder="email" />
+              <input
+                type="email"
+                {...register('email')}
+                placeholder="email"
+                className={classes.input}
+              />
             </div>
-            <p>{errors.email?.message}</p>
+            <p className={classes.error}>{errors.email?.message}</p>
           </div>
 
           <div className={classes['field-wrapper']}>
@@ -136,9 +146,10 @@ const RegisterPage: React.FC = () => {
                 type="password"
                 {...register('password')}
                 placeholder="password"
+                className={classes.input}
               />
             </div>
-            <p>{errors.password?.message}</p>
+            <p className={classes.error}>{errors.password?.message}</p>
           </div>
 
           <div className={classes['field-wrapper']}>
@@ -154,18 +165,29 @@ const RegisterPage: React.FC = () => {
                 className={classes['custom-file-input']}
               />
             </div>
-            <p>{errors.avatar?.message}</p>
+            {errors.avatar ? (
+              <p className={classes.error}>{errors.avatar?.message}</p>
+            ) : (
+              ''
+            )}
           </div>
 
           {previewUrl && (
             <img
               src={previewUrl}
               alt="Preview"
-              style={{ width: '50px', height: '50px' }}
+              style={{
+                width: '50px',
+                height: '50px',
+                borderRadius: '50%',
+              }}
             />
           )}
         </fieldset>
-        <button type="submit" style={{ fontSize: '24px' }}>
+        <button
+          type="submit"
+          className={classes['register-page-wrapper__form-button-register']}
+        >
           Register
         </button>
       </form>

@@ -10,7 +10,8 @@
   background: #ffffffcc;
   display: flex;
   flex-direction: column;
-  height: 350px;
+  font-size: 20px;
+  height: 400px;
   justify-content: space-between;
   padding: 20px;
   width: 300px;
@@ -20,7 +21,7 @@ fieldset {
   border: none;
 }
 
-.register-page-wrapper__form .field-wrapper {
+.field-wrapper {
   position: relative;
 }
 
@@ -31,7 +32,6 @@ fieldset {
 }
 
 .label {
-  font-size: 20px;
   line-height: 1;
 }
 
@@ -39,20 +39,44 @@ fieldset {
   margin-bottom: 32px;
   padding-left: 10px;
   width: 150px;
-  /* text-overflow: ellipsis; */
 }
 
-p {
+.error {
   bottom: 8px;
   color: #ff0000;
+  font-size: 16px;
   position: absolute;
 }
-input[type='file'] {
+
+.input {
+  border: 1px solid #000;
+  border-radius: 0;
+  font-size: 20px;
+}
+
+.register-page-wrapper__form input[type='file'] {
+  font-size: 16px;
   padding: 0;
 }
-input[type='file']::-webkit-file-upload-button {
-  display: flex;
+.register-page-wrapper__form input[type='file']::file-selector-button {
+  background: #0b0d17;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: block;
   margin: 0;
   padding-left: 10px;
+  text-align: center;
   width: 150px;
+}
+
+.register-page-wrapper__form input[type='file']::file-selector-button:hover {
+  background: #0b0d17b3;
+}
+.register-page-wrapper__form input:focus {
+  outline: 1px solid green;
+}
+
+.register-page-wrapper__form-button-register {
+  font-size: 20px;
 }
