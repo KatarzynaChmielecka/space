@@ -28,6 +28,7 @@ fieldset {
 .input-wrapper {
   display: flex;
   justify-content: space-between;
+  position: relative;
   width: 100%;
 }
 
@@ -56,27 +57,46 @@ fieldset {
 
 .register-page-wrapper__form input[type='file'] {
   font-size: 16px;
+  height: 25px;
+  opacity: 0;
   padding: 0;
 }
+
 .register-page-wrapper__form input[type='file']::file-selector-button {
-  background: #0b0d17;
-  border: none;
-  color: #ffffff;
   cursor: pointer;
-  display: block;
-  margin: 0;
-  padding-left: 10px;
-  text-align: center;
   width: 150px;
 }
 
-.register-page-wrapper__form input[type='file']::file-selector-button:hover {
-  background: #0b0d17b3;
-}
 .register-page-wrapper__form input:focus {
-  outline: 1px solid green;
+  outline: 2px solid #0b0d17;
+}
+
+.button-avatar {
+  border: 1px solid #000;
+  border-radius: 0;
+  font-size: 20px;
+  height: 25px;
+  position: absolute;
+  right: 0;
+  width: 150px;
+}
+
+.button-avatar:hover {
+  cursor: pointer;
+}
+
+.image-preview {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
 }
 
 .register-page-wrapper__form-button-register {
   font-size: 20px;
+}
+
+.register-page-wrapper__form-button-register:hover {
+  background: #000;
+  color: #fff;
+  cursor: pointer;
 }
