@@ -2,7 +2,7 @@
   color: #000;
   display: flex;
   justify-content: center;
-  padding-top: 50px;
+  padding: 3.13rem 0 0 0;
   width: 100%;
 }
 
@@ -10,11 +10,11 @@
   background: #ffffffcc;
   display: flex;
   flex-direction: column;
-  font-size: 20px;
-  height: 400px;
+  font-size: 1.25rem;
+  height: 25rem;
   justify-content: space-between;
-  padding: 20px;
-  width: 300px;
+  padding: 1.25rem;
+  width: 18.75rem;
 }
 
 fieldset {
@@ -37,34 +37,34 @@ fieldset {
 }
 
 .register-page-wrapper__form input {
-  margin-bottom: 32px;
-  padding-left: 10px;
-  width: 150px;
+  margin:0 0 2rem 0;
+  padding:0 0 0 0.63rem;
+  width: 9.38rem;
 }
 
 .error {
-  bottom: 8px;
+  bottom: 0.5rem;
   color: #ff0000;
-  font-size: 16px;
+  font-size: 1rem;
   position: absolute;
 }
 
 .input {
   border: 1px solid #000;
   border-radius: 0;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 .register-page-wrapper__form input[type='file'] {
-  font-size: 16px;
-  height: 25px;
+  font-size: 1rem;
+  height: 1.56rem;
   opacity: 0;
   padding: 0;
 }
 
 .register-page-wrapper__form input[type='file']::file-selector-button {
   cursor: pointer;
-  width: 150px;
+  width: 9.38rem;
 }
 
 .register-page-wrapper__form input:focus {
@@ -74,11 +74,11 @@ fieldset {
 .button-avatar {
   border: 1px solid #000;
   border-radius: 0;
-  font-size: 20px;
-  height: 25px;
+  font-size: 1.25rem;
+  height: 1.56rem;
   position: absolute;
   right: 0;
-  width: 150px;
+  width: 9.38rem;
 }
 
 .button-avatar:hover {
@@ -87,12 +87,12 @@ fieldset {
 
 .image-preview {
   border-radius: 50%;
-  height: 50px;
-  width: 50px;
+  height: 3.13rem;
+  width: 3.13rem;
 }
 
 .register-page-wrapper__form-button-register {
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 .register-page-wrapper__form-button-register:hover {
