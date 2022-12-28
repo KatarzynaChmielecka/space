@@ -20,6 +20,9 @@ const Layout = () => {
     case path === '/technology':
       background = `${classes.technology}`;
       break;
+    case path === '/register':
+      background = `${classes.register}`;
+      break;
   }
 
   return (
