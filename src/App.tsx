@@ -10,6 +10,7 @@ const Destination = lazy(() => import('./pages/DestinationPage'));
 const Crew = lazy(() => import('./pages/CrewPage'));
 const Technology = lazy(() => import('./pages/TechnologyPage'));
 const Register = lazy(() => import('./pages/RegisterPage'));
+const Login = lazy(() => import('./pages/LoginPage'));
 function App() {
   return (
     <div className="App">
@@ -21,6 +22,7 @@ function App() {
             <Route path="/crew" element={<Crew />} />
             <Route path="/technology" element={<Technology />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
           </Route>
         </Routes>
       </Suspense>

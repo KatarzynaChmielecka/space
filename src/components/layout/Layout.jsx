@@ -23,6 +23,9 @@ const Layout = () => {
     case path === '/register':
       background = `${classes.register}`;
       break;
+    case path === '/login':
+      background = `${classes.register}`;
+      break;
   }
 
   return (
