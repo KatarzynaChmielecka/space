@@ -45,7 +45,6 @@ const LoginPage: React.FC = () => {
         success: {
           render() {
             reset();
-            console.log(response.data.token);
 
             return <p>{response.data.message} </p>;
           },
