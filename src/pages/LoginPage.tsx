@@ -7,6 +7,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import classes from './LoginPage.module.css';
+import { AuthContext } from '../context/auth-context';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginFormValues {
   email: string;
@@ -37,6 +40,8 @@ const LoginPage: React.FC = () => {
     resolver: yupResolver(LoginFormSchema),
   });
 
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data: SubmitData) => {
     const response = await toast.promise(
       axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, data),
@@ -45,7 +50,9 @@ const LoginPage: React.FC = () => {
         success: {
           render() {
             reset();
-
+            console.log(response.data);
+            auth.login(response.data.token);
+            navigate('/test');
             return <p>{response.data.message} </p>;
           },
         },
