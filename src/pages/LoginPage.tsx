@@ -2,84 +2,56 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import * as Yup from 'yup';
 import axios from 'axios';
-import { ChangeEvent, useState } from 'react';
 import { ToastContentProps, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import classes from './FormPage.module.css';
+import { AuthContext } from '../context/auth-context';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-interface RegisterFormValues {
-  username: string;
+interface LoginFormValues {
   email: string;
   password: string;
-  avatar: FileList[];
 }
 
 interface SubmitData {
-  username: string;
   email: string;
   password: string;
-  avatar: FileList[];
 }
 
-const RegisterFormSchema = Yup.object({
-  username: Yup.string()
-    .min(2, 'Name should have at least 2 chars.')
-    .required('Your name is required.'),
+const LoginFormSchema = Yup.object({
   email: Yup.string()
     .email('Invalid email.')
     .required('Your email is required.'),
   password: Yup.string()
     .min(8, 'Password should have at least 8 chars.')
     .required('Password is required.'),
-  avatar: Yup.mixed().test('avatar', 'Your avatar is required.', (value) => {
-    if (value.length > 0) {
-      return true;
-    }
-    return false;
-  }),
 });
 
-const RegisterPage: React.FC = () => {
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-
+const LoginPage: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<RegisterFormValues>({
-    resolver: yupResolver(RegisterFormSchema),
+  } = useForm<LoginFormValues>({
+    resolver: yupResolver(LoginFormSchema),
   });
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const file = e.target.files[0];
-      const objectUrl = URL.createObjectURL(file);
-      setPreviewUrl(objectUrl);
-    }
-  };
-
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data: SubmitData) => {
-    const formData = new FormData();
-    Object.entries({
-      username: data.username,
-      email: data.email,
-      password: data.password,
-      avatar: data.avatar[0] as unknown as Blob,
-    }).forEach(([key, value]) => {
-      formData.set(key, value);
-    });
-
     const response = await toast.promise(
-      axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/signup`, formData),
+      axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, data),
       {
         pending: 'Please, wait.',
         success: {
           render() {
-            setPreviewUrl(null);
             reset();
+            auth.login(response.data.token);
+            navigate('/test');
             return <p>{response.data.message} </p>;
           },
         },
@@ -90,7 +62,6 @@ const RegisterPage: React.FC = () => {
             response: { status: number; data: { message: string } };
             status: number;
           }>) {
-            setPreviewUrl(null);
             reset();
             if (data && data.response && data?.response.status === 0) {
               return (
@@ -115,22 +86,6 @@ const RegisterPage: React.FC = () => {
     <div className={classes['form-page-wrapper']}>
       <form onSubmit={onSubmit} className={classes['form-page-wrapper__form']}>
         <fieldset>
-          <div className={classes['field-wrapper']}>
-            <div className={classes['input-wrapper']}>
-              <label htmlFor="username" className={classes.label}>
-                Name
-              </label>
-              <input
-                type="text"
-                {...register('username')}
-                name="username"
-                placeholder="name"
-                className={classes.input}
-              />
-            </div>
-            <p className={classes.error}>{errors.username?.message}</p>
-          </div>
-
           <div className={classes['field-wrapper']}>
             <div className={classes['input-wrapper']}>
               <label htmlFor="email" className={classes.label}>
@@ -160,52 +115,17 @@ const RegisterPage: React.FC = () => {
             </div>
             <p className={classes.error}>{errors.password?.message}</p>
           </div>
-
-          <div className={classes['field-wrapper']}>
-            <div className={classes['input-wrapper']}>
-              <label htmlFor="avatar" className={classes.label}>
-                Avatar
-              </label>
-              <button className={classes['button-avatar']}>
-                Choose avatar
-              </button>
-              <input
-                type="file"
-                {...register('avatar')}
-                onChange={(e) => {
-                  handleImageChange(e);
-                  register('avatar').onChange(e);
-                }}
-                name="avatar"
-                className={classes['custom-file-input']}
-                title=""
-              />
-            </div>
-            {errors.avatar ? (
-              <p className={classes.error}>{errors.avatar?.message}</p>
-            ) : (
-              ''
-            )}
-          </div>
-
-          {previewUrl && (
-            <img
-              src={previewUrl}
-              alt="Preview"
-              className={classes['image-preview']}
-            />
-          )}
         </fieldset>
 
         <button
           type="submit"
           className={classes['form-page-wrapper__form-button-submit']}
         >
-          Register
+          Login
         </button>
       </form>
     </div>
   );
 };
 
-export default RegisterPage;
+export default LoginPage;
