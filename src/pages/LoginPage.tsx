@@ -6,7 +6,7 @@ import { ToastContentProps, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import classes from './LoginPage.module.css';
+import classes from './FormPage.module.css';
 import { AuthContext } from '../context/auth-context';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -83,8 +83,8 @@ const LoginPage: React.FC = () => {
   });
 
   return (
-    <div className={classes['login-page-wrapper']}>
-      <form onSubmit={onSubmit} className={classes['login-page-wrapper__form']}>
+    <div className={classes['form-page-wrapper']}>
+      <form onSubmit={onSubmit} className={classes['form-page-wrapper__form']}>
         <fieldset>
           <div className={classes['field-wrapper']}>
             <div className={classes['input-wrapper']}>
@@ -119,7 +119,7 @@ const LoginPage: React.FC = () => {
 
         <button
           type="submit"
-          className={classes['register-page-wrapper__form-button-login']}
+          className={classes['form-page-wrapper__form-button-submit']}
         >
           Login
         </button>
