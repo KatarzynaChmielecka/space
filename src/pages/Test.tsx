@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth-context';
 
 interface UserData {
@@ -26,11 +27,11 @@ const Test = () => {
           },
         );
         const data = response.data;
-        console.log(data);
+
         if (data) {
           setUserData(data);
         } else {
-          setError("You aren't allowed to be here.Please, login again.");
+          setError("You aren't allowed to be here.Please, login.");
         }
       } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -43,14 +44,13 @@ const Test = () => {
     fetchUserData();
   }, []);
 
-  console.log(userData);
-
   return (
     <div style={{ color: 'black' }}>
       {auth.token ? (
         userData && (
           <div>
             <p>{userData.user.username}</p>
+            <p>{userData.user.email}</p>
             <img
               src={userData.user.avatar}
               alt="user avatar"
@@ -59,7 +59,10 @@ const Test = () => {
           </div>
         )
       ) : (
-        <p>{error || 'Please, login again'}</p>
+        <>
+          <p>{error || 'Please, login again'}</p>
+          <Link to="/login">Login</Link>
+        </>
       )}
     </div>
   );

@@ -50,7 +50,6 @@ const LoginPage: React.FC = () => {
         success: {
           render() {
             reset();
-            console.log(response.data);
             auth.login(response.data.token);
             navigate('/test');
             return <p>{response.data.message} </p>;

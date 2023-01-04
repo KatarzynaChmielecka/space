@@ -15,18 +15,12 @@ const Register = lazy(() => import('./pages/RegisterPage'));
 const Login = lazy(() => import('./pages/LoginPage'));
 const Test = lazy(() => import('./pages/Test'));
 function App() {
-  const {
-    token,
-    login,
-    logout,
-    // userId
-  } = useAuth();
+  const { token, login, logout } = useAuth();
   return (
     <div className="App">
       <AuthContext.Provider
         value={{
           token: token,
-          // userId: userId,
           login: login,
           logout: logout,
         }}
