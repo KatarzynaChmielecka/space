@@ -51,7 +51,7 @@ const LoginPage: React.FC = () => {
           render() {
             reset();
             auth.login(response.data.token);
-            navigate('/test');
+            navigate('/user');
             return <p>{response.data.message} </p>;
           },
         },
