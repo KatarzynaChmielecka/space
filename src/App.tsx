@@ -34,7 +34,7 @@ function App() {
               <Route path="/technology" element={<Technology />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/user" element={<User />} />
+              <Route path="/user/:userId" element={<User />} />
             </Route>
           </Routes>
         </Suspense>
