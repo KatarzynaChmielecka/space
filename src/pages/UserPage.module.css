@@ -11,7 +11,7 @@
 .user-card-wrapper__avatar {
   border-radius: 50%;
   height: 75px;
-  outline: 1px solid black;
+  /* outline: 1px solid black; */
   width: 75px;
 }
 
