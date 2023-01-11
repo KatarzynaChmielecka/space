@@ -181,6 +181,7 @@ const UserPage = () => {
             setPreviewUrl(null);
             setIsEditingAvatar(false);
             reset();
+            fetchUserData();
             return <p>{response.data.message} </p>;
           },
         },

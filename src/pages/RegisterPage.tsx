@@ -5,6 +5,7 @@ import axios from 'axios';
 import { ChangeEvent, useState } from 'react';
 import { ToastContentProps, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import classes from './FormPage.module.css';
@@ -43,6 +44,7 @@ const RegisterFormSchema = Yup.object({
 
 const RegisterPage: React.FC = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -80,6 +82,7 @@ const RegisterPage: React.FC = () => {
           render() {
             setPreviewUrl(null);
             reset();
+            navigate('/login');
             return <p>{response.data.message} </p>;
           },
         },
