@@ -8,11 +8,26 @@
   padding: 20px;
   width: 300px;
 }
+
+.user-card__images-wrapper {
+  position: relative;
+}
 .user-card-wrapper__avatar {
   border-radius: 50%;
   height: 75px;
-  /* outline: 1px solid black; */
   width: 75px;
+}
+
+.user-card-wrapper__photo {
+  bottom: 0;
+  height: fit-content;
+  position: absolute;
+  right: 0;
+  width: fit-content;
+}
+
+.photo:hover {
+  cursor: pointer;
 }
 
 .user-card-wrapper__user-data {

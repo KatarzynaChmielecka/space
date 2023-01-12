@@ -14,9 +14,8 @@ import { ToastContentProps, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import classes from '../pages/FormPage.module.css';
-import classes2 from './UserPage.module.css';
-import photo from '../assets/shared/photo.png';
+import UserCard from '../components/UserCard';
+import classes from '../pages/Form.module.css';
 import { AuthContext } from '../context/auth-context';
 
 interface UserData {
@@ -37,15 +36,21 @@ interface UserFormValues {
 type DataChange = Omit<UserFormValues, 'avatar'>;
 type AvatarChange = Pick<UserFormValues, 'avatar'>;
 
-const UserFormSchema = Yup.object({
-  username: Yup.string()
-    .min(2, 'Name should have at least 2 chars.')
-    .required('Your name is required.'),
-  email: Yup.string()
-    .email('Invalid email.')
-    .required('Your email is required.'),
-  avatar: Yup.mixed(),
-});
+const UserFormSchema = (isEditingAvatar: boolean) =>
+  Yup.object({
+    username: Yup.string()
+      .min(2, 'Name should have at least 2 chars.')
+      .required('Your name is required.'),
+    email: Yup.string()
+      .email('Invalid email.')
+      .required('Your email is required.'),
+    avatar: Yup.mixed().test('avatar', 'Your avatar is required.', (value) => {
+      if (isEditingAvatar && !value) {
+        return false;
+      }
+      return true;
+    }),
+  });
 
 const UserPage = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
@@ -62,7 +67,11 @@ const UserPage = () => {
     reset,
     setValue,
   } = useForm<UserFormValues>({
-    resolver: yupResolver(UserFormSchema),
+    resolver: yupResolver(UserFormSchema(isEditingAvatar)),
+    mode: 'onSubmit',
+    defaultValues: {
+      avatar: '',
+    },
   });
   const paramsUserId = useParams().userId;
 
@@ -97,9 +106,9 @@ const UserPage = () => {
     fetchUserData();
   }, [fetchUserData]);
 
-  const handleEditClick = () => setIsEditing(true);
+  const handleEditData = () => setIsEditing(true);
 
-  const handleEditClickAvatar = () => setIsEditingAvatar(true);
+  const handleEditAvatar = () => setIsEditingAvatar(true);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -158,12 +167,7 @@ const UserPage = () => {
 
   const onSubmitAvatar = handleSubmit(async (data: AvatarChange) => {
     const formData = new FormData();
-    Object.entries({
-      avatar: data.avatar[0] as unknown as Blob,
-    }).forEach(([key, value]) => {
-      formData.set(key, value);
-    });
-
+    formData.append('avatar', data.avatar[0]);
     const response = await toast.promise(
       axios.patch(
         `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/image`,
@@ -217,11 +221,8 @@ const UserPage = () => {
   return (
     <div style={{ color: 'black', fontSize: '20px' }}>
       {isEditing && auth.token && (
-        <div className={classes['form-page-wrapper']}>
-          <form
-            onSubmit={onSubmit}
-            className={classes['form-page-wrapper__form']}
-          >
+        <div className={classes['form-wrapper']}>
+          <form onSubmit={onSubmit} className={classes['form-wrapper__form']}>
             <fieldset>
               <div className={classes['field-wrapper']}>
                 <div className={classes['input-wrapper']}>
@@ -255,13 +256,13 @@ const UserPage = () => {
             </fieldset>
             <button
               onClick={() => setIsEditing(false)}
-              className={classes['form-page-wrapper__form-button-submit']}
+              className={classes['form-wrapper__form-button-submit']}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className={classes['form-page-wrapper__form-button-submit']}
+              className={classes['form-wrapper__form-button-submit']}
             >
               Save new data
             </button>
@@ -270,10 +271,10 @@ const UserPage = () => {
       )}
 
       {isEditingAvatar && auth.token && (
-        <div className={classes['form-page-wrapper']}>
+        <div className={classes['form-wrapper']}>
           <form
             onSubmit={onSubmitAvatar}
-            className={classes['form-page-wrapper__form']}
+            className={classes['form-wrapper__form']}
           >
             <fieldset>
               <div className={classes['field-wrapper']}>
@@ -313,13 +314,13 @@ const UserPage = () => {
             </fieldset>
             <button
               onClick={() => setIsEditingAvatar(false)}
-              className={classes['form-page-wrapper__form-button-submit']}
+              className={classes['form-wrapper__form-button-submit']}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className={classes['form-page-wrapper__form-button-submit']}
+              className={classes['form-wrapper__form-button-submit']}
             >
               Save new avatar
             </button>
@@ -327,44 +328,13 @@ const UserPage = () => {
         </div>
       )}
       {auth.token && !isEditing && !isEditingAvatar && userData && (
-        <div className={classes2['user-card-wrapper']}>
-          <div
-            style={{
-              position: 'relative',
-            }}
-          >
-            <img
-              src={userData.user.avatar}
-              alt="user avatar"
-              className={classes2['user-card-wrapper__avatar']}
-            />
-            <div
-              role="button"
-              onClick={handleEditClickAvatar}
-              onKeyDown={handleEditClickAvatar}
-              tabIndex={0}
-              style={{
-                width: 'fit-content',
-                height: 'fit-content',
-                position: 'absolute',
-                bottom: 0,
-                right: 0,
-              }}
-            >
-              <img src={photo} alt="" />
-            </div>
-          </div>
-          <div className={classes2['user-card-wrapper__user-data']}>
-            <p>{userData.user.username}</p>
-            <p>{userData.user.email}</p>
-          </div>
-          <button
-            onClick={handleEditClick}
-            className={classes2['user-card-wrapper__submit-button']}
-          >
-            Edit data
-          </button>
-        </div>
+        <UserCard
+          src={userData.user.avatar}
+          username={userData.user.username}
+          userEmail={userData.user.email}
+          editImage={handleEditAvatar}
+          editData={handleEditData}
+        />
       )}
       {!auth.token && (
         <>
