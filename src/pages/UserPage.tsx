@@ -16,6 +16,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import UserCard from '../components/UserCard';
 import classes from '../pages/Form.module.css';
+import classes2 from './UserPage.module.css';
 import { AuthContext } from '../context/auth-context';
 
 interface UserData {
@@ -337,10 +338,12 @@ const UserPage = () => {
         />
       )}
       {!auth.token && (
-        <>
-          <p>{error || 'Please, login again'}</p>
-          <Link to="/login">Login</Link>
-        </>
+        <div className={classes2['user-page-logout']}>
+          <p>{error || 'Please, login.'}</p>
+          <Link to="/login" className={classes2['user-page-logout__link']}>
+            Login
+          </Link>
+        </div>
       )}
     </div>
   );
