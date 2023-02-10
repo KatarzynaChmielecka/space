@@ -28,8 +28,12 @@
   background: url('../../assets/technology/background-technology-desktop.jpg');
 }
 
-.register{
+.register-login{
   background: url('../../assets/register/earth-1756274_1920.jpg');
+}
+
+.user{
+  background: url('../../assets/shared/user-page.jpg');
 }
 @media screen and (max-width: 1440px) {
   .layout {

@@ -13,7 +13,7 @@ const Crew = lazy(() => import('./pages/CrewPage'));
 const Technology = lazy(() => import('./pages/TechnologyPage'));
 const Register = lazy(() => import('./pages/RegisterPage'));
 const Login = lazy(() => import('./pages/LoginPage'));
-const Test = lazy(() => import('./pages/Test'));
+const User = lazy(() => import('./pages/UserPage'));
 function App() {
   const { token, login, logout } = useAuth();
   return (
@@ -34,7 +34,7 @@ function App() {
               <Route path="/technology" element={<Technology />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/test" element={<Test />} />
+              <Route path="/user/:userId" element={<User />} />
             </Route>
           </Routes>
         </Suspense>

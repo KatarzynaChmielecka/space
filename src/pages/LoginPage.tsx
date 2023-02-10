@@ -3,13 +3,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { ToastContentProps, toast } from 'react-toastify';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import classes from './FormPage.module.css';
+import classes from './Form.module.css';
 import { AuthContext } from '../context/auth-context';
-import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 interface LoginFormValues {
   email: string;
@@ -51,7 +51,8 @@ const LoginPage: React.FC = () => {
           render() {
             reset();
             auth.login(response.data.token);
-            navigate('/test');
+            const userIdFromData = response.data.user._id;
+            navigate(`/user/${userIdFromData}`);
             return <p>{response.data.message} </p>;
           },
         },
@@ -83,8 +84,8 @@ const LoginPage: React.FC = () => {
   });
 
   return (
-    <div className={classes['form-page-wrapper']}>
-      <form onSubmit={onSubmit} className={classes['form-page-wrapper__form']}>
+    <div className={classes['form-wrapper']}>
+      <form onSubmit={onSubmit} className={classes['form-wrapper__form']}>
         <fieldset>
           <div className={classes['field-wrapper']}>
             <div className={classes['input-wrapper']}>
@@ -119,7 +120,7 @@ const LoginPage: React.FC = () => {
 
         <button
           type="submit"
-          className={classes['form-page-wrapper__form-button-submit']}
+          className={classes['form-wrapper__form-button-submit']}
         >
           Login
         </button>

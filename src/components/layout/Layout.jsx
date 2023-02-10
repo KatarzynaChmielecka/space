@@ -1,10 +1,11 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 
 import Nav from './nav/Nav';
 import classes from './Layout.module.css';
 
 const Layout = () => {
   const path = useLocation().pathname;
+  const paramsId = useParams().userId;
   let background;
 
   switch (true) {
@@ -21,10 +22,13 @@ const Layout = () => {
       background = `${classes.technology}`;
       break;
     case path === '/register':
-      background = `${classes.register}`;
+      background = `${classes['register-login']}`;
       break;
     case path === '/login':
-      background = `${classes.register}`;
+      background = `${classes['register-login']}`;
+      break;
+    case path === `/user/${paramsId}`:
+      background = `${classes.user}`;
       break;
   }
 

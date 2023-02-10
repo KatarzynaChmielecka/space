@@ -5,9 +5,10 @@ import axios from 'axios';
 import { ChangeEvent, useState } from 'react';
 import { ToastContentProps, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import classes from './FormPage.module.css';
+import classes from './Form.module.css';
 
 interface RegisterFormValues {
   username: string;
@@ -43,6 +44,7 @@ const RegisterFormSchema = Yup.object({
 
 const RegisterPage: React.FC = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -80,6 +82,7 @@ const RegisterPage: React.FC = () => {
           render() {
             setPreviewUrl(null);
             reset();
+            navigate('/login');
             return <p>{response.data.message} </p>;
           },
         },
@@ -112,8 +115,8 @@ const RegisterPage: React.FC = () => {
   });
 
   return (
-    <div className={classes['form-page-wrapper']}>
-      <form onSubmit={onSubmit} className={classes['form-page-wrapper__form']}>
+    <div className={classes['form-wrapper']}>
+      <form onSubmit={onSubmit} className={classes['form-wrapper__form']}>
         <fieldset>
           <div className={classes['field-wrapper']}>
             <div className={classes['input-wrapper']}>
@@ -199,7 +202,7 @@ const RegisterPage: React.FC = () => {
 
         <button
           type="submit"
-          className={classes['form-page-wrapper__form-button-submit']}
+          className={classes['form-wrapper__form-button-submit']}
         >
           Register
         </button>
