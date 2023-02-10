@@ -79,7 +79,7 @@ const UserPage = () => {
   const fetchUserData = useCallback(async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/user/account`,
+        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}`,
         {
           headers: {
             Authorization: `Bearer ${auth.token}`,
@@ -99,10 +99,11 @@ const UserPage = () => {
       if (axios.isAxiosError(error)) {
         setError(error.response?.data.message);
       } else {
-        return 'An unexpected error occurred';
+        setError('Something went wrong. Please,try again later.');
       }
     }
   }, []);
+
   useEffect(() => {
     fetchUserData();
   }, [fetchUserData]);
