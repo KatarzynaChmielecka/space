@@ -1,25 +1,30 @@
 .form-wrapper {
-  color: #000;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  outline: 1px solid wheat;
+  overflow-y: auto;
   padding: 3.13rem 0 0 0;
   width: 100%;
-  overflow-y: auto;
 }
 
 .form-wrapper__form {
-  background: #ffffffcc;
+  background: #1e2129;
+  color: #d0d6f9;
   display: flex;
   flex-direction: column;
-  font-size: 1.25rem;
-  height: 25rem;
+  font-size: 18px;
+  height: fit-content;
   justify-content: space-between;
-  padding: 1.25rem;
-  width: 18.75rem;
+  outline: 1px solid green;
+  padding: 35px 130px 35px 50px;
+  width: 1275px;
 }
 
 fieldset {
   border: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .field-wrapper {
@@ -28,19 +33,31 @@ fieldset {
 
 .input-wrapper {
   display: flex;
-  justify-content: space-between;
-  position: relative;
+  flex-direction: column;
   width: 100%;
 }
 
+.avatar-wrapper {
+  align-items: center;
+  outline: 1px solid green;
+}
+
 .label {
-  line-height: 1;
+  font-family: 'Barlow Condensed', sans-serif;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
 }
 
 .form-wrapper__form input {
-  margin:0 0 2rem 0;
-  padding:0 0 0 0.63rem;
-  width: 9.38rem;
+  background: #1f222d;
+  border: 1px solid #d0d6f9;
+  color: #d0d6f9;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  height: 50px;
+  margin: 0 0 2rem 0;
+  padding: 0 0 0 0.63rem;
+  width: 500px;
 }
 
 .error {
@@ -57,15 +74,20 @@ fieldset {
 }
 
 .form-wrapper__form input[type='file'] {
+  border-radius: 50%;
   font-size: 1rem;
-  height: 1.56rem;
+  height: 90px;
   opacity: 0;
+  outline: 1px solid green;
   padding: 0;
+  width: 90px;
 }
 
 .form-wrapper__form input[type='file']::file-selector-button {
+  /* position: relative; */
   cursor: pointer;
-  width: 9.38rem;
+  height: 90px;
+  width: 90px;
 }
 
 .form-wrapper__form input:focus {
@@ -73,13 +95,19 @@ fieldset {
 }
 
 .button-avatar {
-  border: 1px solid #000;
-  border-radius: 0;
-  font-size: 1.25rem;
-  height: 1.56rem;
+  align-items: center;
+  background: #1f222d;
+  border: none;
+  border-radius: 50%;
+  color: #d0d6f9;
+  display: flex;
+    font-size: 40px;
+  height: 90px;
+  justify-content: center;
+  outline: 1px solid #d0d6f9;
   position: absolute;
-  right: 0;
-  width: 9.38rem;
+  /* right: 0; */
+  width: 90px;
 }
 
 .button-avatar:hover {
@@ -88,8 +116,9 @@ fieldset {
 
 .image-preview {
   border-radius: 50%;
-  height: 3.13rem;
-  width: 3.13rem;
+  height: 90px;
+  margin: 0 0 0 20px;
+  width: 90px;
 }
 
 .form-wrapper__form-button-submit {

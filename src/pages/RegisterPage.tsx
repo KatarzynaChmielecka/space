@@ -14,6 +14,7 @@ interface RegisterFormValues {
   username: string;
   email: string;
   password: string;
+  passwordConfirmation: string;
   avatar: FileList[];
 }
 
@@ -21,6 +22,7 @@ interface SubmitData {
   username: string;
   email: string;
   password: string;
+  passwordConfirmation: string;
   avatar: FileList[];
 }
 
@@ -34,6 +36,9 @@ const RegisterFormSchema = Yup.object({
   password: Yup.string()
     .min(8, 'Password should have at least 8 chars.')
     .required('Password is required.'),
+  passwordConfirmation: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Different passwords')
+    .required('Password confirmation is required'),
   avatar: Yup.mixed().test('avatar', 'Your avatar is required.', (value) => {
     if (value.length > 0) {
       return true;
@@ -69,6 +74,7 @@ const RegisterPage: React.FC = () => {
       username: data.username,
       email: data.email,
       password: data.password,
+      passwordConfirmation: data.passwordConfirmation,
       avatar: data.avatar[0] as unknown as Blob,
     }).forEach(([key, value]) => {
       formData.set(key, value);
@@ -166,39 +172,65 @@ const RegisterPage: React.FC = () => {
 
           <div className={classes['field-wrapper']}>
             <div className={classes['input-wrapper']}>
+              <label htmlFor="passwordConfirmation" className={classes.label}>
+                Repeat password
+              </label>
+              <input
+                type="password"
+                {...register('passwordConfirmation')}
+                placeholder="password"
+                className={classes.input}
+              />
+            </div>
+            <p className={classes.error}>
+              {errors.passwordConfirmation?.message}
+            </p>
+          </div>
+        </fieldset>
+        <div className={classes['field-wrapper']}>
+          <div
+            className={`${classes['input-wrapper']} ${classes['avatar-wrapper']}`}
+          >
+            <div>
               <label htmlFor="avatar" className={classes.label}>
                 Avatar
               </label>
-              <button className={classes['button-avatar']}>
-                Choose avatar
-              </button>
-              <input
-                type="file"
-                {...register('avatar')}
-                onChange={(e) => {
-                  handleImageChange(e);
-                  register('avatar').onChange(e);
-                }}
-                name="avatar"
-                className={classes['custom-file-input']}
-                title=""
-              />
-            </div>
-            {errors.avatar ? (
-              <p className={classes.error}>{errors.avatar?.message}</p>
-            ) : (
-              ''
-            )}
-          </div>
+              <button className={classes['button-avatar']}>+</button>
 
-          {previewUrl && (
-            <img
-              src={previewUrl}
-              alt="Preview"
-              className={classes['image-preview']}
-            />
+              <div
+                style={{
+                  width: '200px',
+                  display: 'flex',
+                  outline: '1px solid red',
+                }}
+              >
+                <input
+                  type="file"
+                  {...register('avatar')}
+                  onChange={(e) => {
+                    handleImageChange(e);
+                    register('avatar').onChange(e);
+                  }}
+                  name="avatar"
+                  className={classes['custom-file-input']}
+                  title=""
+                />
+                {previewUrl && (
+                  <img
+                    src={previewUrl}
+                    alt="Preview"
+                    className={classes['image-preview']}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+          {errors.avatar ? (
+            <p className={classes.error}>{errors.avatar?.message}</p>
+          ) : (
+            ''
           )}
-        </fieldset>
+        </div>
 
         <button
           type="submit"
