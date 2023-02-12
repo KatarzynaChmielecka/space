@@ -3,12 +3,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { ChangeEvent, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContentProps, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import classes from './Form.module.css';
+import classes2 from './RegisterPage.module.css';
 
 interface RegisterFormValues {
   username: string;
@@ -121,124 +122,130 @@ const RegisterPage: React.FC = () => {
   });
 
   return (
-    <div className={classes['form-wrapper']}>
-      <form onSubmit={onSubmit} className={classes['form-wrapper__form']}>
-        <fieldset>
-          <div className={classes['field-wrapper']}>
-            <div className={classes['input-wrapper']}>
-              <label htmlFor="username" className={classes.label}>
-                Name
-              </label>
-              <input
-                type="text"
-                {...register('username')}
-                name="username"
-                placeholder="name"
-                className={classes.input}
-              />
-            </div>
-            <p className={classes.error}>{errors.username?.message}</p>
-          </div>
-
-          <div className={classes['field-wrapper']}>
-            <div className={classes['input-wrapper']}>
-              <label htmlFor="email" className={classes.label}>
-                Email
-              </label>
-              <input
-                type="email"
-                {...register('email')}
-                placeholder="email"
-                className={classes.input}
-              />
-            </div>
-            <p className={classes.error}>{errors.email?.message}</p>
-          </div>
-
-          <div className={classes['field-wrapper']}>
-            <div className={classes['input-wrapper']}>
-              <label htmlFor="password" className={classes.label}>
-                Password
-              </label>
-              <input
-                type="password"
-                {...register('password')}
-                placeholder="password"
-                className={classes.input}
-              />
-            </div>
-            <p className={classes.error}>{errors.password?.message}</p>
-          </div>
-
-          <div className={classes['field-wrapper']}>
-            <div className={classes['input-wrapper']}>
-              <label htmlFor="passwordConfirmation" className={classes.label}>
-                Repeat password
-              </label>
-              <input
-                type="password"
-                {...register('passwordConfirmation')}
-                placeholder="password"
-                className={classes.input}
-              />
-            </div>
-            <p className={classes.error}>
-              {errors.passwordConfirmation?.message}
-            </p>
-          </div>
-        </fieldset>
-        <div className={classes['field-wrapper']}>
-          <div
-            className={`${classes['input-wrapper']} ${classes['avatar-wrapper']}`}
-          >
-            <div>
-              <label htmlFor="avatar" className={classes.label}>
-                Avatar
-              </label>
-              <button className={classes['button-avatar']}>+</button>
-
-              <div
-                style={{
-                  width: '200px',
-                  display: 'flex',
-                  outline: '1px solid red',
-                }}
-              >
+    <div className={classes2['register-page-wrapper']}>
+      <h6 className={classes2['register-page-wrapper__title']}>
+        <span>04</span> CREATE AN ACCOUNT
+      </h6>
+      <div className={classes['form-wrapper']}>
+        <form onSubmit={onSubmit} className={classes['form-wrapper__form']}>
+          <fieldset>
+            <div className={classes['field-wrapper']}>
+              <div className={classes['input-wrapper']}>
+                <label htmlFor="username" className={classes.label}>
+                  Name
+                </label>
                 <input
-                  type="file"
-                  {...register('avatar')}
-                  onChange={(e) => {
-                    handleImageChange(e);
-                    register('avatar').onChange(e);
-                  }}
-                  name="avatar"
-                  className={classes['custom-file-input']}
-                  title=""
+                  type="text"
+                  {...register('username')}
+                  name="username"
+                  placeholder="name"
+                  className={classes.input}
                 />
-                {previewUrl && (
-                  <img
-                    src={previewUrl}
-                    alt="Preview"
-                    className={classes['image-preview']}
+              </div>
+              <p className={classes.error}>{errors.username?.message}</p>
+            </div>
+
+            <div className={classes['field-wrapper']}>
+              <div className={classes['input-wrapper']}>
+                <label htmlFor="email" className={classes.label}>
+                  Email
+                </label>
+                <input
+                  type="email"
+                  {...register('email')}
+                  placeholder="email"
+                  className={classes.input}
+                />
+              </div>
+              <p className={classes.error}>{errors.email?.message}</p>
+            </div>
+
+            <div className={classes['field-wrapper']}>
+              <div className={classes['input-wrapper']}>
+                <label htmlFor="password" className={classes.label}>
+                  Password
+                </label>
+                <input
+                  type="password"
+                  {...register('password')}
+                  placeholder="password"
+                  className={classes.input}
+                />
+              </div>
+              <p className={classes.error}>{errors.password?.message}</p>
+            </div>
+
+            <div className={classes['field-wrapper']}>
+              <div className={classes['input-wrapper']}>
+                <label htmlFor="passwordConfirmation" className={classes.label}>
+                  Repeat password
+                </label>
+                <input
+                  type="password"
+                  {...register('passwordConfirmation')}
+                  placeholder="password"
+                  className={classes.input}
+                />
+              </div>
+              <p className={classes.error}>
+                {errors.passwordConfirmation?.message}
+              </p>
+            </div>
+          </fieldset>
+          <div className={classes['field-wrapper']}>
+            <div
+              className={`${classes['input-wrapper']} ${classes['avatar-wrapper']}`}
+            >
+              <div>
+                <label htmlFor="avatar" className={classes.label}>
+                  Avatar
+                </label>
+
+                <div className={classes['icons-wrapper']}>
+                  <button className={classes['button-avatar']}>+</button>
+                  <input
+                    type="file"
+                    {...register('avatar')}
+                    onChange={(e) => {
+                      handleImageChange(e);
+                      register('avatar').onChange(e);
+                    }}
+                    name="avatar"
+                    className={classes['custom-file-input']}
+                    title=""
                   />
-                )}
+                  {previewUrl && (
+                    <img
+                      src={previewUrl}
+                      alt="Preview"
+                      className={classes['image-preview']}
+                    />
+                  )}
+                  {!previewUrl && (
+                    <div className={classes['preview-div']}>preview</div>
+                  )}
+                </div>
               </div>
             </div>
+            {errors.avatar ? (
+              <p className={classes.error}>{errors.avatar?.message}</p>
+            ) : (
+              ''
+            )}
           </div>
-          {errors.avatar ? (
-            <p className={classes.error}>{errors.avatar?.message}</p>
-          ) : (
-            ''
-          )}
-        </div>
-
-        <button
-          type="submit"
-          className={classes['form-wrapper__form-button-submit']}
-        >
-          Register
-        </button>
-      </form>
+          <div className={classes['form-wrapper__form-link-button-wrapper']}>
+            <div className={classes['form-wrapper__form-link-login']}>
+              <Link to="/login">LOGIN</Link>
+            </div>
+            <button
+              type="submit"
+              className={classes['form-wrapper__form-button-submit']}
+            >
+              JOIN US
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
