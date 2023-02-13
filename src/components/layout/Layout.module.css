@@ -1,9 +1,10 @@
 .layout {
   color: #fff;
   display: flex;
-  height: 100vh;
+  height: fit-content;
   justify-content: center;
   max-width: 90rem;
+  min-height: 100vh;
   padding: 8.75rem 0 0 0;
   width: 100%;
 }

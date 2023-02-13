@@ -228,7 +228,9 @@ const RegisterPage: React.FC = () => {
               </div>
             </div>
             {errors.avatar ? (
-              <p className={classes.error}>{errors.avatar?.message}</p>
+              <p className={`${classes.error} ${classes['avatar-error']}`} style={{ textAlign: 'center' }}>
+                {errors.avatar?.message}
+              </p>
             ) : (
               ''
             )}
