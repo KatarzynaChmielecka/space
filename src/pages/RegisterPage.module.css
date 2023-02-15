@@ -1,9 +1,7 @@
 .register-page-wrapper {
-  margin: 80px 0 0 0;
-  outline: 1px solid yellow;
-  padding: 0 0 0 165px;
-  width: 100%; 
-  /* overflow: auto; */
+  margin: 5rem 0 0 0;
+  padding: 0 0 0 10.31rem;
+  width: 100%;
 }
 
 .register-page-wrapper__title {
@@ -18,10 +16,15 @@
   margin: 0 1rem 0 0;
   opacity: 0.25;
 }
+
 @media screen and (max-width: 1440px) {
-  .register-page-wrapper{
+  .register-page-wrapper {
+    margin: 1.25rem 0 0 0;
     padding: 0;
-    margin: 20px 0 0 0;
   }
-  .register-page-wrapper__title {font-size: 16px; text-align: center;}
+
+  .register-page-wrapper__title {
+    font-size: 1rem;
+    text-align: center;
+  }
 }

@@ -222,13 +222,16 @@ const RegisterPage: React.FC = () => {
                     />
                   )}
                   {!previewUrl && (
-                    <div className={classes['preview-div']}>preview</div>
+                    <div className={classes['preview-div']}>PREVIEW</div>
                   )}
                 </div>
               </div>
             </div>
             {errors.avatar ? (
-              <p className={`${classes.error} ${classes['avatar-error']}`} style={{ textAlign: 'center' }}>
+              <p
+                className={`${classes.error} ${classes['avatar-error']}`}
+                style={{ textAlign: 'center' }}
+              >
                 {errors.avatar?.message}
               </p>
             ) : (
