@@ -171,7 +171,6 @@ fieldset {
   border-radius: 0.63rem;
   color: #d0d6f9;
   display: flex;
-  flex-grow: 1;
   font-size: 1.75rem;
   height: 3.75rem;
   justify-content: center;
