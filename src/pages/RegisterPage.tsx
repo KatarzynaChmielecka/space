@@ -239,9 +239,13 @@ const RegisterPage: React.FC = () => {
             )}
           </div>
           <div className={classes['form-wrapper__form-link-button-wrapper']}>
-            <div className={classes['form-wrapper__form-link-login']}>
-              <Link to="/login">LOGIN</Link>
-            </div>
+            <Link
+              to="/login"
+              className={classes['form-wrapper__form-link-login']}
+            >
+              LOGIN
+            </Link>
+
             <button
               type="submit"
               className={classes['form-wrapper__form-button-submit']}

@@ -130,9 +130,13 @@ const LoginPage: React.FC = () => {
           <div
             className={`${classes['form-wrapper__form-link-button-wrapper']} ${classes['form-wrapper__form-link-button-wrapper--login']}`}
           >
-            <div className={classes['form-wrapper__form-link-login']}>
-              <Link to="/register">JOIN US</Link>
-            </div>
+            <Link
+              to="/register"
+              className={classes['form-wrapper__form-link-login']}
+            >
+              JOIN US
+            </Link>
+
             <button
               type="submit"
               className={classes['form-wrapper__form-button-submit']}

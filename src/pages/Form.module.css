@@ -171,6 +171,7 @@ fieldset {
   border-radius: 0.63rem;
   color: #d0d6f9;
   display: flex;
+  flex-grow: 1;
   font-size: 1.75rem;
   height: 3.75rem;
   justify-content: center;
@@ -210,6 +211,7 @@ fieldset {
   }
 
   .form-wrapper__form {
+    align-items: center;
     padding: 1.38rem;
   }
 
@@ -217,6 +219,7 @@ fieldset {
     align-items: center;
     flex-direction: column;
   }
+
   .form-wrapper__form input {
     width: 20.63rem;
   }
