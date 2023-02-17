@@ -23,8 +23,9 @@
 .form-wrapper:has(.form-wrapper__form--login) {
   justify-content: flex-start;
 }
+
 .form-wrapper__form--login {
-  width: 600px;
+  max-width: 37.5rem;
 }
 
 fieldset {
@@ -159,13 +160,8 @@ fieldset {
 }
 
 .form-wrapper__form-link-button-wrapper--login {
-  /* outline: 1px solid blue;
-  background: red; */
-  /* width: 500px;
-  display: flex; */
   flex-wrap: nowrap;
-  width: 500px;
-  /* max-width: 500px; */
+  width: 31.25rem;
 }
 
 .form-wrapper__form-link-login {
@@ -207,6 +203,10 @@ fieldset {
 @media screen and (max-width: 1440px) {
   .form-wrapper {
     padding: 1.25rem 0 0 0;
+  }
+
+  .form-wrapper:has(.form-wrapper__form--login) {
+    justify-content: center;
   }
 
   .form-wrapper__form {

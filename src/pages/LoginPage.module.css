@@ -16,3 +16,15 @@
     margin: 0 1rem 0 0;
     opacity: 0.25;
   }
+
+  @media screen and (max-width: 1440px) {
+    .login-page-wrapper {
+      margin: 1.25rem 0 0 0;
+      padding: 0;
+    }
+  
+    .login-page-wrapper__title {
+      font-size: 1rem;
+      text-align: center;
+    }
+  }
