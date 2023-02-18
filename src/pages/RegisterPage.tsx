@@ -38,7 +38,7 @@ const RegisterFormSchema = Yup.object({
     .min(8, 'Password should have at least 8 chars.')
     .required('Password is required.'),
   passwordConfirmation: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Different passwords')
+    .oneOf([Yup.ref('password'), null], 'Passwords are different.')
     .required('Password confirmation is required'),
   avatar: Yup.mixed().test('avatar', 'Your avatar is required.', (value) => {
     if (value.length > 0) {
