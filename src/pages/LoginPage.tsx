@@ -44,7 +44,6 @@ const LoginPage: React.FC = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data: SubmitData) => {
-    console.log(data);
     const response = await toast.promise(
       axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, data),
       {
