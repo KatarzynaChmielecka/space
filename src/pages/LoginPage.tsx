@@ -2,13 +2,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import * as Yup from 'yup';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContentProps, toast } from 'react-toastify';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import classes from './Form.module.css';
+import classes2 from './LoginPage.module.css';
 import { AuthContext } from '../context/auth-context';
 
 interface LoginFormValues {
@@ -84,47 +85,66 @@ const LoginPage: React.FC = () => {
   });
 
   return (
-    <div className={classes['form-wrapper']}>
-      <form onSubmit={onSubmit} className={classes['form-wrapper__form']}>
-        <fieldset>
-          <div className={classes['field-wrapper']}>
-            <div className={classes['input-wrapper']}>
-              <label htmlFor="email" className={classes.label}>
-                Email
-              </label>
-              <input
-                type="email"
-                {...register('email')}
-                placeholder="email"
-                className={classes.input}
-              />
-            </div>
-            <p className={classes.error}>{errors.email?.message}</p>
-          </div>
-
-          <div className={classes['field-wrapper']}>
-            <div className={classes['input-wrapper']}>
-              <label htmlFor="password" className={classes.label}>
-                Password
-              </label>
-              <input
-                type="password"
-                {...register('password')}
-                placeholder="password"
-                className={classes.input}
-              />
-            </div>
-            <p className={classes.error}>{errors.password?.message}</p>
-          </div>
-        </fieldset>
-
-        <button
-          type="submit"
-          className={classes['form-wrapper__form-button-submit']}
+    <div className={classes2['login-page-wrapper']}>
+      <h6 className={classes2['login-page-wrapper__title']}>
+        <span>04</span> LOG IN
+      </h6>
+      <div className={classes['form-wrapper']}>
+        <form
+          onSubmit={onSubmit}
+          className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--login']}`}
         >
-          Login
-        </button>
-      </form>
+          <fieldset>
+            <div className={classes['field-wrapper']}>
+              <div className={classes['input-wrapper']}>
+                <label htmlFor="email" className={classes.label}>
+                  Email
+                </label>
+                <input
+                  type="email"
+                  {...register('email')}
+                  placeholder="email"
+                  className={classes.input}
+                />
+              </div>
+              <p className={classes.error}>{errors.email?.message}</p>
+            </div>
+
+            <div className={classes['field-wrapper']}>
+              <div className={classes['input-wrapper']}>
+                <label htmlFor="password" className={classes.label}>
+                  Password
+                </label>
+                <input
+                  type="password"
+                  {...register('password')}
+                  placeholder="password"
+                  className={classes.input}
+                />
+              </div>
+              <p className={classes.error}>{errors.password?.message}</p>
+            </div>
+          </fieldset>
+
+          <div
+            className={`${classes['form-wrapper__form-link-button-wrapper']} ${classes['form-wrapper__form-link-button-wrapper--login']}`}
+          >
+            <Link
+              to="/register"
+              className={classes['form-wrapper__form-link-login']}
+            >
+              JOIN US
+            </Link>
+
+            <button
+              type="submit"
+              className={classes['form-wrapper__form-button-submit']}
+            >
+              LOG IN
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
