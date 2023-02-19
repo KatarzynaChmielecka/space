@@ -1,0 +1,40 @@
+.tabs {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    width:100%
+  }
+  
+  .tabsNav {
+    display: flex;
+    /* flex-direction: column; */
+    outline:1px solid red;
+    /* flex-wrap: wrap; */
+  }
+  
+  .tabsNavItem {
+    color: #555;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    cursor: pointer;
+    padding: 10px;
+    /* flex: 1; */
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    width:132px
+  }
+  
+  .tabsNavItem:hover {
+    background-color: #eaeaea;
+  }
+  
+  .tabsNavItem.active {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .tabsContent {
+    padding: 20px;
+  }
+  

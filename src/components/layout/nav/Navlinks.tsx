@@ -1,21 +1,29 @@
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
-import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { NavLink, useParams } from 'react-router-dom';
+import { useContext, useState } from 'react';
 
 import classes from './Navlinks.module.css';
+import { AuthContext } from '../../../context/auth-context';
 
-const navigationLink = [
-  { id: '00', name: 'HOME', href: '/' },
-  { id: '01', name: 'DESTINATION', href: '/destination' },
-  { id: '02', name: 'CREW', href: '/crew' },
-  { id: '03', name: 'TECHNOLOGY', href: '/technology' },
-];
 const Navlinks = () => {
   const [open, setOpen] = useState(false);
 
   const openMenu = () => setOpen(true);
   const closeMenu = () => setOpen(false);
+  // const { id } = useParams();
+  const auth = useContext(AuthContext);
+  const navigationLink = [
+    { id: '00', name: 'HOME', href: '/' },
+    { id: '01', name: 'DESTINATION', href: '/destination' },
+    { id: '02', name: 'CREW', href: '/crew' },
+    { id: '03', name: 'TECHNOLOGY', href: '/technology' },
+    {
+      id: '04',
+      name: 'MY ACCOUNT',
+      href: auth.token ? `/user/${auth.userId}` : '/login',
+    },
+  ];
   return (
     <>
       <div className={classes['navlinks-wrapper']}>
@@ -58,17 +66,33 @@ const Navlinks = () => {
             />
 
             {navigationLink.map((item) => (
-              <NavLink
-                key={item.id}
-                to={item.href}
-                className={({ isActive }) =>
-                  isActive ? `${classes['active-mobile']}` : classes.link
-                }
-                onClick={closeMenu}
-              >
-                <span>{item.id}</span> {item.name}
-              </NavLink>
+              <>
+                <NavLink
+                  key={item.id}
+                  to={item.href}
+                  className={({ isActive }) =>
+                    isActive ? `${classes['active-mobile']}` : classes.link
+                  }
+                  onClick={closeMenu}
+                >
+                  <span>{item.id}</span> {item.name}
+                </NavLink>
+              </>
             ))}
+            {/* <ol>
+              <li>
+                <NavLink to="/user">MY DATA</NavLink>
+              </li>
+              <li>
+                <NavLink to="/photos">PHOTOS</NavLink>
+              </li>
+              <li>
+                <NavLink to="/notes">NOTES</NavLink>
+              </li>
+              <li>
+                <button>LOG OUT</button>
+              </li>
+            </ol> */}
           </div>
           <div
             className={classes.backdrop}
