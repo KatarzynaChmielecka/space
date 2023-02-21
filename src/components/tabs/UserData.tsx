@@ -1,3 +1,5 @@
+import 'react-toastify/dist/ReactToastify.css';
+
 import * as Yup from 'yup';
 import axios from 'axios';
 import {
@@ -50,6 +52,7 @@ const UserFormSchema = (isEditingAvatar: boolean) =>
       return true;
     }),
   });
+
 const UserData = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -220,16 +223,6 @@ const UserData = () => {
   return (
     <>
       {!auth.token && <Link to="/login">Login</Link>}
-      {/* {auth.token && auth.userId &&(
-          <>
-            <nav>
-              <NavLink to="">Profile</NavLink>
-              <NavLink to="photos">Photos</NavLink>
-              <NavLink to="notes">Notes</NavLink>
-            </nav>
-            <Outlet />
-          </>
-        )}  */}
 
       <div style={{ color: 'black', fontSize: '20px' }}>
         {isEditing && auth.token && (

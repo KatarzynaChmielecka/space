@@ -1,18 +1,24 @@
-.user-page-logout {
-  align-items: center;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  height: fit-content;
-  margin: 50px 0 0 0;
-  text-align: center;
+.user-page-wrapper {
+  overflow: hidden;
+  padding: 5rem 0 0 10.31rem;
+  width: 100%;
 }
 
-.user-page-logout__link {
-  background: white;
-  color: black;
-  letter-spacing: 5px;
-  padding: 10px 20px;
-  width: 150px;
+.user-page-wrapper__title {
+  font-family: Barlow Condensed, sans-serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: 0.3rem;
+}
+
+.user-page-wrapper__title span {
+  font-weight: 700;
+  margin: 0 1rem 0 0;
+  opacity: 0.25;
+}
+
+@media screen and (max-width: 768px) {
+  .user-page-wrapper {
+    padding: 1.88rem 0 0 0;
+  }
 }
