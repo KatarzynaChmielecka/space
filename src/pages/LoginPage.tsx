@@ -51,7 +51,7 @@ const LoginPage: React.FC = () => {
         success: {
           render() {
             reset();
-            auth.login(response.data.token);
+            auth.login(response.data.token, response.data.user._id);
             const userIdFromData = response.data.user._id;
             navigate(`/user/${userIdFromData}`);
             return <p>{response.data.message} </p>;

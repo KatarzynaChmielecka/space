@@ -4,6 +4,9 @@ import { Route, Routes } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 
 import Layout from './components/layout/Layout';
+import Notes from './components/Notes';
+import Photos from './components/Photos';
+import Profile from './components/Profile';
 import { AuthContext } from './context/auth-context';
 import { useAuth } from './hooks/auth-hook';
 
@@ -15,13 +18,14 @@ const Register = lazy(() => import('./pages/RegisterPage'));
 const Login = lazy(() => import('./pages/LoginPage'));
 const User = lazy(() => import('./pages/UserPage'));
 function App() {
-  const { token, login, logout } = useAuth();
+  const { token, login, logout, userId } = useAuth();
   return (
     <div className="App">
       <AuthContext.Provider
         value={{
           token: token,
           login: login,
+          userId: userId,
           logout: logout,
         }}
       >

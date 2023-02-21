@@ -36,8 +36,9 @@
 }
 
 .user {
-  background: url('../../assets/shared/user-page.jpg');
+  background: url('../../assets/destination/background-destination-desktop.jpg');
 }
+
 @media screen and (max-width: 1440px) {
   .layout {
     padding-top: 6.25rem;
