@@ -2,7 +2,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import * as Yup from 'yup';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContentProps, toast } from 'react-toastify';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
@@ -32,6 +32,7 @@ const LoginFormSchema = Yup.object({
 });
 
 const LoginPage: React.FC = () => {
+  const path = useLocation().pathname;
   const {
     register,
     handleSubmit,
@@ -89,7 +90,13 @@ const LoginPage: React.FC = () => {
       <h6 className={classes2['login-page-wrapper__title']}>
         <span>04</span> LOG IN
       </h6>
-      <div className={classes['form-wrapper']}>
+      <div
+        className={
+          path === '/login'
+            ? `${classes['form-wrapper']} ${classes['form-wrapper--login']}`
+            : classes['form-wrapper']
+        }
+      >
         <form
           onSubmit={onSubmit}
           className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--login']}`}
