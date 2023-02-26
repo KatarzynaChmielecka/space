@@ -18,7 +18,7 @@
   width: 79.69rem;
 }
 
-.form-wrapper:has(.form-wrapper__form--login) {
+.form-wrapper--login {
   justify-content: flex-start;
 }
 
@@ -200,7 +200,7 @@ fieldset {
     padding: 1.25rem 0 0 0;
   }
 
-  .form-wrapper:has(.form-wrapper__form--login) {
+  .form-wrapper--login { 
     justify-content: center;
   }
 
