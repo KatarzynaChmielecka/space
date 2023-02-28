@@ -6,6 +6,10 @@
   width: 100%;
 }
 
+.form-wrapper--my-data {
+  padding: 0;
+}
+
 .form-wrapper__form {
   background: #1e2129;
   color: #d0d6f9;
@@ -14,8 +18,14 @@
   font-size: 1.13rem;
   justify-content: space-between;
   min-height: 32.19rem;
+  min-height: fit-content;
   padding: 2.19rem 8.13rem 2.19rem 3.13rem;
   width: 79.69rem;
+}
+
+.form-wrapper__form--user-page {
+  background: none;
+  padding-top: 0;
 }
 
 .form-wrapper--login {
@@ -56,6 +66,7 @@ fieldset {
 .icons-wrapper {
   display: flex;
   margin-top: 0.63rem;
+  outline: 1px solid green;
   width: 12.5rem;
 }
 
@@ -150,8 +161,9 @@ fieldset {
 .form-wrapper__form-link-button-wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 5rem;
+  gap: 1.63rem;
   justify-content: center;
+  outline: 1px solid yellowgreen;
 }
 
 .form-wrapper__form-link-button-wrapper--login {
@@ -159,7 +171,8 @@ fieldset {
   width: 31.25rem;
 }
 
-.form-wrapper__form-link-login {
+.form-wrapper__form-link-login,
+.form-wrapper__form-button-back {
   align-items: center;
   background: #ffffff08;
   border: 2px solid #d0d6f9;
@@ -173,7 +186,8 @@ fieldset {
   width: 13.13rem;
 }
 
-.form-wrapper__form-link-login:hover {
+.form-wrapper__form-link-login:hover,
+.form-wrapper__form-button-back:hover {
   background: #d9d9d94d;
   cursor: pointer;
   outline: 0.63rem solid #d9d9d94d;
@@ -200,7 +214,7 @@ fieldset {
     padding: 1.25rem 0 0 0;
   }
 
-  .form-wrapper--login { 
+  .form-wrapper--login {
     justify-content: center;
   }
 
@@ -224,7 +238,8 @@ fieldset {
   }
 
   .form-wrapper__form-link-login,
-  .form-wrapper__form-button-submit {
+  .form-wrapper__form-button-submit,
+  .form-wrapper__form-button-back {
     flex-wrap: wrap;
   }
 }
@@ -237,7 +252,8 @@ fieldset {
   }
 
   .form-wrapper__form-link-login,
-  .form-wrapper__form-button-submit {
+  .form-wrapper__form-button-submit,
+  .form-wrapper__form-button-back {
     width: 100%;
   }
 

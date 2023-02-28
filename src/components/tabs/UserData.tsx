@@ -279,56 +279,70 @@ const UserData = () => {
           <div className={classes['form-wrapper']}>
             <form
               onSubmit={onSubmitAvatar}
-              className={classes['form-wrapper__form']}
+              className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
             >
-              <fieldset>
-                <div className={classes['field-wrapper']}>
-                  <div className={classes['input-wrapper']}>
+              <div className={classes['field-wrapper']}>
+                <div
+                  className={`${classes['input-wrapper']} ${classes['avatar-wrapper']}`}
+                >
+                  <div>
                     <label htmlFor="avatar" className={classes.label}>
-                      Avatar
+                      Change avatar
                     </label>
-                    <button className={classes['button-avatar']}>
-                      Choose avatar
-                    </button>
-                    <input
-                      type="file"
-                      {...register('avatar')}
-                      onChange={(e) => {
-                        handleImageChange(e);
-                        register('avatar').onChange(e);
-                      }}
-                      name="avatar"
-                      className={classes['custom-file-input']}
-                      title=""
-                    />
-                  </div>
-                  {errors.avatar ? (
-                    <p className={classes.error}>{errors.avatar?.message}</p>
-                  ) : (
-                    ''
-                  )}
-                </div>
 
-                {previewUrl && (
-                  <img
-                    src={previewUrl}
-                    alt="Preview"
-                    className={classes['image-preview']}
-                  />
+                    <div className={classes['icons-wrapper']}>
+                      <button className={classes['button-avatar']}>+</button>
+                      <input
+                        type="file"
+                        {...register('avatar')}
+                        onChange={(e) => {
+                          handleImageChange(e);
+                          register('avatar').onChange(e);
+                        }}
+                        name="avatar"
+                        className={classes['custom-file-input']}
+                        title=""
+                      />
+                      {previewUrl && (
+                        <img
+                          src={previewUrl}
+                          alt="Preview"
+                          className={classes['image-preview']}
+                        />
+                      )}
+                      {!previewUrl && (
+                        <div className={classes['preview-div']}>PREVIEW</div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                {errors.avatar ? (
+                  <p
+                    className={`${classes.error} ${classes['avatar-error']}`}
+                    style={{ textAlign: 'center' }}
+                  >
+                    {errors.avatar?.message}
+                  </p>
+                ) : (
+                  ''
                 )}
-              </fieldset>
-              <button
-                onClick={() => setIsEditingAvatar(false)}
-                className={classes['form-wrapper__form-button-submit']}
+              </div>
+              <div
+                className={classes['form-wrapper__form-link-button-wrapper']}
               >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className={classes['form-wrapper__form-button-submit']}
-              >
-                Save new avatar
-              </button>
+                <button
+                  onClick={() => setIsEditingAvatar(false)}
+                  className={classes['form-wrapper__form-button-back']}
+                >
+                  BACK
+                </button>
+                <button
+                  type="submit"
+                  className={classes['form-wrapper__form-button-submit']}
+                >
+                  CONFIRM
+                </button>
+              </div>
             </form>
           </div>
         )}
