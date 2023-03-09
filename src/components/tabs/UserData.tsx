@@ -32,11 +32,17 @@ interface UserFormValues {
   username: string;
   email: string;
   avatar: string;
+  password: string;
+  newPassword: string;
+  newPasswordConfirmation: string;
 }
 
-type DataChange = Omit<UserFormValues, 'avatar'>;
+type DataChange = Pick<UserFormValues, 'username'>;
 type AvatarChange = Pick<UserFormValues, 'avatar'>;
-
+type PasswordChange = Pick<
+  UserFormValues,
+  'password' | 'newPassword' | 'newPasswordConfirmation'
+>;
 const UserFormSchema = (isEditingAvatar: boolean) =>
   Yup.object({
     username: Yup.string()
@@ -45,6 +51,15 @@ const UserFormSchema = (isEditingAvatar: boolean) =>
     email: Yup.string()
       .email('Invalid email.')
       .required('Your email is required.'),
+    password: Yup.string()
+      .min(8, 'Password should have at least 8 chars.')
+      .required('Password is required.'),
+    newPassword: Yup.string()
+      .min(8, 'Password should have at least 8 chars.')
+      .required('Password is required.'),
+    newPasswordConfirmation: Yup.string()
+      .oneOf([Yup.ref('newPassword'), null], 'Passwords are different.')
+      .required('Password confirmation is required'),
     avatar: Yup.mixed().test('avatar', 'Your avatar is required.', (value) => {
       if (isEditingAvatar && !value) {
         return false;
@@ -56,8 +71,10 @@ const UserFormSchema = (isEditingAvatar: boolean) =>
 const UserData = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [isEditingName, setIsEditingName] = useState<boolean>(false);
+  const [isEditingEmail, setIsEditingEmail] = useState<boolean>(false);
   const [isEditingAvatar, setIsEditingAvatar] = useState<boolean>(false);
+  const [isEditingPassword, setIsEditingPassword] = useState<boolean>(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const auth = useContext(AuthContext);
 
@@ -108,9 +125,13 @@ const UserData = () => {
     fetchUserData();
   }, [fetchUserData]);
 
-  const handleEditData = () => setIsEditing(true);
+  const handleEditName = () => setIsEditingName(true);
 
   const handleEditAvatar = () => setIsEditingAvatar(true);
+
+  const handleEditEmail = () => setIsEditingEmail(true);
+
+  const handleEditPassword = () => setIsEditingPassword(true);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -119,10 +140,11 @@ const UserData = () => {
       setPreviewUrl(objectUrl);
     }
   };
-  const onSubmit = handleSubmit(async (data: DataChange) => {
+
+  const onSubmitName = handleSubmit(async (data: DataChange) => {
     const response = await toast.promise(
       axios.patch(
-        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/name`,
         data,
         {
           headers: {
@@ -134,7 +156,55 @@ const UserData = () => {
         pending: 'Please, wait.',
         success: {
           render() {
-            setIsEditing(false);
+            setIsEditingName(false);
+            fetchUserData();
+            reset();
+            return <p>{response.data.message} </p>;
+          },
+        },
+        error: {
+          render({
+            data,
+          }: ToastContentProps<{
+            response: { status: number; data: { message: string } };
+            status: number;
+          }>) {
+            reset();
+            if (data && data.response && data?.response.status === 0) {
+              return (
+                <p>
+                  Sorry, we have problem with database connection. Please try
+                  again later.
+                </p>
+              );
+            }
+            if (data && data.response && data.response.data) {
+              return <p>{data.response.data.message} </p>;
+            }
+            return <p>Something went wrong, please try again later.</p>;
+          },
+        },
+      },
+      { position: 'top-center' },
+    );
+  });
+
+  const onSubmitEmail = handleSubmit(async (data: DataChange) => {
+    const response = await toast.promise(
+      axios.patch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/email`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        },
+      ),
+      {
+        pending: 'Please, wait.',
+        success: {
+          render() {
+            setIsEditingEmail(false);
             fetchUserData();
             reset();
             return <p>{response.data.message} </p>;
@@ -220,14 +290,65 @@ const UserData = () => {
     );
   });
 
+  const onSubmitPassword = handleSubmit(async (data: PasswordChange) => {
+    const response = await toast.promise(
+      axios.patch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/password`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        },
+      ),
+      {
+        pending: 'Please, wait.',
+        success: {
+          render() {
+            setIsEditingPassword(false);
+            fetchUserData();
+            reset();
+            return <p>{response.data.message} </p>;
+          },
+        },
+        error: {
+          render({
+            data,
+          }: ToastContentProps<{
+            response: { status: number; data: { message: string } };
+            status: number;
+          }>) {
+            reset();
+            if (data && data.response && data?.response.status === 0) {
+              return (
+                <p>
+                  Sorry, we have problem with database connection. Please try
+                  again later.
+                </p>
+              );
+            }
+            if (data && data.response && data.response.data) {
+              return <p>{data.response.data.message} </p>;
+            }
+            return <p>Something went wrong, please try again later.</p>;
+          },
+        },
+      },
+      { position: 'top-center' },
+    );
+  });
+
   return (
     <>
       {!auth.token && <Link to="/login">Login</Link>}
 
       <div style={{ color: 'black', fontSize: '20px' }}>
-        {isEditing && auth.token && (
+        {isEditingName && auth.token && (
           <div className={classes['form-wrapper']}>
-            <form onSubmit={onSubmit} className={classes['form-wrapper__form']}>
+            <form
+              onSubmit={onSubmitName}
+              className={classes['form-wrapper__form']}
+            >
               <fieldset>
                 <div className={classes['field-wrapper']}>
                   <div className={classes['input-wrapper']}>
@@ -243,24 +364,49 @@ const UserData = () => {
                   </div>
                   <p className={classes.error}>{errors.username?.message}</p>
                 </div>
+              </fieldset>
+              <button
+                onClick={() => setIsEditingName(false)}
+                className={classes['form-wrapper__form-button-submit']}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className={classes['form-wrapper__form-button-submit']}
+              >
+                Save new data
+              </button>
+            </form>
+          </div>
+        )}
 
+        {isEditingEmail && auth.token && (
+          <div className={classes['form-wrapper']}>
+            <form
+              onSubmit={onSubmitEmail}
+              className={classes['form-wrapper__form']}
+            >
+              <fieldset>
                 <div className={classes['field-wrapper']}>
-                  <div className={classes['input-wrapper']}>
-                    <label htmlFor="email" className={classes.label}>
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      {...register('email')}
-                      placeholder="email"
-                      className={classes.input}
-                    />
+                  <div className={classes['field-wrapper']}>
+                    <div className={classes['input-wrapper']}>
+                      <label htmlFor="email" className={classes.label}>
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        {...register('email')}
+                        placeholder="email"
+                        className={classes.input}
+                      />
+                    </div>
+                    <p className={classes.error}>{errors.email?.message}</p>
                   </div>
-                  <p className={classes.error}>{errors.email?.message}</p>
                 </div>
               </fieldset>
               <button
-                onClick={() => setIsEditing(false)}
+                onClick={() => setIsEditingEmail(false)}
                 className={classes['form-wrapper__form-button-submit']}
               >
                 Cancel
@@ -346,15 +492,97 @@ const UserData = () => {
             </form>
           </div>
         )}
-        {auth.token && !isEditing && !isEditingAvatar && userData && (
-          <UserCard
-            src={userData.user.avatar}
-            username={userData.user.username}
-            userEmail={userData.user.email}
-            editImage={handleEditAvatar}
-            editData={handleEditData}
-          />
+
+        {isEditingPassword && auth.token && (
+          <div className={classes['form-wrapper']}>
+            <form
+              onSubmit={onSubmitPassword}
+              className={classes['form-wrapper__form']}
+            >
+              <fieldset>
+                <div className={classes['field-wrapper']}>
+                  <div className={classes['input-wrapper']}>
+                    <label htmlFor="password" className={classes.label}>
+                      Old password
+                    </label>
+                    <input
+                      type="password"
+                      {...register('password')}
+                      placeholder="password"
+                      className={classes.input}
+                    />
+                  </div>
+                  <p className={classes.error}>{errors.password?.message}</p>
+                </div>
+
+                <div className={classes['field-wrapper']}>
+                  <div className={classes['input-wrapper']}>
+                    <label htmlFor="password" className={classes.label}>
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      {...register('newPassword')}
+                      placeholder="password"
+                      className={classes.input}
+                    />
+                  </div>
+                  <p className={classes.error}>{errors.newPassword?.message}</p>
+                </div>
+
+                <div className={classes['field-wrapper']}>
+                  <div className={classes['input-wrapper']}>
+                    <label
+                      htmlFor="passwordConfirmation"
+                      className={classes.label}
+                    >
+                      Repeat password
+                    </label>
+                    <input
+                      type="password"
+                      {...register('newPasswordConfirmation')}
+                      placeholder="password"
+                      className={classes.input}
+                    />
+                  </div>
+                  <p className={classes.error}>
+                    {errors.newPasswordConfirmation?.message}
+                  </p>
+                </div>
+              </fieldset>
+              <button
+                onClick={() => setIsEditingPassword(false)}
+                className={classes['form-wrapper__form-button-submit']}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className={classes['form-wrapper__form-button-submit']}
+              >
+                Save new data
+              </button>
+            </form>
+          </div>
         )}
+
+        {auth.token &&
+          !isEditingName &&
+          !isEditingEmail &&
+          !isEditingAvatar &&
+          !isEditingPassword &&
+          userData && (
+            <UserCard
+              src={userData.user.avatar}
+              username={userData.user.username}
+              userEmail={userData.user.email}
+              editImage={handleEditAvatar}
+              editName={handleEditName}
+              editEmail={handleEditEmail}
+              editPassword={handleEditPassword}
+            />
+          )}
+
         {!auth.token && (
           <div className={classes2['user-page-logout']}>
             <p>{error || 'Please, login.'}</p>

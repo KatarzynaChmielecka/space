@@ -6,13 +6,17 @@ const UserCard = ({
   username,
   userEmail,
   editImage,
-  editData,
+  editName,
+  editEmail,
+  editPassword,
 }: {
   src: string;
   username: string;
   userEmail: string;
   editImage: () => void;
-  editData: () => void;
+  editName: () => void;
+  editEmail: () => void;
+  editPassword: () => void;
 }) => {
   return (
     <div className={classes['user-card-wrapper']}>
@@ -40,8 +44,8 @@ const UserCard = ({
           </div>
           <div
             role="button"
-            onClick={editImage}
-            onKeyDown={editImage}
+            onClick={editName}
+            onKeyDown={editName}
             tabIndex={0}
             // className={classes['user-card-wrapper__photo']}
           >
@@ -55,8 +59,8 @@ const UserCard = ({
           </div>
           <div
             role="button"
-            onClick={editImage}
-            onKeyDown={editImage}
+            onClick={editEmail}
+            onKeyDown={editEmail}
             tabIndex={0}
             // className={classes['user-card-wrapper__photo']}
           >
@@ -70,8 +74,8 @@ const UserCard = ({
           </div>
           <div
             role="button"
-            onClick={editImage}
-            onKeyDown={editImage}
+            onClick={editPassword}
+            onKeyDown={editPassword}
             tabIndex={0}
             // className={classes['user-card-wrapper__photo']}
           >
