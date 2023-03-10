@@ -20,7 +20,8 @@
 - user can get information about some planets, space crew, technology
 - user can register himself
 - user can login
-- after login user can store his personal data and more(in progress) on special protected site
+- after login user can store his personal data special protected site
+- user can change his name, email and avatar
 
 ...more info soon
 
