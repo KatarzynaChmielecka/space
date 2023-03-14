@@ -18,6 +18,7 @@ import UserCard from '../UserCard';
 import classes from '../../pages/Form.module.css';
 import classes2 from '../UserCard.module.css';
 import { AuthContext } from '../../context/auth-context';
+import UserDataPassword from '../ChangePassword';
 
 interface UserData {
   user: {
@@ -32,17 +33,12 @@ interface UserFormValues {
   username: string;
   email: string;
   avatar: string;
-  password: string;
-  newPassword: string;
-  newPasswordConfirmation: string;
 }
 
-type DataChange = Pick<UserFormValues, 'username'>;
+type NameChange = Pick<UserFormValues, 'username'>;
+type EmailChange = Pick<UserFormValues, 'email'>;
 type AvatarChange = Pick<UserFormValues, 'avatar'>;
-type PasswordChange = Pick<
-  UserFormValues,
-  'password' | 'newPassword' | 'newPasswordConfirmation'
->;
+
 const UserFormSchema = (isEditingAvatar: boolean) =>
   Yup.object({
     username: Yup.string()
@@ -51,17 +47,9 @@ const UserFormSchema = (isEditingAvatar: boolean) =>
     email: Yup.string()
       .email('Invalid email.')
       .required('Your email is required.'),
-    password: Yup.string()
-      .min(8, 'Password should have at least 8 chars.')
-      .required('Password is required.'),
-    newPassword: Yup.string()
-      .min(8, 'Password should have at least 8 chars.')
-      .required('Password is required.'),
-    newPasswordConfirmation: Yup.string()
-      .oneOf([Yup.ref('newPassword'), null], 'Passwords are different.')
-      .required('Password confirmation is required'),
     avatar: Yup.mixed().test('avatar', 'Your avatar is required.', (value) => {
       if (isEditingAvatar && !value) {
+        console.log(value);
         return false;
       }
       return true;
@@ -86,7 +74,7 @@ const UserData = () => {
     setValue,
   } = useForm<UserFormValues>({
     resolver: yupResolver(UserFormSchema(isEditingAvatar)),
-    mode: 'onSubmit',
+    // mode: 'onSubmit',
     defaultValues: {
       avatar: '',
     },
@@ -141,7 +129,7 @@ const UserData = () => {
     }
   };
 
-  const onSubmitName = handleSubmit(async (data: DataChange) => {
+  const onSubmitName = handleSubmit(async (data: NameChange) => {
     const response = await toast.promise(
       axios.patch(
         `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/name`,
@@ -189,7 +177,7 @@ const UserData = () => {
     );
   });
 
-  const onSubmitEmail = handleSubmit(async (data: DataChange) => {
+  const onSubmitEmail = handleSubmit(async (data: EmailChange) => {
     const response = await toast.promise(
       axios.patch(
         `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/email`,
@@ -270,54 +258,6 @@ const UserData = () => {
           }>) {
             setPreviewUrl(null);
             setIsEditingAvatar(false);
-            reset();
-            if (data && data.response && data?.response.status === 0) {
-              return (
-                <p>
-                  Sorry, we have problem with database connection. Please try
-                  again later.
-                </p>
-              );
-            }
-            if (data && data.response && data.response.data) {
-              return <p>{data.response.data.message} </p>;
-            }
-            return <p>Something went wrong, please try again later.</p>;
-          },
-        },
-      },
-      { position: 'top-center' },
-    );
-  });
-
-  const onSubmitPassword = handleSubmit(async (data: PasswordChange) => {
-    const response = await toast.promise(
-      axios.patch(
-        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/password`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
-          },
-        },
-      ),
-      {
-        pending: 'Please, wait.',
-        success: {
-          render() {
-            setIsEditingPassword(false);
-            fetchUserData();
-            reset();
-            return <p>{response.data.message} </p>;
-          },
-        },
-        error: {
-          render({
-            data,
-          }: ToastContentProps<{
-            response: { status: number; data: { message: string } };
-            status: number;
-          }>) {
             reset();
             if (data && data.response && data?.response.status === 0) {
               return (
@@ -483,6 +423,7 @@ const UserData = () => {
                   BACK
                 </button>
                 <button
+                  disabled={Object.keys(errors).length >= 1}
                   type="submit"
                   className={classes['form-wrapper__form-button-submit']}
                 >
@@ -493,79 +434,10 @@ const UserData = () => {
           </div>
         )}
 
-        {isEditingPassword && auth.token && (
-          <div className={classes['form-wrapper']}>
-            <form
-              onSubmit={onSubmitPassword}
-              className={classes['form-wrapper__form']}
-            >
-              <fieldset>
-                <div className={classes['field-wrapper']}>
-                  <div className={classes['input-wrapper']}>
-                    <label htmlFor="password" className={classes.label}>
-                      Old password
-                    </label>
-                    <input
-                      type="password"
-                      {...register('password')}
-                      placeholder="password"
-                      className={classes.input}
-                    />
-                  </div>
-                  <p className={classes.error}>{errors.password?.message}</p>
-                </div>
-
-                <div className={classes['field-wrapper']}>
-                  <div className={classes['input-wrapper']}>
-                    <label htmlFor="password" className={classes.label}>
-                      Password
-                    </label>
-                    <input
-                      type="password"
-                      {...register('newPassword')}
-                      placeholder="password"
-                      className={classes.input}
-                    />
-                  </div>
-                  <p className={classes.error}>{errors.newPassword?.message}</p>
-                </div>
-
-                <div className={classes['field-wrapper']}>
-                  <div className={classes['input-wrapper']}>
-                    <label
-                      htmlFor="passwordConfirmation"
-                      className={classes.label}
-                    >
-                      Repeat password
-                    </label>
-                    <input
-                      type="password"
-                      {...register('newPasswordConfirmation')}
-                      placeholder="password"
-                      className={classes.input}
-                    />
-                  </div>
-                  <p className={classes.error}>
-                    {errors.newPasswordConfirmation?.message}
-                  </p>
-                </div>
-              </fieldset>
-              <button
-                onClick={() => setIsEditingPassword(false)}
-                className={classes['form-wrapper__form-button-submit']}
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className={classes['form-wrapper__form-button-submit']}
-              >
-                Save new data
-              </button>
-            </form>
-          </div>
-        )}
-
+        <UserDataPassword
+          isEditingPassword={isEditingPassword}
+          setIsEditingPassword={setIsEditingPassword}
+        />
         {auth.token &&
           !isEditingName &&
           !isEditingEmail &&

@@ -209,6 +209,11 @@ fieldset {
   outline: 0.63rem solid #d9d9d94d;
 }
 
+.form-wrapper__form-button-submit:disabled {
+  cursor: not-allowed;
+  outline: none;
+}
+
 @media screen and (max-width: 1440px) {
   .form-wrapper {
     padding: 1.25rem 0 0 0;
