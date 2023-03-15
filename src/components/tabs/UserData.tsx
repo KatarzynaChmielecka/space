@@ -287,7 +287,7 @@ const UserData = () => {
           <div className={classes['form-wrapper']}>
             <form
               onSubmit={onSubmitName}
-              className={classes['form-wrapper__form']}
+              className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
             >
               <fieldset>
                 <div className={classes['field-wrapper']}>
@@ -305,18 +305,22 @@ const UserData = () => {
                   <p className={classes.error}>{errors.username?.message}</p>
                 </div>
               </fieldset>
-              <button
-                onClick={() => setIsEditingName(false)}
-                className={classes['form-wrapper__form-button-submit']}
+              <div
+                className={`${classes['form-wrapper__form-link-button-wrapper']} ${classes['form-wrapper__form-link-button-wrapper--left']}`}
               >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className={classes['form-wrapper__form-button-submit']}
-              >
-                Save new data
-              </button>
+                <button
+                  onClick={() => setIsEditingName(false)}
+                  className={classes['form-wrapper__form-button-back']}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className={classes['form-wrapper__form-button-submit']}
+                >
+                  Save new data
+                </button>
+              </div>
             </form>
           </div>
         )}
@@ -325,7 +329,7 @@ const UserData = () => {
           <div className={classes['form-wrapper']}>
             <form
               onSubmit={onSubmitEmail}
-              className={classes['form-wrapper__form']}
+              className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
             >
               <fieldset>
                 <div className={classes['field-wrapper']}>
@@ -345,18 +349,22 @@ const UserData = () => {
                   </div>
                 </div>
               </fieldset>
-              <button
-                onClick={() => setIsEditingEmail(false)}
-                className={classes['form-wrapper__form-button-submit']}
+              <div
+                className={`${classes['form-wrapper__form-link-button-wrapper']} ${classes['form-wrapper__form-link-button-wrapper--left']}`}
               >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className={classes['form-wrapper__form-button-submit']}
-              >
-                Save new data
-              </button>
+                <button
+                  onClick={() => setIsEditingEmail(false)}
+                  className={classes['form-wrapper__form-button-back']}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className={classes['form-wrapper__form-button-submit']}
+                >
+                  Save new data
+                </button>
+              </div>
             </form>
           </div>
         )}

@@ -17,8 +17,7 @@
   flex-direction: column;
   font-size: 1.13rem;
   justify-content: space-between;
-  min-height: 32.19rem;
-  min-height: fit-content;
+  min-height: 27.81rem;
   padding: 2.19rem 8.13rem 2.19rem 3.13rem;
   width: 79.69rem;
 }
@@ -161,9 +160,12 @@ fieldset {
 .form-wrapper__form-link-button-wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.63rem;
+  gap: 80px;
   justify-content: center;
   outline: 1px solid yellowgreen;
+}
+.form-wrapper__form-link-button-wrapper--left {
+  justify-content: flex-start;
 }
 
 .form-wrapper__form-link-button-wrapper--login {

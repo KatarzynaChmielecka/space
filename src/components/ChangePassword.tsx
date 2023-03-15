@@ -102,7 +102,7 @@ const UserDataPassword = ({
         <div className={classes['form-wrapper']}>
           <form
             onSubmit={onSubmitPassword}
-            className={classes['form-wrapper__form']}
+            className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
           >
             <fieldset>
               <div className={classes['field-wrapper']}>
@@ -123,7 +123,7 @@ const UserDataPassword = ({
               <div className={classes['field-wrapper']}>
                 <div className={classes['input-wrapper']}>
                   <label htmlFor="password" className={classes.label}>
-                    Password
+                    New Password
                   </label>
                   <input
                     type="password"
@@ -155,18 +155,22 @@ const UserDataPassword = ({
                 </p>
               </div>
             </fieldset>
-            <button
-              onClick={() => setIsEditingPassword(false)}
-              className={classes['form-wrapper__form-button-submit']}
+            <div
+              className={`${classes['form-wrapper__form-link-button-wrapper']} ${classes['form-wrapper__form-link-button-wrapper--left']}`}
             >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className={classes['form-wrapper__form-button-submit']}
-            >
-              Save new data
-            </button>
+              <button
+                onClick={() => setIsEditingPassword(false)}
+                className={classes['form-wrapper__form-button-back']}
+              >
+                CANCEL
+              </button>
+              <button
+                type="submit"
+                className={classes['form-wrapper__form-button-submit']}
+              >
+                CONFIRM
+              </button>
+            </div>
           </form>
         </div>
       )}
