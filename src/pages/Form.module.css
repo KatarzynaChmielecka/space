@@ -22,13 +22,14 @@
   width: 79.69rem;
 }
 
-.form-wrapper__form--user-page {
-  background: none;
-  padding-top: 0;
-}
-
 .form-wrapper--login {
   justify-content: flex-start;
+}
+
+.form-wrapper__form--user-page {
+  align-items: flex-start;
+  background: none;
+  padding-top: 0;
 }
 
 .form-wrapper__form--login {
