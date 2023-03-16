@@ -1,10 +1,9 @@
 .user-card-wrapper {
   color: #fff;
   display: flex;
-  font-size: 28px;
-  gap: 110px;
-  outline: 1px solid wheat;
-  padding: 50px 0 0 50px;
+  font-size: 1.75rem;
+  gap: 6.88rem;
+  padding: 3.13rem 0 0 3.13rem;
 }
 
 .user-card-wrapper * {
@@ -14,23 +13,20 @@
 
 .user-card__images-wrapper {
   height: fit-content;
-  outline: 1px solid yellow;
-  padding: 40px 0 0 0;
+  padding: 2.5rem 0 0 0;
   position: relative;
   width: fit-content;
 }
 
 .user-card-wrapper__avatar {
   border-radius: 50%;
-  height: 150px;
-  outline: 1px solid green;
-  width: 150px;
+  height: 9.38rem;
+  width: 9.38rem;
 }
 
 .user-card-wrapper__photo {
-  bottom: -10px;
+  bottom: -0.63rem;
   height: fit-content;
-  outline: 1px solid red;
   position: absolute;
   right: -5px;
   width: fit-content;
@@ -41,8 +37,7 @@
 }
 
 .user-card-wrapper__user-data {
-  max-width: 465px;
-  outline: 1px solid rgb(29, 119, 199);
+  max-width: 29.06rem;
   width: 100%;
 }
 
@@ -50,12 +45,20 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin: 0 0 30px 0;
+  margin: 0 0 1.88rem 0;
 }
 
 .user-card-wrapper__user-data-part p {
   letter-spacing: 4.64px;
 }
 .user-card-wrapper__label {
-  font-size: 18px;
+  font-size: 1.13rem;
+}
+
+@media screen and (max-width: 768px) {
+  .user-card-wrapper {
+    align-items: center;
+    flex-direction: column;
+    padding: 0 1.38rem;
+  }
 }

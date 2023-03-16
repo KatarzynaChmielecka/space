@@ -47,7 +47,6 @@ const UserCard = ({
             onClick={editName}
             onKeyDown={editName}
             tabIndex={0}
-            // className={classes['user-card-wrapper__photo']}
           >
             <img src={photo2} alt="" />
           </div>
@@ -62,7 +61,6 @@ const UserCard = ({
             onClick={editEmail}
             onKeyDown={editEmail}
             tabIndex={0}
-            // className={classes['user-card-wrapper__photo']}
           >
             <img src={photo2} alt="" />
           </div>
@@ -77,7 +75,6 @@ const UserCard = ({
             onClick={editPassword}
             onKeyDown={editPassword}
             tabIndex={0}
-            // className={classes['user-card-wrapper__photo']}
           >
             <img src={photo2} alt="" />
           </div>

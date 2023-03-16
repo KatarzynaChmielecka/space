@@ -104,7 +104,7 @@ const UserDataPassword = ({
             onSubmit={onSubmitPassword}
             className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
           >
-            <fieldset>
+            <fieldset className={classes['fieldset-password']}>
               <div className={classes['field-wrapper']}>
                 <div className={classes['input-wrapper']}>
                   <label htmlFor="password" className={classes.label}>
