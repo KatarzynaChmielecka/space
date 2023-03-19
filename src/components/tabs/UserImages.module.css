@@ -1,0 +1,17 @@
+.user-images-wrapper__user-data {
+  align-items: center;
+  display: flex;
+  gap: 26px;
+}
+
+.user-images-wrapper__user-data img {
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+}
+
+.user-images-wrapper__user-data-mail {
+  font-family: 'Barlow Condensed';
+  font-size: 28px;
+  letter-spacing: 4.72px;
+}

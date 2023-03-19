@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import UserData from './UserData';
 import classes from './Tabs.module.css';
+import UserImages from './UserImages';
 
 const Tabs: React.FC = () => {
   const [activeTab, setActiveTab] = useState('my data');
@@ -52,16 +53,7 @@ const Tabs: React.FC = () => {
       <div className={classes['tabs-content']}>
         {activeTab === 'my data' && <UserData />}
 
-        {activeTab === 'photos' && (
-          <div>
-            <h2>Photos</h2>
-            <ul>
-              <li>Photo 1</li>
-              <li>Photo 2</li>
-              <li>Photo 3</li>
-            </ul>
-          </div>
-        )}
+        {activeTab === 'photos' && <UserImages />}
 
         {activeTab === 'notes' && (
           <div>
