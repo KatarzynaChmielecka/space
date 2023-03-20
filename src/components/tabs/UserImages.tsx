@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ToastContentProps, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -18,16 +18,21 @@ import { AuthContext } from '../../context/auth-context';
 interface ImagesFormValues {
   images: FileList[];
 }
+
+interface Image {
+  _id: string;
+  imageUrl: string;
+}
+
 interface UserData {
   user: {
     _id: string;
     username: string;
     email: string;
     avatar: string;
-    images: FileList[];
+    images: Image[];
   };
 }
-
 interface SubmitData {
   images: FileList[];
 }
@@ -47,7 +52,7 @@ const UserImages = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const auth = useContext(AuthContext);
   const paramsUserId = useParams().userId;
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -94,7 +99,7 @@ const UserImages = () => {
   useEffect(() => {
     fetchUserData();
   }, [fetchUserData]);
-
+  console.log(userData);
   const onSubmit = handleSubmit(async (data: SubmitData) => {
     const formData = new FormData();
     Object.entries({
@@ -119,7 +124,7 @@ const UserImages = () => {
           render() {
             setPreviewUrl(null);
             reset();
-            navigate('/login');
+            fetchUserData();
             return <p>{response.data.message} </p>;
           },
         },
@@ -157,6 +162,7 @@ const UserImages = () => {
         <>
           <div className={classes['user-images-wrapper__user-data']}>
             <img src={userData.user.avatar} alt="User avatar" />
+
             <p className={classes['user-images-wrapper__user-data-mail']}>
               {userData.user.email}
             </p>
@@ -227,6 +233,10 @@ const UserImages = () => {
               </form>
             </div>
           </div>
+          {userData &&
+            userData.user.images.map((index: Image) => (
+              <img key={index._id} src={index.imageUrl} alt="" />
+            ))}
         </>
       )}
       {!auth.token && (
