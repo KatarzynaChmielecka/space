@@ -1,3 +1,7 @@
+.user-images-wrapper {
+  padding: 60px 0 40px 40px;
+}
+
 .user-images-wrapper__user-data {
   align-items: center;
   display: flex;
@@ -14,4 +18,34 @@
   font-family: 'Barlow Condensed';
   font-size: 28px;
   letter-spacing: 4.72px;
+}
+
+.user-images-wrapper__images-subtitle {
+  color: #d0d6f9;
+  font-family: 'Barlow';
+  font-size: 18px;
+  font-weight: 400;
+  margin: 25px 0;
+}
+
+.user-images-wrapper__images-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 70px;
+}
+
+.user-images-wrapper__images-content {
+  position: relative;
+  width: fit-content;
+}
+
+.user-images-wrapper__main-image {
+  height: 187px;
+  width: 317px;
+}
+
+.user-images-wrapper__delete-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }

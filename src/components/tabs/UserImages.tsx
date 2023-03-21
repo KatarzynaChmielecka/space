@@ -12,7 +12,9 @@ import { ToastContentProps, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import Delete from '../../assets/shared/delete.png';
 import classes from './UserImages.module.css';
+import classes2 from '../../pages/Form.module.css';
 import { AuthContext } from '../../context/auth-context';
 
 interface ImagesFormValues {
@@ -38,7 +40,7 @@ interface SubmitData {
 }
 
 const ImagesFormSchema = Yup.object({
-  images: Yup.mixed().test('images', 'Your images is required.', (value) => {
+  images: Yup.mixed().test('images', 'Image is required.', (value) => {
     if (value.length > 0) {
       return true;
     }
@@ -168,75 +170,118 @@ const UserImages = () => {
             </p>
           </div>
           <div className={classes['user-images-wrapper__images']}>
-            <h6>YOUR PHOTOS</h6>
-            <div className={classes['form-wrapper']}>
-              <form
-                onSubmit={onSubmit}
-                className={classes['form-wrapper__form']}
+            <h6 className={classes['user-images-wrapper__images-subtitle']}>
+              YOUR PHOTOS
+            </h6>
+            <div className={classes['user-images-wrapper__images-main']}>
+              <div
+                className={`${classes2['form-wrapper']} ${classes2['form-wrapper--photos']}`}
               >
-                <div className={classes['field-wrapper']}>
-                  <div
-                    className={`${classes['input-wrapper']} ${classes['avatar-wrapper']}`}
-                  >
-                    <div>
-                      <label htmlFor="images" className={classes.label}>
-                        Avatar
-                      </label>
-
-                      <div className={classes['icons-wrapper']}>
-                        <button className={classes['button-avatar']}>+</button>
-                        <input
-                          type="file"
-                          {...register('images')}
-                          onChange={(e) => {
-                            handleImageChange(e);
-                            register('images').onChange(e);
-                          }}
-                          name="images"
-                          className={classes['custom-file-input']}
-                          title=""
-                        />
-                        {previewUrl && (
-                          <img
-                            src={previewUrl}
-                            alt="Preview"
-                            className={classes['image-preview']}
+                <form
+                  onSubmit={onSubmit}
+                  className={`${classes2['form-wrapper__form']} ${classes2['form-wrapper__form--photos']}`}
+                >
+                  <div className={classes2['field-wrapper']}>
+                    <div
+                      className={`${classes2['input-wrapper']} ${classes2['avatar-wrapper']}`}
+                    >
+                      <div>
+                        <div className={classes2['icons-wrapper']}>
+                          <button className={classes2['button-avatar']}>
+                            +
+                          </button>
+                          <input
+                            type="file"
+                            {...register('images')}
+                            onChange={(e) => {
+                              handleImageChange(e);
+                              register('images').onChange(e);
+                            }}
+                            name="images"
+                            className={classes2['custom-file-input']}
+                            title=""
                           />
-                        )}
-                        {!previewUrl && (
-                          <div className={classes['preview-div']}>PREVIEW</div>
-                        )}
+                          {previewUrl && (
+                            <img
+                              src={previewUrl}
+                              alt="Preview"
+                              className={classes2['image-preview']}
+                            />
+                          )}
+                          {!previewUrl && (
+                            <div className={classes2['preview-div']}>
+                              PREVIEW
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
+                    {errors.images ? (
+                      <p
+                        className={`${classes2.error} ${classes2['avatar-error']}`}
+                        style={{ textAlign: 'center' }}
+                      >
+                        {errors.images?.message}
+                      </p>
+                    ) : (
+                      ''
+                    )}
                   </div>
-                  {errors.images ? (
-                    <p
-                      className={`${classes.error} ${classes['avatar-error']}`}
-                      style={{ textAlign: 'center' }}
-                    >
-                      {errors.images?.message}
-                    </p>
-                  ) : (
-                    ''
-                  )}
-                </div>
-                <div
-                  className={classes['form-wrapper__form-link-button-wrapper']}
-                >
-                  <button
-                    type="submit"
-                    className={classes['form-wrapper__form-button-submit']}
+                  <div
+                    className={
+                      classes2['form-wrapper__form-link-button-wrapper']
+                    }
                   >
-                    ADD IMAGE
-                  </button>
-                </div>
-              </form>
+                    <button
+                      type="submit"
+                      className={`${classes2['form-wrapper__form-button-submit']}
+                    
+                    ${classes2['form-wrapper__form-button-submit--photos']}
+                    `}
+                    >
+                      ADD IMAGE
+                    </button>
+                  </div>
+                </form>
+              </div>
+              {userData &&
+                userData.user.images.map((index: Image) => (
+                  <div
+                    key={index._id}
+                    className={classes['user-images-wrapper__images-content']}
+                  >
+                    <img
+                      src={index.imageUrl}
+                      alt="Space"
+                      className={classes['user-images-wrapper__main-image']}
+                    />
+                    <img
+                      src={Delete}
+                      alt="delete icon"
+                      className={classes['user-images-wrapper__delete-icon']}
+                    />
+                  </div>
+                ))}
             </div>
           </div>
-          {userData &&
+          {/* {userData &&
             userData.user.images.map((index: Image) => (
-              <img key={index._id} src={index.imageUrl} alt="" />
-            ))}
+              <div
+                key={index._id}
+                className={classes['user-images-wrapper__images-content']}
+              >
+                <img
+                  src={index.imageUrl}
+                  alt="Space"
+                  className={classes['user-images-wrapper__main-image']}
+                />
+                <img
+                  src={Delete}
+                  alt="delete icon"
+                  className={classes['user-images-wrapper__delete-icon']}
+                />
+              </div>
+            ))} */}
         </>
       )}
       {!auth.token && (
