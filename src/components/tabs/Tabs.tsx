@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import UserData from './UserData';
-import classes from './Tabs.module.css';
 import UserImages from './UserImages';
+import classes from './Tabs.module.css';
 
 const Tabs: React.FC = () => {
   const [activeTab, setActiveTab] = useState('my data');

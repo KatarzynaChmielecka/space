@@ -13,6 +13,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Delete from '../../assets/shared/delete.png';
+import Modal from '../Modal';
 import classes from './UserImages.module.css';
 import classes2 from '../../pages/Form.module.css';
 import { AuthContext } from '../../context/auth-context';
@@ -52,9 +53,11 @@ const UserImages = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState<boolean | null>(null);
   const auth = useContext(AuthContext);
   const paramsUserId = useParams().userId;
   // const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -157,7 +160,15 @@ const UserImages = () => {
       { position: 'top-center' },
     );
   });
+  const handleDeleteClick = (id: string) => {
+    console.log('aaaa: ' + id);
+    setShowModal(false);
+  };
 
+  const onDelete = (id: string) => {
+    setShowModal(true);
+    setSelectedImage(id);
+  };
   return (
     <div className={classes['user-images-wrapper']}>
       {auth.token && userData && (
@@ -255,33 +266,30 @@ const UserImages = () => {
                       alt="Space"
                       className={classes['user-images-wrapper__main-image']}
                     />
-                    <img
-                      src={Delete}
-                      alt="delete icon"
-                      className={classes['user-images-wrapper__delete-icon']}
-                    />
+                    <button onClick={() => onDelete(index._id)}>
+                      <img
+                        src={Delete}
+                        alt="delete icon"
+                        className={classes['user-images-wrapper__delete-icon']}
+                      />
+                    </button>
+
+                    {showModal && selectedImage === index._id && (
+                      <Modal
+                        title="Deleting image"
+                        content="Are you sure?"
+                        confirmText="Delete"
+                        cancelText="Cancel"
+                        onConfirm={() => {
+                          handleDeleteClick(index._id);
+                        }}
+                        onCancel={() => setSelectedImage(null)}
+                      />
+                    )}
                   </div>
                 ))}
             </div>
           </div>
-          {/* {userData &&
-            userData.user.images.map((index: Image) => (
-              <div
-                key={index._id}
-                className={classes['user-images-wrapper__images-content']}
-              >
-                <img
-                  src={index.imageUrl}
-                  alt="Space"
-                  className={classes['user-images-wrapper__main-image']}
-                />
-                <img
-                  src={Delete}
-                  alt="delete icon"
-                  className={classes['user-images-wrapper__delete-icon']}
-                />
-              </div>
-            ))} */}
         </>
       )}
       {!auth.token && (
