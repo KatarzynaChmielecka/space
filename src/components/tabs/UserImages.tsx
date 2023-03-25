@@ -56,7 +56,6 @@ const UserImages = () => {
   const [showModal, setShowModal] = useState<boolean | null>(null);
   const auth = useContext(AuthContext);
   const paramsUserId = useParams().userId;
-  // const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const {
     register,
@@ -160,9 +159,54 @@ const UserImages = () => {
       { position: 'top-center' },
     );
   });
-  const handleDeleteClick = (id: string) => {
+
+  const handleDeleteClick = async (id: string) => {
     console.log('aaaa: ' + id);
-    setShowModal(false);
+
+    await toast.promise(
+      axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/images/${id}`,
+
+        {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        },
+      ),
+      {
+        pending: 'Please, wait.',
+        success: {
+          render() {
+            fetchUserData();
+            setShowModal(false);
+            return <p>Your image was removed. </p>;
+          },
+        },
+        error: {
+          render({
+            data,
+          }: ToastContentProps<{
+            response: { status: number; data: { message: string } };
+            status: number;
+          }>) {
+            setShowModal(false);
+            if (data && data.response && data?.response.status === 0) {
+              return (
+                <p>
+                  Sorry, we have problem with database connection. Please try
+                  again later.
+                </p>
+              );
+            }
+            if (data && data.response && data.response.data) {
+              return <p>{data.response.data.message} </p>;
+            }
+            return <p>Something went wrong, please try again later.</p>;
+          },
+        },
+      },
+      { position: 'top-center' },
+    );
   };
 
   const onDelete = (id: string) => {
@@ -255,6 +299,7 @@ const UserImages = () => {
                   </div>
                 </form>
               </div>
+
               {userData &&
                 userData.user.images.map((index: Image) => (
                   <div
@@ -288,10 +333,15 @@ const UserImages = () => {
                     )}
                   </div>
                 ))}
+
+              {userData && userData.user.images.length === 0 && (
+                <p>You have 0 images</p>
+              )}
             </div>
           </div>
         </>
       )}
+
       {!auth.token && (
         <div
         // className={classes2['user-page-logout']}
