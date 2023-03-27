@@ -311,12 +311,11 @@ const UserImages = () => {
                       alt="Space"
                       className={classes['user-images-wrapper__main-image']}
                     />
-                    <button onClick={() => onDelete(index._id)}>
-                      <img
-                        src={Delete}
-                        alt="delete icon"
-                        className={classes['user-images-wrapper__delete-icon']}
-                      />
+                    <button
+                      onClick={() => onDelete(index._id)}
+                      className={classes['user-images-wrapper__delete-icon']}
+                    >
+                      <img src={Delete} alt="delete icon" />
                     </button>
 
                     {showModal && selectedImage === index._id && (
@@ -325,6 +324,7 @@ const UserImages = () => {
                         content="Are you sure?"
                         confirmText="Delete"
                         cancelText="Cancel"
+                        showModal={showModal}
                         onConfirm={() => {
                           handleDeleteClick(index._id);
                         }}

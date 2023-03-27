@@ -45,6 +45,8 @@
 }
 
 .user-images-wrapper__delete-icon {
+  background: none;
+  border: none;
   position: absolute;
   right: 10px;
   top: 10px;
