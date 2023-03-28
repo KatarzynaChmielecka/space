@@ -19,7 +19,6 @@
   justify-content: center;
   left: 50%;
   max-width: 500px;
-  max-width: 500px;
   min-height: 300px;
   padding: 20px;
   position: fixed;
@@ -38,6 +37,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1.63rem;
+  justify-content: center;
 }
 
 .modal__button {
@@ -80,4 +80,10 @@
 .modal__text {
   margin: 10px 0 0 0;
   text-transform: uppercase;
+}
+
+@media screen and (max-width: 768px) {
+  .modal__button--confirm {
+    order: -1;
+  }
 }

@@ -218,6 +218,10 @@ fieldset {
     padding: 1.25rem 0 0 0;
   }
 
+  .form-wrapper--photos {
+    padding: 0;
+  }
+
   .form-wrapper--login {
     justify-content: center;
   }
@@ -225,6 +229,10 @@ fieldset {
   .form-wrapper__form {
     align-items: center;
     padding: 1.38rem;
+  }
+
+  .form-wrapper__form--photos {
+    padding: 0;
   }
 
   fieldset {
@@ -261,6 +269,10 @@ fieldset {
 
   .form-wrapper__form-button-submit {
     order: -1;
+  }
+
+  .form-wrapper__form-button-submit--photos {
+    width: 13.13rem;
   }
 
   .form-wrapper__form input {
