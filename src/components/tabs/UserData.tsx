@@ -15,10 +15,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import UserCard from '../UserCard';
+import UserDataPassword from '../ChangePassword';
 import classes from '../../pages/Form.module.css';
 import classes2 from '../UserCard.module.css';
 import { AuthContext } from '../../context/auth-context';
-import UserDataPassword from '../ChangePassword';
 
 interface UserData {
   user: {
@@ -74,7 +74,7 @@ const UserData = () => {
     setValue,
   } = useForm<UserFormValues>({
     resolver: yupResolver(UserFormSchema(isEditingAvatar)),
-    // mode: 'onSubmit',
+    mode: 'onSubmit',
     defaultValues: {
       avatar: '',
     },
@@ -283,7 +283,7 @@ const UserData = () => {
       {!auth.token && <Link to="/login">Login</Link>}
 
       <div style={{ color: 'black', fontSize: '20px' }}>
-        {isEditingName && auth.token && (
+        {isEditingName && userData && auth.token && (
           <div className={classes['form-wrapper']}>
             <form
               onSubmit={onSubmitName}
@@ -309,7 +309,11 @@ const UserData = () => {
                 className={`${classes['form-wrapper__form-link-button-wrapper']} ${classes['form-wrapper__form-link-button-wrapper--left']}`}
               >
                 <button
-                  onClick={() => setIsEditingName(false)}
+                  onClick={() => {
+                    setIsEditingName(false);
+                    reset();
+                    setValue('username', userData.user.username);
+                  }}
                   className={classes['form-wrapper__form-button-back']}
                 >
                   Cancel
@@ -325,7 +329,7 @@ const UserData = () => {
           </div>
         )}
 
-        {isEditingEmail && auth.token && (
+        {isEditingEmail && userData && auth.token && (
           <div className={classes['form-wrapper']}>
             <form
               onSubmit={onSubmitEmail}
@@ -353,7 +357,11 @@ const UserData = () => {
                 className={`${classes['form-wrapper__form-link-button-wrapper']} ${classes['form-wrapper__form-link-button-wrapper--left']}`}
               >
                 <button
-                  onClick={() => setIsEditingEmail(false)}
+                  onClick={() => {
+                    setIsEditingEmail(false);
+                    reset();
+                    setValue('email', userData.user.email);
+                  }}
                   className={classes['form-wrapper__form-button-back']}
                 >
                   Cancel
@@ -425,7 +433,10 @@ const UserData = () => {
                 className={classes['form-wrapper__form-link-button-wrapper']}
               >
                 <button
-                  onClick={() => setIsEditingAvatar(false)}
+                  onClick={() => {
+                    setIsEditingAvatar(false);
+                    reset();
+                  }}
                   className={classes['form-wrapper__form-button-back']}
                 >
                   BACK

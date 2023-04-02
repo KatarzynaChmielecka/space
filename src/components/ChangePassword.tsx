@@ -3,13 +3,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { Dispatch, SetStateAction, useContext } from 'react';
-import { useParams } from 'react-router-dom';
 import { ToastContentProps, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { AuthContext } from '../context/auth-context';
 
 import classes from '../pages/Form.module.css';
+import { AuthContext } from '../context/auth-context';
 
 interface UserFormValues {
   password: string;
