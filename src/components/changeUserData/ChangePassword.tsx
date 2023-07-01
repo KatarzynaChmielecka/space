@@ -8,8 +8,8 @@ import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import classes from '../pages/Form.module.css';
-import { AuthContext } from '../context/auth-context';
+import classes from '../../pages/Form.module.css';
+import { AuthContext } from '../../context/auth-context';
 
 interface UserFormValues {
   password: string;
@@ -30,14 +30,14 @@ const UserFormSchema = () =>
       .required('Password confirmation is required'),
   });
 
-const UserDataPassword = ({
+const ChangePassword = ({
   isEditingPassword,
   setIsEditingPassword,
 }: {
   isEditingPassword: boolean;
   setIsEditingPassword: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const auth = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
 
   const {
     register,
@@ -56,7 +56,7 @@ const UserDataPassword = ({
         data,
         {
           headers: {
-            Authorization: `Bearer ${auth.token}`,
+            Authorization: `Bearer ${token}`,
           },
         },
       ),
@@ -98,7 +98,7 @@ const UserDataPassword = ({
 
   return (
     <>
-      {isEditingPassword && auth.token && (
+      {isEditingPassword && token && (
         <div className={classes['form-wrapper']}>
           <form
             onSubmit={onSubmitPassword}
@@ -177,4 +177,4 @@ const UserDataPassword = ({
     </>
   );
 };
-export default UserDataPassword;
+export default ChangePassword;

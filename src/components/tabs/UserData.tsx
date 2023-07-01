@@ -1,22 +1,15 @@
 import 'react-toastify/dist/ReactToastify.css';
 
-import * as Yup from 'yup';
 import axios from 'axios';
-import {
-  ChangeEvent,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ToastContentProps, toast } from 'react-toastify';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 
+import ChangeAvatar from '../changeUserData/ChangeAvatar';
+import ChangeEmail from '../changeUserData/ChangeEmail';
+import ChangeName from '../changeUserData/ChangeName';
+import ChangePassword from '../changeUserData/ChangePassword';
 import UserCard from '../UserCard';
-import UserDataPassword from '../ChangePassword';
-import classes from '../../pages/Form.module.css';
 import classes2 from '../UserCard.module.css';
 import { AuthContext } from '../../context/auth-context';
 
@@ -29,33 +22,6 @@ interface UserData {
   };
 }
 
-interface UserFormValues {
-  username: string;
-  email: string;
-  avatar: string;
-}
-
-type NameChange = Pick<UserFormValues, 'username'>;
-type EmailChange = Pick<UserFormValues, 'email'>;
-type AvatarChange = Pick<UserFormValues, 'avatar'>;
-
-const UserFormSchema = (isEditingAvatar: boolean) =>
-  Yup.object({
-    username: Yup.string()
-      .min(2, 'Name should have at least 2 chars.')
-      .required('Your name is required.'),
-    email: Yup.string()
-      .email('Invalid email.')
-      .required('Your email is required.'),
-    avatar: Yup.mixed().test('avatar', 'Your avatar is required.', (value) => {
-      if (isEditingAvatar && !value) {
-        console.log(value);
-        return false;
-      }
-      return true;
-    }),
-  });
-
 const UserData = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -63,22 +29,10 @@ const UserData = () => {
   const [isEditingEmail, setIsEditingEmail] = useState<boolean>(false);
   const [isEditingAvatar, setIsEditingAvatar] = useState<boolean>(false);
   const [isEditingPassword, setIsEditingPassword] = useState<boolean>(false);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const auth = useContext(AuthContext);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-    setValue,
-  } = useForm<UserFormValues>({
-    resolver: yupResolver(UserFormSchema(isEditingAvatar)),
-    mode: 'onSubmit',
-    defaultValues: {
-      avatar: '',
-    },
-  });
+  const { token } = useContext(AuthContext);
+
+  const { setValue } = useForm();
   const paramsUserId = useParams().userId;
 
   const fetchUserData = useCallback(async () => {
@@ -87,7 +41,7 @@ const UserData = () => {
         `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}`,
         {
           headers: {
-            Authorization: `Bearer ${auth.token}`,
+            Authorization: `Bearer ${token}`,
           },
         },
       );
@@ -117,347 +71,39 @@ const UserData = () => {
 
   const handleEditAvatar = () => setIsEditingAvatar(true);
 
-  const handleEditEmail = () => setIsEditingEmail(true);
+  const handleEditEmail = () => {
+    setIsEditingEmail(true);
+  };
 
   const handleEditPassword = () => setIsEditingPassword(true);
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const file = e.target.files[0];
-      const objectUrl = URL.createObjectURL(file);
-      setPreviewUrl(objectUrl);
-    }
-  };
-
-  const onSubmitName = handleSubmit(async (data: NameChange) => {
-    const response = await toast.promise(
-      axios.patch(
-        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/name`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
-          },
-        },
-      ),
-      {
-        pending: 'Please, wait.',
-        success: {
-          render() {
-            setIsEditingName(false);
-            fetchUserData();
-            reset();
-            return <p>{response.data.message} </p>;
-          },
-        },
-        error: {
-          render({
-            data,
-          }: ToastContentProps<{
-            response: { status: number; data: { message: string } };
-            status: number;
-          }>) {
-            reset();
-            if (data && data.response && data?.response.status === 0) {
-              return (
-                <p>
-                  Sorry, we have problem with database connection. Please try
-                  again later.
-                </p>
-              );
-            }
-            if (data && data.response && data.response.data) {
-              return <p>{data.response.data.message} </p>;
-            }
-            return <p>Something went wrong, please try again later.</p>;
-          },
-        },
-      },
-      { position: 'top-center' },
-    );
-  });
-
-  const onSubmitEmail = handleSubmit(async (data: EmailChange) => {
-    const response = await toast.promise(
-      axios.patch(
-        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/email`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
-          },
-        },
-      ),
-      {
-        pending: 'Please, wait.',
-        success: {
-          render() {
-            setIsEditingEmail(false);
-            fetchUserData();
-            reset();
-            return <p>{response.data.message} </p>;
-          },
-        },
-        error: {
-          render({
-            data,
-          }: ToastContentProps<{
-            response: { status: number; data: { message: string } };
-            status: number;
-          }>) {
-            reset();
-            if (data && data.response && data?.response.status === 0) {
-              return (
-                <p>
-                  Sorry, we have problem with database connection. Please try
-                  again later.
-                </p>
-              );
-            }
-            if (data && data.response && data.response.data) {
-              return <p>{data.response.data.message} </p>;
-            }
-            return <p>Something went wrong, please try again later.</p>;
-          },
-        },
-      },
-      { position: 'top-center' },
-    );
-  });
-
-  const onSubmitAvatar = handleSubmit(async (data: AvatarChange) => {
-    const formData = new FormData();
-    formData.append('avatar', data.avatar[0]);
-    const response = await toast.promise(
-      axios.patch(
-        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/image`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
-          },
-        },
-      ),
-      {
-        pending: 'Please, wait.',
-        success: {
-          render() {
-            setPreviewUrl(null);
-            setIsEditingAvatar(false);
-            reset();
-            fetchUserData();
-            return <p>{response.data.message} </p>;
-          },
-        },
-        error: {
-          render({
-            data,
-          }: ToastContentProps<{
-            response: { status: number; data: { message: string } };
-            status: number;
-          }>) {
-            setPreviewUrl(null);
-            setIsEditingAvatar(false);
-            reset();
-            if (data && data.response && data?.response.status === 0) {
-              return (
-                <p>
-                  Sorry, we have problem with database connection. Please try
-                  again later.
-                </p>
-              );
-            }
-            if (data && data.response && data.response.data) {
-              return <p>{data.response.data.message} </p>;
-            }
-            return <p>Something went wrong, please try again later.</p>;
-          },
-        },
-      },
-      { position: 'top-center' },
-    );
-  });
-
   return (
     <>
-      {!auth.token && <Link to="/login">Login</Link>}
+      {!token && <Link to="/login">Login</Link>}
 
-      <div style={{ color: 'black', fontSize: '20px' }}>
-        {isEditingName && userData && auth.token && (
-          <div className={classes['form-wrapper']}>
-            <form
-              onSubmit={onSubmitName}
-              className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
-            >
-              <fieldset>
-                <div className={classes['field-wrapper']}>
-                  <div className={classes['input-wrapper']}>
-                    <label htmlFor="username" className={classes.label}>
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      {...register('username')}
-                      placeholder="name"
-                      className={classes.input}
-                    />
-                  </div>
-                  <p className={classes.error}>{errors.username?.message}</p>
-                </div>
-              </fieldset>
-              <div
-                className={`${classes['form-wrapper__form-link-button-wrapper']} ${classes['form-wrapper__form-link-button-wrapper--left']}`}
-              >
-                <button
-                  onClick={() => {
-                    setIsEditingName(false);
-                    reset();
-                    setValue('username', userData.user.username);
-                  }}
-                  className={classes['form-wrapper__form-button-back']}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className={classes['form-wrapper__form-button-submit']}
-                >
-                  Save new data
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
+      <div>
+        <ChangeName
+          isEditingName={isEditingName}
+          setIsEditingName={setIsEditingName}
+          userDataName={userData && userData?.user.username}
+        />
 
-        {isEditingEmail && userData && auth.token && (
-          <div className={classes['form-wrapper']}>
-            <form
-              onSubmit={onSubmitEmail}
-              className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
-            >
-              <fieldset>
-                <div className={classes['field-wrapper']}>
-                  <div className={classes['field-wrapper']}>
-                    <div className={classes['input-wrapper']}>
-                      <label htmlFor="email" className={classes.label}>
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        {...register('email')}
-                        placeholder="email"
-                        className={classes.input}
-                      />
-                    </div>
-                    <p className={classes.error}>{errors.email?.message}</p>
-                  </div>
-                </div>
-              </fieldset>
-              <div
-                className={`${classes['form-wrapper__form-link-button-wrapper']} ${classes['form-wrapper__form-link-button-wrapper--left']}`}
-              >
-                <button
-                  onClick={() => {
-                    setIsEditingEmail(false);
-                    reset();
-                    setValue('email', userData.user.email);
-                  }}
-                  className={classes['form-wrapper__form-button-back']}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className={classes['form-wrapper__form-button-submit']}
-                >
-                  Save new data
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
+        <ChangeEmail
+          isEditingEmail={isEditingEmail}
+          setIsEditingEmail={setIsEditingEmail}
+          userDataEmail={userData && userData?.user.email}
+        />
 
-        {isEditingAvatar && auth.token && (
-          <div className={classes['form-wrapper']}>
-            <form
-              onSubmit={onSubmitAvatar}
-              className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
-            >
-              <div className={classes['field-wrapper']}>
-                <div
-                  className={`${classes['input-wrapper']} ${classes['avatar-wrapper']}`}
-                >
-                  <div>
-                    <label htmlFor="avatar" className={classes.label}>
-                      Change avatar
-                    </label>
+        <ChangeAvatar
+          isEditingAvatar={isEditingAvatar}
+          setIsEditingAvatar={setIsEditingAvatar}
+        />
 
-                    <div className={classes['icons-wrapper']}>
-                      <button className={classes['button-avatar']}>+</button>
-                      <input
-                        type="file"
-                        {...register('avatar')}
-                        onChange={(e) => {
-                          handleImageChange(e);
-                          register('avatar').onChange(e);
-                        }}
-                        name="avatar"
-                        className={classes['custom-file-input']}
-                        title=""
-                      />
-                      {previewUrl && (
-                        <img
-                          src={previewUrl}
-                          alt="Preview"
-                          className={classes['image-preview']}
-                        />
-                      )}
-                      {!previewUrl && (
-                        <div className={classes['preview-div']}>PREVIEW</div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                {errors.avatar ? (
-                  <p
-                    className={`${classes.error} ${classes['avatar-error']}`}
-                    style={{ textAlign: 'center' }}
-                  >
-                    {errors.avatar?.message}
-                  </p>
-                ) : (
-                  ''
-                )}
-              </div>
-              <div
-                className={classes['form-wrapper__form-link-button-wrapper']}
-              >
-                <button
-                  onClick={() => {
-                    setIsEditingAvatar(false);
-                    reset();
-                  }}
-                  className={classes['form-wrapper__form-button-back']}
-                >
-                  BACK
-                </button>
-                <button
-                  disabled={Object.keys(errors).length >= 1}
-                  type="submit"
-                  className={classes['form-wrapper__form-button-submit']}
-                >
-                  CONFIRM
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
-
-        <UserDataPassword
+        <ChangePassword
           isEditingPassword={isEditingPassword}
           setIsEditingPassword={setIsEditingPassword}
         />
-        {auth.token &&
+        {token &&
           !isEditingName &&
           !isEditingEmail &&
           !isEditingAvatar &&
@@ -474,7 +120,7 @@ const UserData = () => {
             />
           )}
 
-        {!auth.token && (
+        {!token && (
           <div className={classes2['user-page-logout']}>
             <p>{error || 'Please, login.'}</p>
             <Link to="/login" className={classes2['user-page-logout__link']}>
