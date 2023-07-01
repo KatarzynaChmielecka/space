@@ -45,7 +45,7 @@ const ChangeEmail = ({
         data,
         {
           headers: {
-            orization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         },
       ),
