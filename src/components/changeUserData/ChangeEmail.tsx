@@ -22,6 +22,7 @@ const UserFormSchema = () =>
 const ChangeEmail = ({
   isEditingEmail,
   setIsEditingEmail,
+  userDataEmail,
 }: {
   isEditingEmail: boolean;
   setIsEditingEmail: Dispatch<SetStateAction<boolean>>;
@@ -35,6 +36,7 @@ const ChangeEmail = ({
     formState: { errors },
     reset,
   } = useForm<UserFormValues>({
+    values: { email: userDataEmail },
     resolver: yupResolver(UserFormSchema()),
   });
 

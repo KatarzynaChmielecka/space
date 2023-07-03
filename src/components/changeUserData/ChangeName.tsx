@@ -22,6 +22,7 @@ const UserFormSchema = () =>
 const ChangeName = ({
   isEditingName,
   setIsEditingName,
+  userDataName,
 }: {
   isEditingName: boolean;
   setIsEditingName: Dispatch<SetStateAction<boolean>>;
@@ -35,6 +36,7 @@ const ChangeName = ({
     formState: { errors },
     reset,
   } = useForm<UserFormValues>({
+    values: { username: userDataName },
     resolver: yupResolver(UserFormSchema()),
   });
 
