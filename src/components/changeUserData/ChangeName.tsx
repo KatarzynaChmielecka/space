@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import classes from '../../pages/Form.module.css';
+import useGet from '../../hooks/useGet';
 import { AuthContext } from '../../context/auth-context';
 
 interface UserFormValues {
@@ -29,6 +30,9 @@ const ChangeName = ({
   userDataName: string | null;
 }) => {
   const { token } = useContext(AuthContext);
+  const { fetchUserData } = useGet({
+    useSetValue: false,
+  });
   const paramsUserId = useParams().userId;
   const {
     register,
@@ -56,7 +60,7 @@ const ChangeName = ({
         success: {
           render() {
             setIsEditingName(false);
-            // fetchUserData();
+            fetchUserData();
             reset();
             return <p>{response.data.message} </p>;
           },

@@ -1,9 +1,7 @@
 import 'react-toastify/dist/ReactToastify.css';
 
-import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
-import { useCallback, useContext, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { useContext, useState } from 'react';
 
 import ChangeAvatar from '../changeUserData/ChangeAvatar';
 import ChangeEmail from '../changeUserData/ChangeEmail';
@@ -11,61 +9,20 @@ import ChangeName from '../changeUserData/ChangeName';
 import ChangePassword from '../changeUserData/ChangePassword';
 import UserCard from '../UserCard';
 import classes2 from '../UserCard.module.css';
+import useGet from '../../hooks/useGet';
 import { AuthContext } from '../../context/auth-context';
 
-interface UserData {
-  user: {
-    _id: string;
-    username: string;
-    email: string;
-    avatar: string;
-  };
-}
-
 const UserData = () => {
-  const [userData, setUserData] = useState<UserData | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [isEditingName, setIsEditingName] = useState<boolean>(false);
   const [isEditingEmail, setIsEditingEmail] = useState<boolean>(false);
   const [isEditingAvatar, setIsEditingAvatar] = useState<boolean>(false);
   const [isEditingPassword, setIsEditingPassword] = useState<boolean>(false);
-
+  const { userData, error, fetchUserData } = useGet({
+    useSetValue: true,
+  });
   const { token } = useContext(AuthContext);
 
-  const { setValue } = useForm();
-  const paramsUserId = useParams().userId;
-
-  const fetchUserData = useCallback(async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      const data = response.data;
-
-      if (data) {
-        setUserData(data);
-        setValue('username', data.user.username);
-        setValue('email', data.user.email);
-      } else {
-        setError("You aren't allowed to be here.Please, login.");
-      }
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        setError(error.response?.data.message);
-      } else {
-        setError('Something went wrong. Please,try again later.');
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchUserData();
-  }, [fetchUserData]);
+  fetchUserData();
 
   const handleEditName = () => setIsEditingName(true);
 
@@ -103,6 +60,7 @@ const UserData = () => {
           isEditingPassword={isEditingPassword}
           setIsEditingPassword={setIsEditingPassword}
         />
+        {/* {loading ? <p>Loading user data</p> : ''} */}
         {token &&
           !isEditingName &&
           !isEditingEmail &&
