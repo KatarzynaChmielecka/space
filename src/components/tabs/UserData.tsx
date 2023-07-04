@@ -22,8 +22,6 @@ const UserData = () => {
   });
   const { token } = useContext(AuthContext);
 
-  fetchUserData();
-
   const handleEditName = () => setIsEditingName(true);
 
   const handleEditAvatar = () => setIsEditingAvatar(true);
@@ -40,12 +38,14 @@ const UserData = () => {
 
       <div>
         <ChangeName
+          fetchUserData={fetchUserData}
           isEditingName={isEditingName}
           setIsEditingName={setIsEditingName}
           userDataName={userData && userData?.user.username}
         />
 
         <ChangeEmail
+          fetchUserData={fetchUserData}
           isEditingEmail={isEditingEmail}
           setIsEditingEmail={setIsEditingEmail}
           userDataEmail={userData && userData?.user.email}

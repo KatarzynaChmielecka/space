@@ -24,15 +24,15 @@ const ChangeName = ({
   isEditingName,
   setIsEditingName,
   userDataName,
+  fetchUserData,
 }: {
   isEditingName: boolean;
   setIsEditingName: Dispatch<SetStateAction<boolean>>;
   userDataName: string | null;
+  fetchUserData: () => void;
 }) => {
   const { token } = useContext(AuthContext);
-  const { fetchUserData } = useGet({
-    useSetValue: false,
-  });
+
   const paramsUserId = useParams().userId;
   const {
     register,
@@ -121,6 +121,7 @@ const ChangeName = ({
               className={`${classes['form-wrapper__form-link-button-wrapper']} ${classes['form-wrapper__form-link-button-wrapper--left']}`}
             >
               <button
+                type={'button'}
                 onClick={() => {
                   setIsEditingName(false);
                   reset();

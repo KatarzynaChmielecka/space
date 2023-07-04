@@ -23,10 +23,12 @@ const ChangeEmail = ({
   isEditingEmail,
   setIsEditingEmail,
   userDataEmail,
+  fetchUserData,
 }: {
   isEditingEmail: boolean;
   setIsEditingEmail: Dispatch<SetStateAction<boolean>>;
   userDataEmail: string | null;
+  fetchUserData: () => void;
 }) => {
   const { token } = useContext(AuthContext);
   const paramsUserId = useParams().userId;
@@ -56,7 +58,7 @@ const ChangeEmail = ({
         success: {
           render() {
             setIsEditingEmail(false);
-            // fetchUserData();
+            fetchUserData();
             reset();
             return <p>{response.data.message} </p>;
           },
@@ -117,6 +119,7 @@ const ChangeEmail = ({
               className={`${classes['form-wrapper__form-link-button-wrapper']} ${classes['form-wrapper__form-link-button-wrapper--left']}`}
             >
               <button
+                type={'button'}
                 onClick={() => {
                   setIsEditingEmail(false);
                   reset();
