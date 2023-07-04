@@ -20,10 +20,12 @@ const UserFormSchema = () =>
   });
 
 const ChangeEmail = ({
+  fetchUserData,
   isEditingEmail,
   setIsEditingEmail,
   userDataEmail,
 }: {
+  fetchUserData: () => void;
   isEditingEmail: boolean;
   setIsEditingEmail: Dispatch<SetStateAction<boolean>>;
   userDataEmail: string | null;
@@ -56,7 +58,7 @@ const ChangeEmail = ({
         success: {
           render() {
             setIsEditingEmail(false);
-            // fetchUserData();
+            fetchUserData();
             reset();
             return <p>{response.data.message} </p>;
           },
