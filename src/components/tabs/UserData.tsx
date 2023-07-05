@@ -17,9 +17,7 @@ const UserData = () => {
   const [isEditingEmail, setIsEditingEmail] = useState<boolean>(false);
   const [isEditingAvatar, setIsEditingAvatar] = useState<boolean>(false);
   const [isEditingPassword, setIsEditingPassword] = useState<boolean>(false);
-  const { userData, error, fetchUserData } = useGet({
-    useSetValue: true,
-  });
+  const { userData, error, fetchUserData, loading } = useGet();
   const { token } = useContext(AuthContext);
 
   const handleEditName = () => setIsEditingName(true);
@@ -60,7 +58,7 @@ const UserData = () => {
           isEditingPassword={isEditingPassword}
           setIsEditingPassword={setIsEditingPassword}
         />
-        {/* {loading ? <p>Loading user data</p> : ''} */}
+        {loading ? <p>Loading user data...</p> : null}
         {token &&
           !isEditingName &&
           !isEditingEmail &&
