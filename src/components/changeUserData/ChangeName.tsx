@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import classes from '../../pages/Form.module.css';
+import useChange from '../../hooks/useChange';
 import { AuthContext } from '../../context/auth-context';
 
 interface UserFormValues {
@@ -20,13 +21,15 @@ const UserFormSchema = () =>
   });
 
 const ChangeName = ({
-  isEditingName,
-  setIsEditingName,
+  isEditing,
+  // setIsEditingName,
   userDataName,
+  setIsEditing,
   fetchUserData,
 }: {
-  isEditingName: boolean;
-  setIsEditingName: Dispatch<SetStateAction<boolean>>;
+  isEditing: boolean;
+  // setIsEditingName: Dispatch<SetStateAction<boolean>>;
+  setIsEditing: Dispatch<SetStateAction<boolean>>;
   userDataName: string | null;
   fetchUserData: () => void;
 }) => {
@@ -44,59 +47,67 @@ const ChangeName = ({
     resolver: yupResolver(UserFormSchema()),
   });
 
-  const onSubmitName = handleSubmit(async (data: UserFormValues) => {
-    const response = await toast.promise(
-      axios.patch(
-        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/name`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      ),
-      {
-        pending: 'Please, wait.',
-        success: {
-          render() {
-            setIsEditingName(false);
-            fetchUserData();
-            reset();
-            return <p>{response.data.message} </p>;
-          },
-        },
-        error: {
-          render({
-            data,
-          }: ToastContentProps<{
-            response: { status: number; data: { message: string } };
-            status: number;
-          }>) {
-            reset();
-            if (data && data.response && data?.response.status === 0) {
-              return (
-                <p>
-                  Sorry, we have problem with database connection. Please try
-                  again later.
-                </p>
-              );
-            }
-            if (data && data.response && data.response.data) {
-              return <p>{data.response.data.message} </p>;
-            }
-            return <p>Something went wrong, please try again later.</p>;
-          },
-        },
-      },
-      { position: 'top-center' },
-    );
-  });
+  // const onSubmitName = handleSubmit(async (data: UserFormValues) => {
+  //   const response = await toast.promise(
+  //     axios.patch(
+  //       `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/name`,
+  //       data,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       },
+  //     ),
+  //     {
+  //       pending: 'Please, wait.',
+  //       success: {
+  //         render() {
+  //           setIsEditingName(false);
+  //           fetchUserData();
+  //           reset();
+  //           return <p>{response.data.message} </p>;
+  //         },
+  //       },
+  //       error: {
+  //         render({
+  //           data,
+  //         }: ToastContentProps<{
+  //           response: { status: number; data: { message: string } };
+  //           status: number;
+  //         }>) {
+  //           reset();
+  //           if (data && data.response && data?.response.status === 0) {
+  //             return (
+  //               <p>
+  //                 Sorry, we have problem with database connection. Please try
+  //                 again later.
+  //               </p>
+  //             );
+  //           }
+  //           if (data && data.response && data.response.data) {
+  //             return <p>{data.response.data.message} </p>;
+  //           }
+  //           return <p>Something went wrong, please try again later.</p>;
+  //         },
+  //       },
+  //     },
+  //     { position: 'top-center' },
+  //   );
+  // });
+
+  const { onSubmit } = useChange(
+    'username',
+    isEditing,
+    setIsEditing,
+    'name',
+    fetchUserData,
+  );
   return (
     <>
-      {isEditingName && token && (
+      {isEditing && token && (
         <div className={classes['form-wrapper']}>
           <form
-            onSubmit={onSubmitName}
+            onSubmit={onSubmit}
             className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
           >
             <fieldset>
@@ -122,7 +133,7 @@ const ChangeName = ({
             >
               <button
                 onClick={() => {
-                  setIsEditingName(false);
+                  setIsEditing(false);
                   reset();
                 }}
                 className={classes['form-wrapper__form-button-back']}

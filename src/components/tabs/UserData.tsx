@@ -14,6 +14,7 @@ import { AuthContext } from '../../context/auth-context';
 
 const UserData = () => {
   const [isEditingName, setIsEditingName] = useState<boolean>(false);
+  // const [isEditing, setIsEditing] = useState<boolean>(false);
   const [isEditingEmail, setIsEditingEmail] = useState<boolean>(false);
   const [isEditingAvatar, setIsEditingAvatar] = useState<boolean>(false);
   const [isEditingPassword, setIsEditingPassword] = useState<boolean>(false);
@@ -30,6 +31,7 @@ const UserData = () => {
 
   const handleEditPassword = () => setIsEditingPassword(true);
 
+  // (piszę do siebie bo zgubię wątek, a stacjonarki nie chce mi się już włączać 😛). kilka useState w userdata, setState przekazane propsami do komponentu i hook tam użyty bierze setstate. np. <ChangeName isopen={isOpenName} setIsOpen={setIsopenname} /> <ChangeEmail isOpen={isOpenEmail} setIsopen={setIsOpenEmail} /> a whooku użycie setisopen(false)
   return (
     <>
       {!token && <Link to="/login">Login</Link>}
@@ -37,8 +39,8 @@ const UserData = () => {
       <div>
         <ChangeName
           fetchUserData={fetchUserData}
-          isEditingName={isEditingName}
-          setIsEditingName={setIsEditingName}
+          isEditing={isEditingName}
+          setIsEditing={setIsEditingName}
           userDataName={userData && userData?.user.username}
         />
 
