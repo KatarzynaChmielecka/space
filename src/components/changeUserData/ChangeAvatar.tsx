@@ -31,12 +31,13 @@ const UserFormSchema = (isEditingAvatar: boolean) =>
 const ChangeAvatar = ({
   isEditingAvatar,
   setIsEditingAvatar,
+  fetchUserData,
 }: {
   isEditingAvatar: boolean;
   setIsEditingAvatar: Dispatch<SetStateAction<boolean>>;
+  fetchUserData: () => void;
 }) => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-
   const { token } = useContext(AuthContext);
   const paramsUserId = useParams().userId;
   const {
@@ -78,7 +79,7 @@ const ChangeAvatar = ({
           render() {
             setPreviewUrl(null);
             setIsEditingAvatar(false);
-            // fetchUserData();
+            fetchUserData();
             reset();
             return <p>{response.data.message} </p>;
           },
@@ -111,6 +112,7 @@ const ChangeAvatar = ({
       { position: 'top-center' },
     );
   });
+
   return (
     <>
       {isEditingAvatar && token && (

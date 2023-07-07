@@ -1,14 +1,12 @@
 import 'react-toastify/dist/ReactToastify.css';
 
 import * as Yup from 'yup';
-import axios from 'axios';
 import { Dispatch, SetStateAction, useContext } from 'react';
-import { ToastContentProps, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import classes from '../../pages/Form.module.css';
+import useChange from '../../hooks/useChange';
 import { AuthContext } from '../../context/auth-context';
 
 interface UserFormValues {
@@ -31,11 +29,13 @@ const UserFormSchema = () =>
   });
 
 const ChangePassword = ({
-  isEditingPassword,
-  setIsEditingPassword,
+  isEditing,
+  setIsEditing,
+  fetchUserData,
 }: {
-  isEditingPassword: boolean;
-  setIsEditingPassword: Dispatch<SetStateAction<boolean>>;
+  isEditing: boolean;
+  setIsEditing: Dispatch<SetStateAction<boolean>>;
+  fetchUserData: () => void;
 }) => {
   const { token } = useContext(AuthContext);
 
@@ -47,61 +47,20 @@ const ChangePassword = ({
   } = useForm<UserFormValues>({
     resolver: yupResolver(UserFormSchema()),
   });
-  const paramsUserId = useParams().userId;
 
-  const onSubmitPassword = handleSubmit(async (data: UserFormValues) => {
-    const response = await toast.promise(
-      axios.patch(
-        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/password`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      ),
-      {
-        pending: 'Please, wait.',
-        success: {
-          render() {
-            setIsEditingPassword(false);
-            reset();
-            return <p>{response.data.message} </p>;
-          },
-        },
-        error: {
-          render({
-            data,
-          }: ToastContentProps<{
-            response: { status: number; data: { message: string } };
-            status: number;
-          }>) {
-            reset();
-            if (data && data.response && data?.response.status === 0) {
-              return (
-                <p>
-                  Sorry, we have problem with database connection. Please try
-                  again later.
-                </p>
-              );
-            }
-            if (data && data.response && data.response.data) {
-              return <p>{data.response.data.message} </p>;
-            }
-            return <p>Something went wrong, please try again later.</p>;
-          },
-        },
-      },
-      { position: 'top-center' },
-    );
-  });
-
+  const { onSubmit } = useChange(
+    isEditing,
+    setIsEditing,
+    'password',
+    fetchUserData,
+    reset,
+  );
   return (
     <>
-      {isEditingPassword && token && (
+      {isEditing && token && (
         <div className={classes['form-wrapper']}>
           <form
-            onSubmit={onSubmitPassword}
+            onSubmit={handleSubmit(onSubmit)}
             className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
           >
             <fieldset className={classes['fieldset-password']}>
@@ -159,7 +118,7 @@ const ChangePassword = ({
               className={`${classes['form-wrapper__form-link-button-wrapper']} ${classes['form-wrapper__form-link-button-wrapper--left']}`}
             >
               <button
-                onClick={() => setIsEditingPassword(false)}
+                onClick={() => setIsEditing(false)}
                 className={classes['form-wrapper__form-button-back']}
               >
                 CANCEL

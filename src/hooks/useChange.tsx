@@ -1,30 +1,23 @@
 import axios from 'axios';
-import { Dispatch, SetStateAction, useContext, useState } from 'react';
+import { Dispatch, SetStateAction, useContext } from 'react';
 import { ToastContentProps, toast } from 'react-toastify';
-import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth-context';
 
-type FormValues = {
-  fieldName: string;
-};
 const useChange = (
-  data: string,
   isEditing: boolean,
   setIsEditing: Dispatch<SetStateAction<boolean>>,
-  // input: string,
-  fieldName: string,
+  path: string,
   fetchUserData: () => void,
+  reset: () => void,
 ) => {
-  // const [isEditing, setIsEditing] = useState({});
-  const { handleSubmit, reset } = useForm<FormValues>();
   const paramsUserId = useParams().userId;
   const { token } = useContext(AuthContext);
-  const onSubmit = handleSubmit(async () => {
+  const onSubmit = async (data: object) => {
     const response = await toast.promise(
       axios.patch(
-        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/${fieldName}`,
+        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/${path}`,
         data,
         {
           headers: {
@@ -67,7 +60,7 @@ const useChange = (
       },
       { position: 'top-center' },
     );
-  });
+  };
 
   return { onSubmit, isEditing };
 };
