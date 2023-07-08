@@ -8,12 +8,12 @@ import useChange from '../../hooks/useChange';
 import { AuthContext } from '../../context/auth-context';
 
 interface UserFormValues {
-  avatar: string | null;
+  avatar: string;
 }
-const UserFormSchema = (isEditingAvatar: boolean) =>
+const UserFormSchema = (isEditing: boolean) =>
   Yup.object({
     avatar: Yup.mixed().test('avatar', 'Your avatar is required.', (value) => {
-      if (isEditingAvatar && !value) {
+      if (isEditing && !value) {
         return false;
       }
       return true;
@@ -64,16 +64,14 @@ const ChangeAvatar = ({
     fetchUserData,
     reset,
     true,
+    setPreviewUrl,
   );
   return (
     <>
       {isEditing && token && (
         <div className={classes['form-wrapper']}>
           <form
-            onSubmit={() => {
-              setPreviewUrl(null);
-              handleSubmit(onSubmit);
-            }}
+            onSubmit={handleSubmit(onSubmit)}
             className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
           >
             <div className={classes['field-wrapper']}>
@@ -112,10 +110,7 @@ const ChangeAvatar = ({
                 </div>
               </div>
               {errors.avatar ? (
-                <p
-                  className={`${classes.error} ${classes['avatar-error']}`}
-                  style={{ textAlign: 'center' }}
-                >
+                <p className={`${classes.error} ${classes['avatar-error']}`}>
                   {errors.avatar?.message as string}
                 </p>
               ) : (

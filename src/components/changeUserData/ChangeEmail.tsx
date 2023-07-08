@@ -22,11 +22,13 @@ const ChangeEmail = ({
   userDataEmail,
   setIsEditing,
   fetchUserData,
+  setPreviewUrl,
 }: {
   isEditing: boolean;
   userDataEmail: string | null;
   setIsEditing: Dispatch<SetStateAction<boolean>>;
   fetchUserData: () => void;
+  setPreviewUrl: Dispatch<SetStateAction<string | null>>;
 }) => {
   const { token } = useContext(AuthContext);
 
@@ -47,6 +49,7 @@ const ChangeEmail = ({
     fetchUserData,
     reset,
     false,
+    setPreviewUrl,
   );
   return (
     <>

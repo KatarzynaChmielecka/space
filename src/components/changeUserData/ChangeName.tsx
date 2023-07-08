@@ -22,11 +22,13 @@ const ChangeName = ({
   userDataName,
   setIsEditing,
   fetchUserData,
+  setPreviewUrl,
 }: {
   isEditing: boolean;
   setIsEditing: Dispatch<SetStateAction<boolean>>;
   userDataName: string | null;
   fetchUserData: () => void;
+  setPreviewUrl: Dispatch<SetStateAction<string | null>>;
 }) => {
   const { token } = useContext(AuthContext);
 
@@ -47,6 +49,7 @@ const ChangeName = ({
     fetchUserData,
     reset,
     false,
+    setPreviewUrl,
   );
   return (
     <>

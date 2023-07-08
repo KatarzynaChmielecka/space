@@ -12,6 +12,7 @@ const useChange = (
   fetchUserData: () => void,
   reset: () => void,
   isAvatar: boolean,
+  setPreviewUrl: Dispatch<SetStateAction<string | null>>,
 ) => {
   const paramsUserId = useParams().userId;
   const { token } = useContext(AuthContext);
@@ -35,6 +36,7 @@ const useChange = (
         pending: 'Please, wait.',
         success: {
           render() {
+            isAvatar && setPreviewUrl(null);
             setIsEditing(false);
             fetchUserData();
             reset();
@@ -48,6 +50,7 @@ const useChange = (
             response: { status: number; data: { message: string } };
             status: number;
           }>) {
+            isAvatar && setPreviewUrl(null);
             reset();
             if (data && data.response && data?.response.status === 0) {
               return (

@@ -33,14 +33,13 @@ const UserData = () => {
 
   return (
     <>
-      {!token && <Link to="/login">Login</Link>}
-
       <div>
         <ChangeName
           fetchUserData={fetchUserData}
           isEditing={isEditingName}
           setIsEditing={setIsEditingName}
           userDataName={userData && userData?.user.username}
+          setPreviewUrl={setPreviewUrl}
         />
 
         <ChangeEmail
@@ -48,6 +47,7 @@ const UserData = () => {
           isEditing={isEditingEmail}
           setIsEditing={setIsEditingEmail}
           userDataEmail={userData && userData?.user.email}
+          setPreviewUrl={setPreviewUrl}
         />
 
         <ChangeAvatar
@@ -62,6 +62,7 @@ const UserData = () => {
           fetchUserData={fetchUserData}
           isEditing={isEditingPassword}
           setIsEditing={setIsEditingPassword}
+          setPreviewUrl={setPreviewUrl}
         />
         {loading ? <p>Loading user data...</p> : null}
         {token &&
