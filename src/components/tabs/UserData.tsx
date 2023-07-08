@@ -65,6 +65,9 @@ const UserData = () => {
           setPreviewUrl={setPreviewUrl}
         />
         {loading ? <p>Loading user data...</p> : null}
+        {!userData && (
+          <p>Something went wrong. Try to refresh page or log in again</p>
+        )}
         {token &&
           !isEditingName &&
           !isEditingEmail &&

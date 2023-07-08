@@ -1,6 +1,7 @@
 import classes from './UserCard.module.css';
 import photo from '../assets/shared/edit-image.png';
 import photo2 from '../assets/shared/edit.png';
+
 const UserCard = ({
   src,
   username,
@@ -47,6 +48,7 @@ const UserCard = ({
             onClick={editName}
             onKeyDown={editName}
             tabIndex={0}
+            className={classes['user-card-wrapper__photo-right']}
           >
             <img src={photo2} alt="" />
           </div>
@@ -61,6 +63,7 @@ const UserCard = ({
             onClick={editEmail}
             onKeyDown={editEmail}
             tabIndex={0}
+            className={classes['user-card-wrapper__photo-right']}
           >
             <img src={photo2} alt="" />
           </div>
@@ -75,6 +78,7 @@ const UserCard = ({
             onClick={editPassword}
             onKeyDown={editPassword}
             tabIndex={0}
+            className={classes['user-card-wrapper__photo-right']}
           >
             <img src={photo2} alt="" />
           </div>
