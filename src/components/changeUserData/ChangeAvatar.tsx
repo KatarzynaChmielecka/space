@@ -40,7 +40,7 @@ const ChangeAvatar = ({
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<UserFormValues | any>({
+  } = useForm<UserFormValues>({
     resolver: yupResolver(UserFormSchema(isEditing)),
     mode: 'onSubmit',
     defaultValues: {

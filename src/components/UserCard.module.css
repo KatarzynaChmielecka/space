@@ -3,7 +3,7 @@
   display: flex;
   font-size: 1.75rem;
   gap: 6.88rem;
-  padding: 3.13rem 0 0 3.13rem;
+  padding: 3.13rem 3.13rem 0 3.13rem;
 }
 
 .user-card-wrapper * {
