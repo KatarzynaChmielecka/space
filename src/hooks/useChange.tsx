@@ -11,14 +11,20 @@ const useChange = (
   path: string,
   fetchUserData: () => void,
   reset: () => void,
+  isAvatar: boolean,
 ) => {
   const paramsUserId = useParams().userId;
   const { token } = useContext(AuthContext);
-  const onSubmit = async (data: object) => {
+  const onSubmit = async (data: object | any) => {
+    const formData = new FormData();
+    if (isAvatar) {
+      formData.append('avatar', data.avatar[0]);
+    }
+
     const response = await toast.promise(
       axios.patch(
         `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/${path}`,
-        data,
+        isAvatar ? formData : data,
         {
           headers: {
             Authorization: `Bearer ${token}`,

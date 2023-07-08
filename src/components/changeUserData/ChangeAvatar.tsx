@@ -1,22 +1,14 @@
 import * as Yup from 'yup';
-import axios from 'axios';
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useState,
-} from 'react';
-import { ToastContentProps, toast } from 'react-toastify';
+import { ChangeEvent, Dispatch, SetStateAction, useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import classes from '../../pages/Form.module.css';
+import useChange from '../../hooks/useChange';
 import { AuthContext } from '../../context/auth-context';
 
 interface UserFormValues {
-  avatar: string;
+  avatar: string | null;
 }
 const UserFormSchema = (isEditingAvatar: boolean) =>
   Yup.object({
@@ -29,24 +21,27 @@ const UserFormSchema = (isEditingAvatar: boolean) =>
   });
 
 const ChangeAvatar = ({
-  isEditingAvatar,
-  setIsEditingAvatar,
+  isEditing,
+  setIsEditing,
   fetchUserData,
+  previewUrl,
+  setPreviewUrl,
 }: {
-  isEditingAvatar: boolean;
-  setIsEditingAvatar: Dispatch<SetStateAction<boolean>>;
+  isEditing: boolean;
+  setIsEditing: Dispatch<SetStateAction<boolean>>;
   fetchUserData: () => void;
+  previewUrl: string | null;
+  setPreviewUrl: Dispatch<SetStateAction<string | null>>;
 }) => {
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { token } = useContext(AuthContext);
-  const paramsUserId = useParams().userId;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<UserFormValues>({
-    resolver: yupResolver(UserFormSchema(isEditingAvatar)),
+  } = useForm<UserFormValues | any>({
+    resolver: yupResolver(UserFormSchema(isEditing)),
     mode: 'onSubmit',
     defaultValues: {
       avatar: '',
@@ -56,69 +51,29 @@ const ChangeAvatar = ({
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0];
+
       const objectUrl = URL.createObjectURL(file);
       setPreviewUrl(objectUrl);
     }
   };
-  const onSubmitAvatar = handleSubmit(async (data: UserFormValues) => {
-    const formData = new FormData();
-    formData.append('avatar', data.avatar[0]);
-    const response = await toast.promise(
-      axios.patch(
-        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/image`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      ),
-      {
-        pending: 'Please, wait.',
-        success: {
-          render() {
-            setPreviewUrl(null);
-            setIsEditingAvatar(false);
-            fetchUserData();
-            reset();
-            return <p>{response.data.message} </p>;
-          },
-        },
-        error: {
-          render({
-            data,
-          }: ToastContentProps<{
-            response: { status: number; data: { message: string } };
-            status: number;
-          }>) {
-            setPreviewUrl(null);
-            setIsEditingAvatar(false);
-            reset();
-            if (data && data.response && data?.response.status === 0) {
-              return (
-                <p>
-                  Sorry, we have problem with database connection. Please try
-                  again later.
-                </p>
-              );
-            }
-            if (data && data.response && data.response.data) {
-              return <p>{data.response.data.message} </p>;
-            }
-            return <p>Something went wrong, please try again later.</p>;
-          },
-        },
-      },
-      { position: 'top-center' },
-    );
-  });
 
+  const { onSubmit } = useChange(
+    isEditing,
+    setIsEditing,
+    'image',
+    fetchUserData,
+    reset,
+    true,
+  );
   return (
     <>
-      {isEditingAvatar && token && (
+      {isEditing && token && (
         <div className={classes['form-wrapper']}>
           <form
-            onSubmit={onSubmitAvatar}
+            onSubmit={() => {
+              setPreviewUrl(null);
+              handleSubmit(onSubmit);
+            }}
             className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
           >
             <div className={classes['field-wrapper']}>
@@ -161,7 +116,7 @@ const ChangeAvatar = ({
                   className={`${classes.error} ${classes['avatar-error']}`}
                   style={{ textAlign: 'center' }}
                 >
-                  {errors.avatar?.message}
+                  {errors.avatar?.message as string}
                 </p>
               ) : (
                 ''
@@ -171,7 +126,7 @@ const ChangeAvatar = ({
               <button
                 onClick={() => {
                   setPreviewUrl(null);
-                  setIsEditingAvatar(false);
+                  setIsEditing(false);
                   reset();
                 }}
                 className={classes['form-wrapper__form-button-back']}

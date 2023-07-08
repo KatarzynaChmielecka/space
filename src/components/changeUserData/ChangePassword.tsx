@@ -54,6 +54,7 @@ const ChangePassword = ({
     'password',
     fetchUserData,
     reset,
+    false,
   );
   return (
     <>

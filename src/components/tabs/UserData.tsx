@@ -17,6 +17,7 @@ const UserData = () => {
   const [isEditingEmail, setIsEditingEmail] = useState<boolean>(false);
   const [isEditingAvatar, setIsEditingAvatar] = useState<boolean>(false);
   const [isEditingPassword, setIsEditingPassword] = useState<boolean>(false);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { userData, error, fetchUserData, loading } = useGet();
   const { token } = useContext(AuthContext);
 
@@ -51,8 +52,10 @@ const UserData = () => {
 
         <ChangeAvatar
           fetchUserData={fetchUserData}
-          isEditingAvatar={isEditingAvatar}
-          setIsEditingAvatar={setIsEditingAvatar}
+          isEditing={isEditingAvatar}
+          setIsEditing={setIsEditingAvatar}
+          previewUrl={previewUrl}
+          setPreviewUrl={setPreviewUrl}
         />
 
         <ChangePassword

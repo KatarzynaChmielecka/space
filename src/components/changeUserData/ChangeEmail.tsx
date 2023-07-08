@@ -46,6 +46,7 @@ const ChangeEmail = ({
     'email',
     fetchUserData,
     reset,
+    false,
   );
   return (
     <>

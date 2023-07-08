@@ -46,6 +46,7 @@ const ChangeName = ({
     'name',
     fetchUserData,
     reset,
+    false,
   );
   return (
     <>
