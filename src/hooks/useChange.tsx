@@ -5,6 +5,9 @@ import { useParams } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth-context';
 
+type Data = {
+  [key: string]: string;
+};
 const useChange = (
   isEditing: boolean,
   setIsEditing: Dispatch<SetStateAction<boolean>>,
@@ -16,10 +19,10 @@ const useChange = (
 ) => {
   const paramsUserId = useParams().userId;
   const { token } = useContext(AuthContext);
-  const onSubmit = async (data: object | any) => {
+  const onSubmit = async (data: Data) => {
     const formData = new FormData();
     if (isAvatar) {
-      formData.append('avatar', data.avatar[0]);
+      formData.append('avatar', data.avatar as string);
     }
 
     const response = await toast.promise(

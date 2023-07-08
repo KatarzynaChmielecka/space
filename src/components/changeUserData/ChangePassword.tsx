@@ -59,12 +59,20 @@ const ChangePassword = ({
     false,
     setPreviewUrl,
   );
+
+  const handleFormSubmit = (data: UserFormValues) => {
+    onSubmit({
+      password: data.password as string,
+      newPassword: data.newPassword as string,
+      newPasswordConfirmation: data.newPasswordConfirmation as string,
+    });
+  };
   return (
     <>
       {isEditing && token && (
         <div className={classes['form-wrapper']}>
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(handleFormSubmit)}
             className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
           >
             <fieldset className={classes['fieldset-password']}>

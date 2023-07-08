@@ -66,12 +66,15 @@ const ChangeAvatar = ({
     true,
     setPreviewUrl,
   );
+  const handleFormSubmit = (data: UserFormValues) => {
+    onSubmit({ avatar: data.avatar[0] as string });
+  };
   return (
     <>
       {isEditing && token && (
         <div className={classes['form-wrapper']}>
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(handleFormSubmit)}
             className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
           >
             <div className={classes['field-wrapper']}>

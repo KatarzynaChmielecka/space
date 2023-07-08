@@ -51,12 +51,15 @@ const ChangeEmail = ({
     false,
     setPreviewUrl,
   );
+  const handleFormSubmit = (data: UserFormValues) => {
+    onSubmit({ email: data.email as string });
+  };
   return (
     <>
       {isEditing && token && (
         <div className={classes['form-wrapper']}>
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(handleFormSubmit)}
             className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
           >
             <fieldset>

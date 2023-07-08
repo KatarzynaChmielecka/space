@@ -8,7 +8,7 @@ import useChange from '../../hooks/useChange';
 import { AuthContext } from '../../context/auth-context';
 
 interface UserFormValues {
-  username: string | null;
+  username: string | File | null;
 }
 const UserFormSchema = () =>
   Yup.object({
@@ -51,12 +51,16 @@ const ChangeName = ({
     false,
     setPreviewUrl,
   );
+
+  const handleFormSubmit = (data: UserFormValues) => {
+    onSubmit({ username: data.username as string });
+  };
   return (
     <>
       {isEditing && token && (
         <div className={classes['form-wrapper']}>
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(handleFormSubmit)}
             className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
           >
             <fieldset>
