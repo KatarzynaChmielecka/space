@@ -11,7 +11,7 @@ const Navlinks = () => {
 
   const openMenu = () => setOpen(true);
   const closeMenu = () => setOpen(false);
-  const auth = useContext(AuthContext);
+  const { token, userId } = useContext(AuthContext);
 
   const navigationLink = [
     { id: '00', name: 'HOME', href: '/' },
@@ -21,7 +21,7 @@ const Navlinks = () => {
     {
       id: '04',
       name: 'MY ACCOUNT',
-      href: auth.token ? `/user/${auth.userId}` : '/login',
+      href: token ? `/user/${userId}` : '/login',
     },
   ];
 

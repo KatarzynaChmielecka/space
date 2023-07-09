@@ -40,7 +40,7 @@ const UserImages = () => {
   const [showModal, setShowModal] = useState<boolean | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { userData, error, fetchUserData, loading } = useGet();
-  const auth = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const paramsUserId = useParams().userId;
   const {
     register,
@@ -73,7 +73,7 @@ const UserImages = () => {
         formData,
         {
           headers: {
-            Authorization: `Bearer ${auth.token}`,
+            Authorization: `Bearer ${token}`,
           },
         },
       ),
@@ -122,7 +122,7 @@ const UserImages = () => {
 
         {
           headers: {
-            Authorization: `Bearer ${auth.token}`,
+            Authorization: `Bearer ${token}`,
           },
         },
       ),
@@ -168,7 +168,7 @@ const UserImages = () => {
   };
   return (
     <div className={classes['user-images-wrapper']}>
-      {auth.token && userData && (
+      {token && userData && (
         <>
           <div className={classes['user-images-wrapper__user-data']}>
             <img src={userData.user.avatar} alt="User avatar" />
@@ -295,7 +295,7 @@ const UserImages = () => {
         </>
       )}
       {loading ? <p>Loading user data...</p> : null}
-      {!auth.token && (
+      {!token && (
         <div>
           <p>{error || 'Please, login.'}</p>
           <Link to="/login">Login</Link>

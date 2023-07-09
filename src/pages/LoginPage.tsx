@@ -42,7 +42,7 @@ const LoginPage: React.FC = () => {
     resolver: yupResolver(LoginFormSchema),
   });
 
-  const auth = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data: SubmitData) => {
     const response = await toast.promise(
@@ -52,7 +52,7 @@ const LoginPage: React.FC = () => {
         success: {
           render() {
             reset();
-            auth.login(response.data.token, response.data.user._id);
+            login(response.data.token, response.data.user._id);
             const userIdFromData = response.data.user._id;
             navigate(`/user/${userIdFromData}`);
             return <p>{response.data.message} </p>;
