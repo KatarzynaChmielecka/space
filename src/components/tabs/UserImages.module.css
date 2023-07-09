@@ -1,37 +1,37 @@
 .user-images-wrapper {
-  padding: 60px 0 40px 40px;
+  padding: 3.75rem 0 2.5rem 2.5rem;
 }
 
 .user-images-wrapper__user-data {
   align-items: center;
   display: flex;
-  gap: 26px;
+  gap: 1.63rem;
 }
 
 .user-images-wrapper__user-data img {
   border-radius: 50%;
-  height: 150px;
-  width: 150px;
+  height: 9.38rem;
+  width: 9.38rem;
 }
 
 .user-images-wrapper__user-data-mail {
   font-family: 'Barlow Condensed';
-  font-size: 28px;
-  letter-spacing: 4.72px;
+  font-size: 1.75rem;
+  letter-spacing: 0.29rem;
 }
 
 .user-images-wrapper__images-subtitle {
   color: #d0d6f9;
   font-family: 'Barlow';
-  font-size: 18px;
+  font-size: 1.13rem;
   font-weight: 400;
-  margin: 25px 0;
+  margin: 1.56rem 0;
 }
 
 .user-images-wrapper__images-main {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px 70px;
+  gap: 2.5rem 4.38rem;
 }
 
 .user-images-wrapper__images-content {
@@ -40,16 +40,16 @@
 }
 
 .user-images-wrapper__main-image {
-  height: 187px;
-  width: 317px;
+  height: 11.69rem;
+  width: 19.81rem;
 }
 
 .user-images-wrapper__delete-icon {
   background: none;
   border: none;
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 0.63rem;
+  top: 0.63rem;
 }
 
 .user-images-wrapper__delete-icon:hover {
@@ -58,7 +58,7 @@
 
 @media screen and (max-width: 1440px) {
   .user-images-wrapper {
-    padding: 60px 40px 40px 40px;
+    padding: 3.75rem 2.5rem 2.5rem 2.5rem;
   }
 
   .user-images-wrapper__images-main {
@@ -68,7 +68,7 @@
 
 @media screen and (max-width: 768px) {
   .user-images-wrapper {
-    padding: 20px 40px 40px 40px;
+    padding: 1.25rem 1.25rem 2.5rem 1.25rem;
   }
   .user-images-wrapper__user-data {
     flex-direction: column;
@@ -79,7 +79,7 @@
   }
 
   .user-images-wrapper__user-data img {
-    height: 74px;
-    width: 74px;
+    height: 4.63rem;
+    width: 4.63rem;
   }
 }
