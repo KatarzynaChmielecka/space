@@ -1,18 +1,23 @@
 import classes from './UserCard.module.css';
 import photo from '../assets/shared/edit-image.png';
 import photo2 from '../assets/shared/edit.png';
+
 const UserCard = ({
   src,
   username,
   userEmail,
   editImage,
-  editData,
+  editName,
+  editEmail,
+  editPassword,
 }: {
   src: string;
   username: string;
   userEmail: string;
   editImage: () => void;
-  editData: () => void;
+  editName: () => void;
+  editEmail: () => void;
+  editPassword: () => void;
 }) => {
   return (
     <div className={classes['user-card-wrapper']}>
@@ -40,10 +45,10 @@ const UserCard = ({
           </div>
           <div
             role="button"
-            onClick={editImage}
-            onKeyDown={editImage}
+            onClick={editName}
+            onKeyDown={editName}
             tabIndex={0}
-            // className={classes['user-card-wrapper__photo']}
+            className={classes['user-card-wrapper__photo-right']}
           >
             <img src={photo2} alt="" />
           </div>
@@ -55,10 +60,10 @@ const UserCard = ({
           </div>
           <div
             role="button"
-            onClick={editImage}
-            onKeyDown={editImage}
+            onClick={editEmail}
+            onKeyDown={editEmail}
             tabIndex={0}
-            // className={classes['user-card-wrapper__photo']}
+            className={classes['user-card-wrapper__photo-right']}
           >
             <img src={photo2} alt="" />
           </div>
@@ -70,10 +75,10 @@ const UserCard = ({
           </div>
           <div
             role="button"
-            onClick={editImage}
-            onKeyDown={editImage}
+            onClick={editPassword}
+            onKeyDown={editPassword}
             tabIndex={0}
-            // className={classes['user-card-wrapper__photo']}
+            className={classes['user-card-wrapper__photo-right']}
           >
             <img src={photo2} alt="" />
           </div>
