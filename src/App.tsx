@@ -4,9 +4,6 @@ import { Route, Routes } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 
 import Layout from './components/layout/Layout';
-import Notes from './components/Notes';
-import Photos from './components/Photos';
-import Profile from './components/Profile';
 import { AuthContext } from './context/auth-context';
 import { useAuth } from './hooks/auth-hook';
 

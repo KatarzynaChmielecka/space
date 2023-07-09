@@ -1,12 +1,6 @@
 import * as Yup from 'yup';
 import axios from 'axios';
-import {
-  ChangeEvent,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ToastContentProps, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
@@ -16,6 +10,7 @@ import Delete from '../../assets/shared/delete.png';
 import Modal from '../Modal';
 import classes from './UserImages.module.css';
 import classes2 from '../../pages/Form.module.css';
+import useGet from '../../hooks/useGet';
 import { AuthContext } from '../../context/auth-context';
 
 interface ImagesFormValues {
@@ -27,15 +22,6 @@ interface Image {
   imageUrl: string;
 }
 
-interface UserData {
-  user: {
-    _id: string;
-    username: string;
-    email: string;
-    avatar: string;
-    images: Image[];
-  };
-}
 interface SubmitData {
   images: FileList[];
 }
@@ -50,13 +36,12 @@ const ImagesFormSchema = Yup.object({
 });
 
 const UserImages = () => {
-  const [userData, setUserData] = useState<UserData | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [showModal, setShowModal] = useState<boolean | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const { userData, error, fetchUserData, loading } = useGet();
   const auth = useContext(AuthContext);
   const paramsUserId = useParams().userId;
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -74,36 +59,6 @@ const UserImages = () => {
     }
   };
 
-  const fetchUserData = useCallback(async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
-          },
-        },
-      );
-      const data = response.data;
-
-      if (data) {
-        setUserData(data);
-      } else {
-        setError("You aren't allowed to be here.Please, login.");
-      }
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        setError(error.response?.data.message);
-      } else {
-        setError('Something went wrong. Please,try again later.');
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchUserData();
-  }, [fetchUserData]);
-  console.log(userData);
   const onSubmit = handleSubmit(async (data: SubmitData) => {
     const formData = new FormData();
     Object.entries({
@@ -161,8 +116,6 @@ const UserImages = () => {
   });
 
   const handleDeleteClick = async (id: string) => {
-    console.log('aaaa: ' + id);
-
     await toast.promise(
       axios.delete(
         `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/images/${id}`,
@@ -341,18 +294,11 @@ const UserImages = () => {
           </div>
         </>
       )}
-
+      {loading ? <p>Loading user data...</p> : null}
       {!auth.token && (
-        <div
-        // className={classes2['user-page-logout']}
-        >
+        <div>
           <p>{error || 'Please, login.'}</p>
-          <Link
-            to="/login"
-            //   className={classes2['user-page-logout__link']}
-          >
-            Login
-          </Link>
+          <Link to="/login">Login</Link>
         </div>
       )}
     </div>

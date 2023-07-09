@@ -21,9 +21,9 @@ const Modal = ({
   onCancel,
   showModal,
 }: Props) => {
-  // const handleBodyScroll = (showModal: boolean) => {
-  //   document.body.style.overflow = showModal ? 'hidden' : 'auto';
-  // };
+  const handleBodyScroll = (showModal: boolean) => {
+    document.body.style.overflow = showModal ? 'hidden' : 'auto';
+  };
   const modal = (
     <div className="modal">
       <div
@@ -43,7 +43,7 @@ const Modal = ({
           <button
             className={`${classes.modal__button} ${classes['modal__button--cancel']}`}
             onClick={() => {
-              // handleBodyScroll(false);
+              handleBodyScroll(false);
               onCancel();
             }}
           >
@@ -59,7 +59,7 @@ const Modal = ({
       </div>
     </div>
   );
-  // handleBodyScroll(showModal);
+  handleBodyScroll(showModal);
   return showModal ? createPortal(modal, document.body) : null;
 };
 
