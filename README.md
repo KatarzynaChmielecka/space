@@ -14,7 +14,7 @@
 -  [Screenshots](#screenshots)
 
 ## Overview
-
+! Important ! Backend part is stored on render. After 15 minutes of inactivity server is going sleep. It can take several minutes to work everything again (for example you can see loader for long time).
 ### The challenge
 user can:
 - get information about some planets, space crew, technology
