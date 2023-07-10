@@ -16,12 +16,13 @@
 ## Overview
 
 ### The challenge
-
-- user can get information about some planets, space crew, technology
-- user can register himself
-- user can login
-- after login user can store his personal data special protected site
-- user can change his name, email and avatar
+user can:
+- get information about some planets, space crew, technology
+- register himself
+- login
+- store his personal data in special protected site
+- change his data
+- add images to his personal collection (or remove) 
 
 ...more info soon
 
