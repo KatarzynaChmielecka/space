@@ -28,7 +28,7 @@ user can:
 
 ### Links
 
-- [Here will be link to demo space app](#)
+- [Demo](https://space-katarzynachmielecka.vercel.app/)
 - [Backend part](https://github.com/KatarzynaChmielecka/space-backend)
 - [Figma](https://www.figma.com/file/0zdTKUMiUV9XMi3ehL8Ufc/space-tourism-website?t=mYdOOJdEsjyFpilJ-0)
 
