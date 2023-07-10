@@ -1,0 +1,86 @@
+.user-images-wrapper {
+  padding: 3.75rem 0 2.5rem 2.5rem;
+}
+
+.user-images-wrapper__user-data {
+  align-items: center;
+  display: flex;
+  gap: 1.63rem;
+}
+
+.user-images-wrapper__user-data img {
+  border-radius: 50%;
+  height: 9.38rem;
+  width: 9.38rem;
+}
+
+.user-images-wrapper__user-data-mail {
+  font-family: 'Barlow Condensed';
+  font-size: 1.75rem;
+  letter-spacing: 0.29rem;
+}
+
+.user-images-wrapper__images-subtitle {
+  color: #d0d6f9;
+  font-family: 'Barlow';
+  font-size: 1.13rem;
+  font-weight: 400;
+  margin: 1.56rem 0;
+}
+
+.user-images-wrapper__images-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem 4.38rem;
+}
+
+.user-images-wrapper__images-content {
+  position: relative;
+  width: 19.81rem;
+  height: 11.69rem;
+}
+
+.user-images-wrapper__main-image {
+  height: inherit;
+  width: inherit;
+}
+
+.user-images-wrapper__delete-icon {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 0.63rem;
+  top: 0.63rem;
+}
+
+.user-images-wrapper__delete-icon:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1440px) {
+  .user-images-wrapper {
+    padding: 3.75rem 2.5rem 2.5rem 2.5rem;
+  }
+
+  .user-images-wrapper__images-main {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .user-images-wrapper {
+    padding: 1.25rem 1.25rem 2.5rem 1.25rem;
+  }
+  .user-images-wrapper__user-data {
+    flex-direction: column;
+  }
+
+  .user-images-wrapper__images-subtitle {
+    text-align: center;
+  }
+
+  .user-images-wrapper__user-data img {
+    height: 4.63rem;
+    width: 4.63rem;
+  }
+}

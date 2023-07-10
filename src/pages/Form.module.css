@@ -6,6 +6,11 @@
   width: 100%;
 }
 
+.form-wrapper--photos {
+  height: 11.69rem;
+  padding: 0;
+  width: 19.81rem;
+}
 .form-wrapper--my-data {
   padding: 0;
 }
@@ -20,6 +25,12 @@
   min-height: 27.81rem;
   padding: 2.19rem 8.13rem 2.19rem 3.13rem;
   width: 79.69rem;
+}
+
+.form-wrapper__form--photos {
+  background: #ffffff40;
+  min-height: inherit;
+  padding: 0;
 }
 
 .form-wrapper--login {
@@ -164,7 +175,7 @@ fieldset.fieldset-password {
 .form-wrapper__form-link-button-wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 80px;
+  gap: 5rem;
   justify-content: center;
 }
 .form-wrapper__form-link-button-wrapper--left {
@@ -209,6 +220,12 @@ fieldset.fieldset-password {
   width: 13.13rem;
 }
 
+.form-wrapper__form-button-submit--photos {
+  font-size: 1.25rem;
+  height: 2.5rem;
+  margin: 0 0 0.63rem 0;
+}
+
 .form-wrapper__form-button-submit:hover {
   cursor: pointer;
   outline: 0.63rem solid #d9d9d94d;
@@ -224,6 +241,10 @@ fieldset.fieldset-password {
     padding: 1.25rem 0 0 0;
   }
 
+  .form-wrapper--photos {
+    padding: 0;
+  }
+
   .form-wrapper--login {
     justify-content: center;
   }
@@ -231,6 +252,10 @@ fieldset.fieldset-password {
   .form-wrapper__form {
     align-items: center;
     padding: 1.38rem;
+  }
+
+  .form-wrapper__form--photos {
+    padding: 0;
   }
 
   fieldset {
@@ -255,6 +280,9 @@ fieldset.fieldset-password {
 }
 
 @media screen and (max-width: 768px) {
+  .form-wrapper__form--photos {
+    width: 19.81rem;
+  }
   .form-wrapper__form-link-button-wrapper {
     align-self: center;
     max-width: 20.63rem;
@@ -269,6 +297,10 @@ fieldset.fieldset-password {
 
   .form-wrapper__form-button-submit {
     order: -1;
+  }
+
+  .form-wrapper__form-button-submit--photos {
+    width: 13.13rem;
   }
 
   .form-wrapper__form input {

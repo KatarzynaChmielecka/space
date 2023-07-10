@@ -5,12 +5,17 @@ import { useParams } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth-context';
 
+interface Image {
+  _id: string;
+  imageUrl: string;
+}
 interface UserData {
   user: {
     _id: string;
     username: string;
     email: string;
     avatar: string;
+    images: Image[];
   };
 }
 
