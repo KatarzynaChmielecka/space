@@ -36,12 +36,13 @@
 
 .user-images-wrapper__images-content {
   position: relative;
-  width: fit-content;
+  width: 19.81rem;
+  height: 11.69rem;
 }
 
 .user-images-wrapper__main-image {
-  height: 11.69rem;
-  width: 19.81rem;
+  height: inherit;
+  width: inherit;
 }
 
 .user-images-wrapper__delete-icon {
