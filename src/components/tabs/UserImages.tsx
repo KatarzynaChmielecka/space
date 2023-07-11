@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import axios from 'axios';
-import { ChangeEvent, useContext, useState } from 'react';
+import { ChangeEvent, ReactEventHandler, useContext, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ToastContentProps, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
@@ -12,6 +12,7 @@ import classes from './UserImages.module.css';
 import classes2 from '../../pages/Form.module.css';
 import useGet from '../../hooks/useGet';
 import { AuthContext } from '../../context/auth-context';
+import { errorImage } from '../../utils/errorImage';
 
 interface ImagesFormValues {
   images: FileList[];
@@ -171,7 +172,11 @@ const UserImages = () => {
       {token && userData && (
         <>
           <div className={classes['user-images-wrapper__user-data']}>
-            <img src={userData.user.avatar} alt="User avatar" />
+            <img
+              src={userData.user.avatar}
+              alt="User avatar"
+              onError={errorImage as ReactEventHandler<HTMLImageElement>}
+            />
 
             <p className={classes['user-images-wrapper__user-data-mail']}>
               {userData.user.email}
