@@ -1,14 +1,13 @@
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Link } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import ChangeAvatar from '../changeUserData/ChangeAvatar';
 import ChangeEmail from '../changeUserData/ChangeEmail';
 import ChangeName from '../changeUserData/ChangeName';
 import ChangePassword from '../changeUserData/ChangePassword';
+import Modal from '../Modal';
 import UserCard from '../UserCard';
-import classes2 from '../UserCard.module.css';
 import useGet from '../../hooks/useGet';
 import { AuthContext } from '../../context/auth-context';
 
@@ -20,6 +19,10 @@ const UserData = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { userData, error, fetchUserData, loading } = useGet();
   const { token } = useContext(AuthContext);
+
+  useEffect(() => {
+    document.body.style.overflow = 'auto';
+  }, []);
 
   const handleEditName = () => setIsEditingName(true);
 
@@ -65,9 +68,31 @@ const UserData = () => {
           setPreviewUrl={setPreviewUrl}
         />
         {loading ? <p>Loading user data...</p> : null}
+
+        {/* <Modal
+              title="Something went wrong"
+              content={
+                error
+                  ? error
+                  : 'Time has gone or something weird went wrong. Please login again or refresh page.'
+              }
+              modalOnClick={false}
+              showModal={true}
+             
+            /> */}
         {!userData && !loading && (
-          <p>Something went wrong. Try to refresh page or log in again</p>
+          <Modal
+            title="Something went wrong"
+            content={
+              error
+                ? error
+                : 'Time has gone or something weird went wrong. Please log in again or refresh page.'
+            }
+            modalOnClick={false}
+            showModal={true}
+          />
         )}
+
         {token &&
           !isEditingName &&
           !isEditingEmail &&
@@ -84,15 +109,6 @@ const UserData = () => {
               editPassword={handleEditPassword}
             />
           )}
-
-        {!token && (
-          <div className={classes2['user-page-logout']}>
-            <p>{error || 'Please, login.'}</p>
-            <Link to="/login" className={classes2['user-page-logout__link']}>
-              Login
-            </Link>
-          </div>
-        )}
       </div>
     </>
   );
