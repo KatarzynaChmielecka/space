@@ -35,82 +35,79 @@ const UserData = () => {
   const handleEditPassword = () => setIsEditingPassword(true);
 
   return (
-    <>
-      <div>
-        <ChangeName
-          fetchUserData={fetchUserData}
-          isEditing={isEditingName}
-          setIsEditing={setIsEditingName}
-          userDataName={userData && userData?.user.username}
-          setPreviewUrl={setPreviewUrl}
-        />
+    <div>
+      {loading ? <p>Loading user data...</p> : null}
 
-        <ChangeEmail
-          fetchUserData={fetchUserData}
-          isEditing={isEditingEmail}
-          setIsEditing={setIsEditingEmail}
-          userDataEmail={userData && userData?.user.email}
-          setPreviewUrl={setPreviewUrl}
-        />
+      <ChangeName
+        fetchUserData={fetchUserData}
+        isEditing={isEditingName}
+        setIsEditing={setIsEditingName}
+        userDataName={userData && userData?.user.username}
+        setPreviewUrl={setPreviewUrl}
+      />
 
-        <ChangeAvatar
-          fetchUserData={fetchUserData}
-          isEditing={isEditingAvatar}
-          setIsEditing={setIsEditingAvatar}
-          previewUrl={previewUrl}
-          setPreviewUrl={setPreviewUrl}
-        />
+      <ChangeEmail
+        fetchUserData={fetchUserData}
+        isEditing={isEditingEmail}
+        setIsEditing={setIsEditingEmail}
+        userDataEmail={userData && userData?.user.email}
+        setPreviewUrl={setPreviewUrl}
+      />
 
-        <ChangePassword
-          fetchUserData={fetchUserData}
-          isEditing={isEditingPassword}
-          setIsEditing={setIsEditingPassword}
-          setPreviewUrl={setPreviewUrl}
-        />
-        {loading ? <p>Loading user data...</p> : null}
+      <ChangeAvatar
+        fetchUserData={fetchUserData}
+        isEditing={isEditingAvatar}
+        setIsEditing={setIsEditingAvatar}
+        previewUrl={previewUrl}
+        setPreviewUrl={setPreviewUrl}
+      />
 
-        {/* <Modal
-              title="Something went wrong"
-              content={
-                error
-                  ? error
-                  : 'Time has gone or something weird went wrong. Please login again or refresh page.'
-              }
-              modalOnClick={false}
-              showModal={true}
-             
-            /> */}
-        {!userData && !loading && (
-          <Modal
-            title="Something went wrong"
-            content={
-              error
-                ? error
-                : 'Time has gone or something weird went wrong. Please log in again or refresh page.'
-            }
-            modalOnClick={false}
-            showModal={true}
+      <ChangePassword
+        fetchUserData={fetchUserData}
+        isEditing={isEditingPassword}
+        setIsEditing={setIsEditingPassword}
+        setPreviewUrl={setPreviewUrl}
+      />
+
+      {token &&
+        !isEditingName &&
+        !isEditingEmail &&
+        !isEditingAvatar &&
+        !isEditingPassword &&
+        userData && (
+          <UserCard
+            src={userData.user.avatar}
+            username={userData.user.username}
+            userEmail={userData.user.email}
+            editImage={handleEditAvatar}
+            editName={handleEditName}
+            editEmail={handleEditEmail}
+            editPassword={handleEditPassword}
           />
         )}
 
-        {token &&
-          !isEditingName &&
-          !isEditingEmail &&
-          !isEditingAvatar &&
-          !isEditingPassword &&
-          userData && (
-            <UserCard
-              src={userData.user.avatar}
-              username={userData.user.username}
-              userEmail={userData.user.email}
-              editImage={handleEditAvatar}
-              editName={handleEditName}
-              editEmail={handleEditEmail}
-              editPassword={handleEditPassword}
-            />
-          )}
-      </div>
-    </>
+      {!userData && !loading && (
+        <Modal
+          title="Something went wrong"
+          content={
+            error
+              ? error
+              : 'Time has gone or something weird went wrong. Please log in again or refresh page.'
+          }
+          modalOnClick={false}
+          showModal={true}
+        />
+      )}
+
+      {!token && (
+        <Modal
+          title="Something went wrong"
+          content={error ? error : 'Time has gone. Please log in again.'}
+          modalOnClick={false}
+          showModal={true}
+        />
+      )}
+    </div>
   );
 };
 export default UserData;

@@ -178,6 +178,8 @@ const UserImages = () => {
   };
   return (
     <div className={classes['user-images-wrapper']}>
+      {loading ? <p>Loading user data...</p> : null}
+
       {token && userData && (
         <>
           <div className={classes['user-images-wrapper__user-data']}>
@@ -308,31 +310,28 @@ const UserImages = () => {
           </div>
         </>
       )}
-      {loading ? <p>Loading user data...</p> : null}
-      {/* <Modal
-              title="Something went wrong"
-              content={
-                error
-                  ? error
-                  : 'Time has gone or something weird went wrong. Please login again or refresh page.'
-              }
-              modalOnClick={false}
-              showModal={true}
-             
-            /> */}
-      {!token ||
-        (!userData && !loading && (
-          <Modal
-            title="Something went wrong"
-            content={
-              error
-                ? error
-                : 'Time has gone or something weird went wrong. Please log in again or refresh page.'
-            }
-            modalOnClick={false}
-            showModal={true}
-          />
-        ))}
+
+      {!userData && !loading && (
+        <Modal
+          title="Something went wrong"
+          content={
+            error
+              ? error
+              : 'Time has gone or something weird went wrong. Please log in again or refresh page.'
+          }
+          modalOnClick={false}
+          showModal={true}
+        />
+      )}
+
+      {!token && (
+        <Modal
+          title="Something went wrong"
+          content={error ? error : 'Time has gone. Please log in again.'}
+          modalOnClick={false}
+          showModal={true}
+        />
+      )}
     </div>
   );
 };
