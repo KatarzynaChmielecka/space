@@ -311,7 +311,7 @@ const UserImages = () => {
         </>
       )}
 
-      {!userData && !loading && (
+      {error && (
         <Modal
           title="Something went wrong"
           content={

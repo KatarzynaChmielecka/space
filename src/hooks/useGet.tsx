@@ -46,13 +46,16 @@ const useGet = () => {
         setValue('username', data.user.username);
         setValue('email', data.user.email);
       } else {
-        setError("You aren't allowed to be here.Please, login.");
+        setError("You aren't allowed to be here. Please, login.");
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        setError(error.response?.data.message);
+        setError(
+          error.response?.data.message ||
+            'Something went wrong. Please, try again later.',
+        );
       } else {
-        setError('Something went wrong. Please,try again later.');
+        setError('Something went wrong. Please, try again later.');
       }
     } finally {
       setLoading(false);
