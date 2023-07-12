@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 
 import classes from './Modal.module.css';
@@ -5,11 +6,12 @@ import classes from './Modal.module.css';
 interface Props {
   title: string;
   content: string;
-  confirmText: string;
-  cancelText: string;
-  onConfirm: () => void;
-  onCancel: () => void;
-  showModal: boolean;
+  confirmText?: string;
+  cancelText?: string;
+  onConfirm?: () => void;
+  onCancel?: () => void;
+  showModal?: boolean;
+  modalOnClick: boolean;
 }
 
 const Modal = ({
@@ -20,6 +22,7 @@ const Modal = ({
   onConfirm,
   onCancel,
   showModal,
+  modalOnClick,
 }: Props) => {
   const handleBodyScroll = (showModal: boolean) => {
     document.body.style.overflow = showModal ? 'hidden' : 'auto';
@@ -40,26 +43,50 @@ const Modal = ({
           <h2 className={classes.modal__text}>{content}</h2>
         </div>
         <div className={classes.modal__buttons}>
-          <button
-            className={`${classes.modal__button} ${classes['modal__button--cancel']}`}
-            onClick={() => {
-              handleBodyScroll(false);
-              onCancel();
-            }}
-          >
-            {cancelText}
-          </button>
-          <button
-            className={`${classes.modal__button} ${classes['modal__button--confirm']}`}
-            onClick={onConfirm}
-          >
-            {confirmText}
-          </button>
+          {modalOnClick && (
+            <>
+              <button
+                className={`${classes.modal__button} ${classes['modal__button--cancel']}`}
+                onClick={() => {
+                  handleBodyScroll(false);
+                  modalOnClick && onCancel && onCancel();
+                }}
+              >
+                {cancelText}
+              </button>
+              <button
+                className={`${classes.modal__button} ${classes['modal__button--confirm']}`}
+                onClick={onConfirm}
+              >
+                {confirmText}
+              </button>
+            </>
+          )}
+
+          {!modalOnClick && (
+            <>
+              <button
+                className={`${classes.modal__button} ${classes['modal__button--cancel']}`}
+                onClick={() => {
+                  handleBodyScroll(false);
+                  window.location.reload();
+                }}
+              >
+                Refresh
+              </button>
+              <Link
+                className={`${classes.modal__button} ${classes['modal__button--confirm']}`}
+                to={'/login'}
+              >
+                Log in
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>
   );
-  handleBodyScroll(showModal);
+  showModal && handleBodyScroll(showModal);
   return showModal ? createPortal(modal, document.body) : null;
 };
 

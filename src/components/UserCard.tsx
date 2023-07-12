@@ -1,6 +1,9 @@
+import { ReactEventHandler } from 'react';
+
 import classes from './UserCard.module.css';
 import photo from '../assets/shared/edit-image.png';
 import photo2 from '../assets/shared/edit.png';
+import { errorImage } from '../utils/errorImage';
 
 const UserCard = ({
   src,
@@ -24,6 +27,7 @@ const UserCard = ({
       <div className={classes['user-card__images-wrapper']}>
         <img
           src={src}
+          onError={errorImage as ReactEventHandler<HTMLImageElement>}
           alt="user avatar"
           className={classes['user-card-wrapper__avatar']}
         />

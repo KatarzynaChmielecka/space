@@ -1,9 +1,15 @@
 import * as Yup from 'yup';
 import axios from 'axios';
-import { ChangeEvent, useContext, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import {
+  ChangeEvent,
+  ReactEventHandler,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { ToastContentProps, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Delete from '../../assets/shared/delete.png';
@@ -12,6 +18,7 @@ import classes from './UserImages.module.css';
 import classes2 from '../../pages/Form.module.css';
 import useGet from '../../hooks/useGet';
 import { AuthContext } from '../../context/auth-context';
+import { errorImage } from '../../utils/errorImage';
 
 interface ImagesFormValues {
   images: FileList[];
@@ -51,6 +58,10 @@ const UserImages = () => {
     resolver: yupResolver(ImagesFormSchema),
   });
 
+  useEffect(() => {
+    document.body.style.overflow = 'auto';
+  }, []);
+
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0];
@@ -58,7 +69,6 @@ const UserImages = () => {
       setPreviewUrl(objectUrl);
     }
   };
-
   const onSubmit = handleSubmit(async (data: SubmitData) => {
     const formData = new FormData();
     Object.entries({
@@ -168,10 +178,16 @@ const UserImages = () => {
   };
   return (
     <div className={classes['user-images-wrapper']}>
+      {loading ? <p>Loading user data...</p> : null}
+
       {token && userData && (
         <>
           <div className={classes['user-images-wrapper__user-data']}>
-            <img src={userData.user.avatar} alt="User avatar" />
+            <img
+              src={userData.user.avatar}
+              alt="User avatar"
+              onError={errorImage as ReactEventHandler<HTMLImageElement>}
+            />
 
             <p className={classes['user-images-wrapper__user-data-mail']}>
               {userData.user.email}
@@ -227,7 +243,6 @@ const UserImages = () => {
                     {errors.images ? (
                       <p
                         className={`${classes2.error} ${classes2['avatar-error']}`}
-                        style={{ textAlign: 'center' }}
                       >
                         {errors.images?.message}
                       </p>
@@ -282,6 +297,7 @@ const UserImages = () => {
                           handleDeleteClick(index._id);
                         }}
                         onCancel={() => setSelectedImage(null)}
+                        modalOnClick={true}
                       />
                     )}
                   </div>
@@ -294,12 +310,27 @@ const UserImages = () => {
           </div>
         </>
       )}
-      {loading ? <p>Loading user data...</p> : null}
+
+      {error && (
+        <Modal
+          title="Something went wrong"
+          content={
+            error
+              ? error
+              : 'Time has gone or something weird went wrong. Please log in again or refresh page.'
+          }
+          modalOnClick={false}
+          showModal={true}
+        />
+      )}
+
       {!token && (
-        <div>
-          <p>{error || 'Please, login.'}</p>
-          <Link to="/login">Login</Link>
-        </div>
+        <Modal
+          title="Something went wrong"
+          content={error ? error : 'Time has gone. Please log in again.'}
+          modalOnClick={false}
+          showModal={true}
+        />
       )}
     </div>
   );
