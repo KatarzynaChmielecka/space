@@ -37,6 +37,7 @@ const UserData = () => {
 
   return (
     <div>
+      <Loader />
       {loading ? <Loader /> : null}
 
       <ChangeName

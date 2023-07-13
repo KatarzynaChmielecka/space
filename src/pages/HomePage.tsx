@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 
+import Loader from '../components/Loader';
 import classes from './HomePage.module.css';
 
 const Home = () => {
   return (
     <>
+      <Loader />
       <div className={classes['home-page-wrapper']}>
         <div className={classes['home-page-wrapper__content-left']}>
           <p className={classes['home-page-wrapper__text1']}>
