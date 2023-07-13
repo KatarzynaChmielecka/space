@@ -6,6 +6,7 @@ import ChangeAvatar from '../changeUserData/ChangeAvatar';
 import ChangeEmail from '../changeUserData/ChangeEmail';
 import ChangeName from '../changeUserData/ChangeName';
 import ChangePassword from '../changeUserData/ChangePassword';
+import Loader from '../Loader';
 import Modal from '../Modal';
 import UserCard from '../UserCard';
 import useGet from '../../hooks/useGet';
@@ -36,7 +37,7 @@ const UserData = () => {
 
   return (
     <div>
-      {loading ? <p>Loading user data...</p> : null}
+      {loading ? <Loader /> : null}
 
       <ChangeName
         fetchUserData={fetchUserData}
