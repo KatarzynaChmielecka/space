@@ -31,6 +31,7 @@ user can:
 - [Demo](https://space-katarzynachmielecka.vercel.app/)
 - [Backend part](https://github.com/KatarzynaChmielecka/space-backend)
 - [Figma](https://www.figma.com/file/0zdTKUMiUV9XMi3ehL8Ufc/space-tourism-website?t=mYdOOJdEsjyFpilJ-0)
+- [Loaders](https://cssloaders.github.io/)
 
 
 ## Process
@@ -46,6 +47,7 @@ user can:
 - axios 
 - mui base
 - css modules
+- cssloaders.github.io
 - eslint
 - prettier
 
