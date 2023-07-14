@@ -1,14 +1,13 @@
 .navlinks-wrapper {
-  backdrop-filter: blur(5rem);
-  background: rgba(255, 255, 255, 0.04);
+  background: #232732;
   color: #fff;
   display: flex;
   font-weight: 400;
   justify-content: space-between;
-  padding: 2.5rem 48px;
+  padding: 2.5rem 3rem;
   position: relative;
   position: relative;
-  width: 830.08px;
+  width: 51.88rem;
 }
 
 .menu-button {
@@ -61,7 +60,7 @@
 @media screen and (max-width: 1440px) {
   .navlinks-wrapper {
     font-size: 0.88rem;
-    width: 650.08px;
+    width: 40.63rem;
   }
 
   .hr {
@@ -74,8 +73,7 @@
   }
 
   .navlinks-wrapper-mobile {
-    backdrop-filter: blur(5.1rem);
-    background: #ffffff0a;
+    background: #232732;
     color: #fff;
     display: flex;
     flex-direction: column;

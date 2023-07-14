@@ -28,7 +28,7 @@
   bottom: -0.63rem;
   height: fit-content;
   position: absolute;
-  right: -5px;
+  right: -0.31rem;
   width: fit-content;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .user-card-wrapper__user-data-part p {
-  letter-spacing: 4.64px;
+  letter-spacing: 0.29rem;
 }
 .user-card-wrapper__label {
   font-size: 1.13rem;

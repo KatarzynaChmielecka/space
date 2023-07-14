@@ -13,6 +13,7 @@ import { useParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Delete from '../../assets/shared/delete.png';
+import Loader from '../Loader';
 import Modal from '../Modal';
 import classes from './UserImages.module.css';
 import classes2 from '../../pages/Form.module.css';
@@ -178,7 +179,7 @@ const UserImages = () => {
   };
   return (
     <div className={classes['user-images-wrapper']}>
-      {loading ? <p>Loading user data...</p> : null}
+      {loading ? <Loader /> : null}
 
       {token && userData && (
         <>

@@ -1,7 +1,5 @@
 .tabs {
-  backdrop-filter: blur(2.55rem);
-  background: #ffffff0a;
-  height: fit-content;
+  background-color: #1c1f29;
 }
 
 .tabs-nav {

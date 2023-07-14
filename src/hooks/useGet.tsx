@@ -51,11 +51,13 @@ const useGet = () => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setError(
-          error.response?.data.message ||
-            'Something went wrong. Please, try again later.',
+          error.response?.data.message === 'jwt expired'
+            ? 'You have been log out.'
+            : error.response?.data.message ||
+                'Something went wrong. Please, try again later.',
         );
       } else {
-        setError('Something went wrong. Please, try again later.');
+        setError('Something went wrong. Please, try again lateraaa.');
       }
     } finally {
       setLoading(false);

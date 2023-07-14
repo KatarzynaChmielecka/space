@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 
 import Layout from './components/layout/Layout';
+import Loader from './components/Loader';
 import { AuthContext } from './context/auth-context';
 import { useAuth } from './hooks/auth-hook';
 
@@ -26,7 +27,7 @@ function App() {
           logout: logout,
         }}
       >
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
