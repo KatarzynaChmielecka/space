@@ -13,6 +13,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
   width: 100px;
+  z-index:10000
 }
 
 .loader:before {

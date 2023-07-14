@@ -1,14 +1,14 @@
 .navlinks-wrapper {
-  backdrop-filter: blur(5rem);
-  background: rgba(255, 255, 255, 0.04);
+  /* backdrop-filter: blur(5rem); */
+  background: #232732;
   color: #fff;
   display: flex;
   font-weight: 400;
   justify-content: space-between;
-  padding: 2.5rem 48px;
+  padding: 2.5rem 3rem;
   position: relative;
   position: relative;
-  width: 830.08px;
+  width: 51.88rem;
 }
 
 .menu-button {
@@ -74,8 +74,8 @@
   }
 
   .navlinks-wrapper-mobile {
-    backdrop-filter: blur(5.1rem);
-    background: #ffffff0a;
+    /* backdrop-filter: blur(5.1rem); */
+    background: #232732;
     color: #fff;
     display: flex;
     flex-direction: column;

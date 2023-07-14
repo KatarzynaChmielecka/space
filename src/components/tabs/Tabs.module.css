@@ -1,8 +1,25 @@
 .tabs {
-  backdrop-filter: blur(2.55rem);
-  background: #ffffff0a;
-  height: fit-content;
+  /* background: rgba(255, 255, 255, 0.039); */
+  /* backdrop-filter: blur(2.55rem); */
+  background-color: #1c1f29;
 }
+/* 
+.tabs::before {
+  /* backdrop-filter: blur(2.55rem);
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1; */
+/* background-color: rgba(255, 255, 255, 0.5);
+  content: '';
+  filter: blur(18px);
+  position: absolute;
+  inset: 3%;
+  z-index: -1; */
+/* }  */
 
 .tabs-nav {
   display: flex;
