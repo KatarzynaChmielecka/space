@@ -1,5 +1,4 @@
 .navlinks-wrapper {
-  /* backdrop-filter: blur(5rem); */
   background: #232732;
   color: #fff;
   display: flex;
@@ -61,7 +60,7 @@
 @media screen and (max-width: 1440px) {
   .navlinks-wrapper {
     font-size: 0.88rem;
-    width: 650.08px;
+    width: 40.63rem;
   }
 
   .hr {
@@ -74,7 +73,6 @@
   }
 
   .navlinks-wrapper-mobile {
-    /* backdrop-filter: blur(5.1rem); */
     background: #232732;
     color: #fff;
     display: flex;
