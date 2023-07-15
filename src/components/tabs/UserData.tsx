@@ -99,15 +99,6 @@ const UserData = () => {
           showModal={true}
         />
       )}
-
-      {!token && (
-        <Modal
-          title="Something went wrong"
-          content={error ? error : 'Time has gone. Please log in again.'}
-          modalOnClick={false}
-          showModal={true}
-        />
-      )}
     </div>
   );
 };

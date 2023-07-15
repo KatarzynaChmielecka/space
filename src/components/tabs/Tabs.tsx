@@ -3,7 +3,6 @@ import { FC, useContext, useState } from 'react';
 import { ToastContentProps, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-import Modal from '../Modal';
 import UserData from './UserData';
 import UserImages from './UserImages';
 import classes from './Tabs.module.css';
@@ -98,37 +97,24 @@ const Tabs: FC = () => {
           <span>03</span>LOG OUT
         </button>
       </div>
-
       <hr />
+      <div className={classes['tabs-content']}>
+        {activeTab === 'my data' && <UserData />}
 
-      {token && (
-        <div className={classes['tabs-content']}>
-          {activeTab === 'my data' && <UserData />}
+        {activeTab === 'photos' && <UserImages />}
 
-          {activeTab === 'photos' && <UserImages />}
+        {activeTab === 'notes' && (
+          <div>
+            <h2>Notes</h2>
 
-          {activeTab === 'notes' && (
-            <div>
-              <h2>Notes</h2>
-
-              <ul>
-                <li>Note 1</li>
-                <li>Note 2</li>
-                <li>Note 3</li>
-              </ul>
-            </div>
-          )}
-        </div>
-      )}
-
-      {!token && (
-        <Modal
-          title="Something went wrong"
-          content={"You aren't allowed to be here. Please log in againaaa."}
-          modalOnClick={false}
-          showModal={true}
-        />
-      )}
+            <ul>
+              <li>Note 1</li>
+              <li>Note 2</li>
+              <li>Note 3</li>
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
