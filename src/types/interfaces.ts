@@ -9,3 +9,8 @@ export interface AltInterface extends PlanetInterface {
   alt: string;
   src: string;
 }
+
+export interface Response {
+  status: number;
+  data: { message: string };
+}

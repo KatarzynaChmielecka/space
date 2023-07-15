@@ -57,7 +57,7 @@ const useGet = () => {
                 'Something went wrong. Please, try again later.',
         );
       } else {
-        setError('Something went wrong. Please, try again lateraaa.');
+        setError('Something went wrong. Please, try again later.');
       }
     } finally {
       setLoading(false);

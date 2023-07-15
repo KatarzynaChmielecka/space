@@ -4,6 +4,7 @@ import { ToastContentProps, toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth-context';
+import { Response } from '../types/interfaces';
 
 type Data = {
   [key: string]: string;
@@ -50,8 +51,7 @@ const useChange = (
           render({
             data,
           }: ToastContentProps<{
-            response: { status: number; data: { message: string } };
-            status: number;
+            response: Response;
           }>) {
             isAvatar && setPreviewUrl(null);
             reset();

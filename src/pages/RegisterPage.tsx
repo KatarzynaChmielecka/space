@@ -10,6 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import classes from './Form.module.css';
 import classes2 from './RegisterPage.module.css';
+import { Response } from '../types/interfaces';
 
 interface RegisterFormValues {
   username: string;
@@ -97,8 +98,7 @@ const RegisterPage: React.FC = () => {
           render({
             data,
           }: ToastContentProps<{
-            response: { status: number; data: { message: string } };
-            status: number;
+            response: Response;
           }>) {
             setPreviewUrl(null);
             reset();
