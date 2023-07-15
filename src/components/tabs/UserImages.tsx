@@ -19,6 +19,7 @@ import classes from './UserImages.module.css';
 import classes2 from '../../pages/Form.module.css';
 import useGet from '../../hooks/useGet';
 import { AuthContext } from '../../context/auth-context';
+import { Response } from '../../types/interfaces';
 import { errorImage } from '../../utils/errorImage';
 
 interface ImagesFormValues {
@@ -102,8 +103,7 @@ const UserImages = () => {
           render({
             data,
           }: ToastContentProps<{
-            response: { status: number; data: { message: string } };
-            status: number;
+            response: Response;
           }>) {
             setPreviewUrl(null);
             reset();
@@ -150,8 +150,7 @@ const UserImages = () => {
           render({
             data,
           }: ToastContentProps<{
-            response: { status: number; data: { message: string } };
-            status: number;
+            response: Response;
           }>) {
             setShowModal(false);
             if (data && data.response && data?.response.status === 0) {

@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import classes from './Form.module.css';
 import classes2 from './LoginPage.module.css';
 import { AuthContext } from '../context/auth-context';
+import { Response } from '../types/interfaces';
 
 interface LoginFormValues {
   email: string;
@@ -62,8 +63,7 @@ const LoginPage: React.FC = () => {
           render({
             data,
           }: ToastContentProps<{
-            response: { status: number; data: { message: string } };
-            status: number;
+            response: Response;
           }>) {
             reset();
             if (data && data.response && data?.response.status === 0) {

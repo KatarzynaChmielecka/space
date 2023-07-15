@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import { ToastContentProps, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,8 +8,9 @@ import UserData from './UserData';
 import UserImages from './UserImages';
 import classes from './Tabs.module.css';
 import { AuthContext } from '../../context/auth-context';
+import { Response } from '../../types/interfaces';
 
-const Tabs: React.FC = () => {
+const Tabs: FC = () => {
   const [activeTab, setActiveTab] = useState('my data');
   const { logout, token } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -40,8 +41,7 @@ const Tabs: React.FC = () => {
           render({
             data,
           }: ToastContentProps<{
-            response: { status: number; data: { message: string } };
-            status: number;
+            response: Response;
           }>) {
             if (data && data.response && data?.response.status === 0) {
               return (
