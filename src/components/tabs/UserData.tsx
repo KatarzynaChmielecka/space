@@ -1,6 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 
 import ChangeAvatar from '../changeUserData/ChangeAvatar';
 import ChangeEmail from '../changeUserData/ChangeEmail';
@@ -21,9 +21,7 @@ const UserData = () => {
   const { userData, error, fetchUserData, loading } = useGet();
   const { token } = useContext(AuthContext);
 
-  useEffect(() => {
-    document.body.style.overflow = 'auto';
-  }, []);
+  document.body.style.overflow = 'auto';
 
   const handleEditName = () => setIsEditingName(true);
 

@@ -45,6 +45,9 @@ const LoginPage: React.FC = () => {
 
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  document.body.style.overflow = 'auto';
+
   const onSubmit = handleSubmit(async (data: SubmitData) => {
     const response = await toast.promise(
       axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, data),
