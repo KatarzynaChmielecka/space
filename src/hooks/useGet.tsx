@@ -9,13 +9,20 @@ interface Image {
   _id: string;
   imageUrl: string;
 }
+interface Note {
+  _id: string;
+  createdAt: string;
+  text: string;
+}
 interface UserData {
   user: {
+    // [x: string]: any;
     _id: string;
     username: string;
     email: string;
     avatar: string;
     images: Image[];
+    notes: Note[];
   };
 }
 
@@ -42,7 +49,7 @@ const useGet = () => {
 
       if (data) {
         setUserData(data);
-
+        console.log(userData);
         setValue('username', data.user.username);
         setValue('email', data.user.email);
       } else {
