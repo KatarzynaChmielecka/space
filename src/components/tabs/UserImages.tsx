@@ -1,12 +1,6 @@
 import * as Yup from 'yup';
 import axios from 'axios';
-import {
-  ChangeEvent,
-  ReactEventHandler,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, ReactEventHandler, useContext, useState } from 'react';
 import { ToastContentProps, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
@@ -60,9 +54,7 @@ const UserImages = () => {
     resolver: yupResolver(ImagesFormSchema),
   });
 
-  useEffect(() => {
-    document.body.style.overflow = 'auto';
-  }, []);
+  document.body.style.overflow = 'auto';
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
