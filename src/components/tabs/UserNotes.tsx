@@ -1,11 +1,14 @@
-import * as Yup from 'yup';
+import axios from 'axios';
+import { ToastContentProps, toast } from 'react-toastify';
 import { useContext, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useParams } from 'react-router-dom';
 
-import classes from '../../pages/Form.module.css';
+import ChangeNote from '../changeData/ChangeNote';
+import Loader from '../Loader';
+import Modal from '../Modal';
 import useGet from '../../hooks/useGet';
 import { AuthContext } from '../../context/auth-context';
+import { Response } from '../../types/interfaces';
 
 interface Note {
   _id: string;
@@ -13,34 +16,16 @@ interface Note {
   text: string;
 }
 
-interface UserFormValues {
-  text: string;
-}
-
-const UserFormSchema = () =>
-  Yup.object({
-    note: Yup.string()
-      .min(20, 'Note should have at least 20 chars.')
-      .required('Note is required.'),
-  });
 const UserNotes = () => {
-  const {
-    userData,
-    // error, fetchUserData, loading
-  } = useGet();
-  // const [note, setNote] = useState('');
-  const { token } = useContext(AuthContext);
-  const [selectedNote, setSelectedNote] = useState<Note | null>(null);
+  const [selectedNote, setSelectedNote] = useState<string | null>(null);
+  const [isEditingNote, setIsEditingNote] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [noteToDelete, setNoteToDelete] = useState<string | null>(null);
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm<UserFormValues>({
-    resolver: yupResolver(UserFormSchema()),
-    // values: { text: selectedNote?.text || '' },
-  });
+  const paramsUserId = useParams().userId;
+
+  const { token } = useContext(AuthContext);
+  const { userData, setValue, fetchUserData, loading } = useGet();
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -52,57 +37,82 @@ const UserNotes = () => {
 
   const handleEditNote = (note: Note) => {
     setValue('text', note.text);
-    setSelectedNote(note);
+    setSelectedNote(note._id);
+    setIsEditingNote(true);
   };
 
-  const handleCloseModal = () => setSelectedNote(null);
+  const onDelete = (id: string) => {
+    setShowModal(true);
+    setNoteToDelete(id);
+  };
 
-  const handleFormSubmit = () => console.log('test');
+  const handleDeleteClick = async (id: string) => {
+    await toast.promise(
+      axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/notes/${id}`,
+
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      ),
+      {
+        pending: 'Please, wait.',
+        success: {
+          render() {
+            fetchUserData();
+            setSelectedNote(null);
+            return <p>Your note was removed. </p>;
+          },
+        },
+        error: {
+          render({
+            data,
+          }: ToastContentProps<{
+            response: Response;
+          }>) {
+            setSelectedNote(null);
+            if (data && data.response && data?.response.status === 0) {
+              return (
+                <p>
+                  Sorry, we have problem with database connection. Please try
+                  again later.
+                </p>
+              );
+            }
+            if (data && data.response && data.response.data) {
+              return <p>{data.response.data.message} </p>;
+            }
+            return <p>Something went wrong, please try again later.</p>;
+          },
+        },
+      },
+      { position: 'top-center' },
+    );
+  };
+
+  document.body.style.overflow = 'auto';
+
   return (
     <>
-      {selectedNote && (
-        <div className={classes['form-wrapper']}>
-          <form
-            onSubmit={handleSubmit(handleFormSubmit)}
-            className={`${classes['form-wrapper__form']} ${classes['form-wrapper__form--user-page']}`}
-          >
-            <fieldset className={classes['fieldset-password']}>
-              <div className={classes['field-wrapper']}>
-                <div className={classes['input-wrapper']}>
-                  <label htmlFor="note" className={classes.label}>
-                    Note
-                  </label>
-                  <input
-                    type="text"
-                    {...register('text')}
-                    placeholder="note text"
-                    className={classes.input}
-                  />
-                </div>
-                <p className={classes.error}>{errors.text?.message}</p>
-              </div>
-            </fieldset>
-            <div
-              className={`${classes['form-wrapper__form-link-button-wrapper']} ${classes['form-wrapper__form-link-button-wrapper--left']}`}
-            >
-              <button
-                onClick={() => setSelectedNote(null)}
-                className={classes['form-wrapper__form-button-back']}
-              >
-                CANCEL
-              </button>
-              <button
-                type="submit"
-                className={classes['form-wrapper__form-button-submit']}
-              >
-                CONFIRM
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
+      {loading ? <Loader /> : null}
+
+      <ChangeNote
+        isEditing={isEditingNote}
+        userDataText={
+          userData?.user?.notes.find((note) => note._id === selectedNote)
+            ?.text as string
+        }
+        setIsEditing={setIsEditingNote}
+        fetchUserData={fetchUserData}
+        noteId={selectedNote}
+        selectedNote={selectedNote}
+        setSelectedNote={setSelectedNote}
+      />
+
       {userData &&
-        !selectedNote &&
+        !isEditingNote &&
         userData.user.notes.map((note: Note) => (
           <div key={note._id} style={{ width: '1090px', display: 'flex' }}>
             <span>{formatDate(note.createdAt)}</span>
@@ -110,23 +120,22 @@ const UserNotes = () => {
             <p>{note.text}</p>
             <div>
               <button onClick={() => handleEditNote(note)}>Edit</button>
-              <button onClick={() => console.log(note)}>Remove</button>
-              {/* {selectedNote && selectedNote._id === note._id && (
-                <div className="modal">
-                  <div className="modal-content">
-                    <form
-                    // onSubmit={handleUpdateNote}
-                    >
-                      <input
-                        {...register('text')}
-                        defaultValue={selectedNote.text}
-                      />
-                      <button type="submit">Save</button>
-                      <button onClick={handleCloseModal}>Close</button>
-                    </form>
-                  </div>
-                </div>
-              )} */}
+              <button onClick={() => onDelete(note._id)}>Remove</button>
+
+              {showModal && noteToDelete === note._id && (
+                <Modal
+                  title="Deleting note"
+                  content="Are you sure?"
+                  confirmText="Delete"
+                  cancelText="Cancel"
+                  showModal={showModal}
+                  onConfirm={() => {
+                    handleDeleteClick(note._id);
+                  }}
+                  onCancel={() => setNoteToDelete(null)}
+                  modalOnClick={true}
+                />
+              )}
             </div>
           </div>
         ))}

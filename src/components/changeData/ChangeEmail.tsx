@@ -8,27 +8,25 @@ import useChange from '../../hooks/useChange';
 import { AuthContext } from '../../context/auth-context';
 
 interface UserFormValues {
-  username: string | File | null;
+  email: string | null;
 }
 const UserFormSchema = () =>
   Yup.object({
-    username: Yup.string()
-      .min(2, 'Name should have at least 2 chars.')
-      .required('Your name is required.'),
+    email: Yup.string()
+      .email('Invalid email.')
+      .required('Your email is required.'),
   });
 
-const ChangeName = ({
+const ChangeEmail = ({
   isEditing,
-  userDataName,
+  userDataEmail,
   setIsEditing,
   fetchUserData,
-  setPreviewUrl,
 }: {
   isEditing: boolean;
+  userDataEmail: string | null;
   setIsEditing: Dispatch<SetStateAction<boolean>>;
-  userDataName: string | null;
   fetchUserData: () => void;
-  setPreviewUrl: Dispatch<SetStateAction<string | null>>;
 }) => {
   const { token } = useContext(AuthContext);
 
@@ -38,22 +36,21 @@ const ChangeName = ({
     formState: { errors },
     reset,
   } = useForm<UserFormValues>({
-    values: { username: userDataName },
+    values: { email: userDataEmail },
     resolver: yupResolver(UserFormSchema()),
   });
 
   const { onSubmit } = useChange(
     isEditing,
     setIsEditing,
-    'name',
+    'email',
     fetchUserData,
     reset,
     false,
-    setPreviewUrl,
+    false,
   );
-
   const handleFormSubmit = (data: UserFormValues) => {
-    onSubmit({ username: data.username as string });
+    onSubmit({ email: data.email as string });
   };
   return (
     <>
@@ -67,17 +64,17 @@ const ChangeName = ({
               <div className={classes['field-wrapper']}>
                 <div className={classes['field-wrapper']}>
                   <div className={classes['input-wrapper']}>
-                    <label htmlFor="name" className={classes.label}>
-                      Name
+                    <label htmlFor="email" className={classes.label}>
+                      Email
                     </label>
                     <input
-                      type="name"
-                      {...register('username')}
-                      placeholder="name"
+                      type="email"
+                      {...register('email')}
+                      placeholder="email"
                       className={classes.input}
                     />
                   </div>
-                  <p className={classes.error}>{errors.username?.message}</p>
+                  <p className={classes.error}>{errors.email?.message}</p>
                 </div>
               </div>
             </fieldset>
@@ -106,4 +103,4 @@ const ChangeName = ({
     </>
   );
 };
-export default ChangeName;
+export default ChangeEmail;

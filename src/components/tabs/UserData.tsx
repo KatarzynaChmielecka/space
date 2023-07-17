@@ -2,10 +2,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useContext, useState } from 'react';
 
-import ChangeAvatar from '../changeUserData/ChangeAvatar';
-import ChangeEmail from '../changeUserData/ChangeEmail';
-import ChangeName from '../changeUserData/ChangeName';
-import ChangePassword from '../changeUserData/ChangePassword';
+import ChangeAvatar from '../changeData/ChangeAvatar';
+import ChangeEmail from '../changeData/ChangeEmail';
+import ChangeName from '../changeData/ChangeName';
+import ChangePassword from '../changeData/ChangePassword';
 import Loader from '../Loader';
 import Modal from '../Modal';
 import UserCard from '../UserCard';
@@ -42,7 +42,6 @@ const UserData = () => {
         isEditing={isEditingName}
         setIsEditing={setIsEditingName}
         userDataName={userData && userData?.user.username}
-        setPreviewUrl={setPreviewUrl}
       />
 
       <ChangeEmail
@@ -50,7 +49,6 @@ const UserData = () => {
         isEditing={isEditingEmail}
         setIsEditing={setIsEditingEmail}
         userDataEmail={userData && userData?.user.email}
-        setPreviewUrl={setPreviewUrl}
       />
 
       <ChangeAvatar
@@ -65,7 +63,6 @@ const UserData = () => {
         fetchUserData={fetchUserData}
         isEditing={isEditingPassword}
         setIsEditing={setIsEditingPassword}
-        setPreviewUrl={setPreviewUrl}
       />
 
       {token &&

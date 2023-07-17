@@ -16,7 +16,6 @@ interface Note {
 }
 interface UserData {
   user: {
-    // [x: string]: any;
     _id: string;
     username: string;
     email: string;
@@ -49,7 +48,7 @@ const useGet = () => {
 
       if (data) {
         setUserData(data);
-        console.log(userData);
+
         setValue('username', data.user.username);
         setValue('email', data.user.email);
       } else {
@@ -73,6 +72,6 @@ const useGet = () => {
   useEffect(() => {
     fetchUserData();
   }, []);
-  return { userData, error, fetchUserData, loading };
+  return { userData, error, fetchUserData, loading, setValue };
 };
 export default useGet;
