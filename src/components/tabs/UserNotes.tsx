@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import ChangeNote from '../changeData/ChangeNote';
 import Loader from '../Loader';
 import Modal from '../Modal';
+import SubmitNote from '../SubmitNote';
 import useGet from '../../hooks/useGet';
 import { AuthContext } from '../../context/auth-context';
 import { Response } from '../../types/interfaces';
@@ -21,7 +22,7 @@ const UserNotes = () => {
   const [isEditingNote, setIsEditingNote] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [noteToDelete, setNoteToDelete] = useState<string | null>(null);
-
+  const [isAddingNote, setIsAddingNote] = useState<boolean>(false);
   const paramsUserId = useParams().userId;
 
   const { token } = useContext(AuthContext);
@@ -110,9 +111,19 @@ const UserNotes = () => {
         selectedNote={selectedNote}
         setSelectedNote={setSelectedNote}
       />
+      <SubmitNote
+        isAddingNote={isAddingNote}
+        setIsAddingNote={setIsAddingNote}
+        fetchUserData={fetchUserData}
+      />
+
+      {!isAddingNote && (
+        <button onClick={() => setIsAddingNote(true)}>add note</button>
+      )}
 
       {userData &&
         !isEditingNote &&
+        !isAddingNote &&
         userData.user.notes.map((note: Note) => (
           <div key={note._id} style={{ width: '1090px', display: 'flex' }}>
             <span>{formatDate(note.createdAt)}</span>

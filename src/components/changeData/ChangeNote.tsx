@@ -13,8 +13,8 @@ interface UserFormValues {
 const UserFormSchema = () =>
   Yup.object({
     text: Yup.string()
-      .min(20, 'Note should have at least 20 chars.')
-      .required('Note is required.'),
+      .required('Note is required.')
+      .min(20, 'Note should have at least 20 chars.'),
   });
 
 const ChangeNote = ({
