@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import ChangeNote from '../changeData/ChangeNote';
 import Loader from '../Loader';
 import Modal from '../Modal';
+import NoteModal from '../NoteModal';
 import SubmitNote from '../SubmitNote';
 import useGet from '../../hooks/useGet';
 import { AuthContext } from '../../context/auth-context';
@@ -20,13 +21,15 @@ interface Note {
 const UserNotes = () => {
   const [selectedNote, setSelectedNote] = useState<string | null>(null);
   const [isEditingNote, setIsEditingNote] = useState<boolean>(false);
+  const [isFullNote, setIsFullNote] = useState<boolean>(false);
+  const [selectedFullNote, setSelectedFullNote] = useState<string | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [noteToDelete, setNoteToDelete] = useState<string | null>(null);
   const [isAddingNote, setIsAddingNote] = useState<boolean>(false);
   const paramsUserId = useParams().userId;
 
   const { token } = useContext(AuthContext);
-  const { userData, setValue, fetchUserData, loading } = useGet();
+  const { userData, setValue, fetchUserData, loading, error } = useGet();
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -117,7 +120,7 @@ const UserNotes = () => {
         fetchUserData={fetchUserData}
       />
 
-      {!isAddingNote && (
+      {!isAddingNote && userData && !isEditingNote && (
         <button onClick={() => setIsAddingNote(true)}>add note</button>
       )}
 
@@ -128,7 +131,38 @@ const UserNotes = () => {
           <div key={note._id} style={{ width: '1090px', display: 'flex' }}>
             <span>{formatDate(note.createdAt)}</span>
 
-            <p>{note.text}</p>
+            <div style={{ position: 'relative' }}>
+              <p
+                style={{
+                  width: '250px',
+                  whiteSpace:
+                    'nowrap' /* Zapobiega zawijaniu tekstu na nową linię */,
+                  overflow:
+                    'hidden' /* Ukrywa tekst, który nie mieści się w divie */,
+                  textOverflow:
+                    'ellipsis' /* Dodaje "..." na końcu, jeśli tekst jest zbyt długi */,
+                }}
+              >
+                {note.text}
+              </p>
+              <button
+                tabIndex={0}
+                onClick={() => {
+                  setIsFullNote(true);
+                  setSelectedFullNote(note._id);
+                }}
+                onKeyDown={() => setIsFullNote(true)}
+                style={{
+                  position: 'absolute',
+                  width: '100%',
+                  top: 0,
+                  outline: 'none',
+                  opacity: '0',
+                }}
+              >
+                Full
+              </button>
+            </div>
             <div>
               <button onClick={() => handleEditNote(note)}>Edit</button>
               <button onClick={() => onDelete(note._id)}>Remove</button>
@@ -147,9 +181,29 @@ const UserNotes = () => {
                   modalOnClick={true}
                 />
               )}
+              {isFullNote && selectedFullNote === note._id && (
+                <NoteModal
+                  date={formatDate(note.createdAt)}
+                  text={note.text}
+                  onCancel={() => setIsFullNote(false)}
+                />
+              )}
             </div>
           </div>
         ))}
+
+      {error && (
+        <Modal
+          title="Something went wrong"
+          content={
+            error
+              ? error
+              : 'Time has gone or something weird went wrong. Please log in again or refresh page.'
+          }
+          modalOnClick={false}
+          showModal={true}
+        />
+      )}
     </>
   );
 };
