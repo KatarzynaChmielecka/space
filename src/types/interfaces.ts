@@ -14,3 +14,9 @@ export interface Response {
   status: number;
   data: { message: string };
 }
+
+export interface Note {
+  _id: string;
+  createdAt: string;
+  text: string;
+}

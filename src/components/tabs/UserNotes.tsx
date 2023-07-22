@@ -6,17 +6,11 @@ import { useParams } from 'react-router-dom';
 import ChangeNote from '../changeData/ChangeNote';
 import Loader from '../Loader';
 import Modal from '../Modal';
-import NoteModal from '../NoteModal';
+import Notes from '../Notes';
 import SubmitNote from '../SubmitNote';
 import useGet from '../../hooks/useGet';
 import { AuthContext } from '../../context/auth-context';
-import { Response } from '../../types/interfaces';
-
-interface Note {
-  _id: string;
-  createdAt: string;
-  text: string;
-}
+import { Note, Response } from '../../types/interfaces';
 
 const UserNotes = () => {
   const [selectedNote, setSelectedNote] = useState<string | null>(null);
@@ -30,14 +24,6 @@ const UserNotes = () => {
 
   const { token } = useContext(AuthContext);
   const { userData, setValue, fetchUserData, loading, error } = useGet();
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}.${month}.${day}`;
-  };
 
   const handleEditNote = (note: Note) => {
     setValue('text', note.text);
@@ -114,6 +100,7 @@ const UserNotes = () => {
         selectedNote={selectedNote}
         setSelectedNote={setSelectedNote}
       />
+
       <SubmitNote
         isAddingNote={isAddingNote}
         setIsAddingNote={setIsAddingNote}
@@ -128,68 +115,20 @@ const UserNotes = () => {
         !isEditingNote &&
         !isAddingNote &&
         userData.user.notes.map((note: Note) => (
-          <div key={note._id} style={{ width: '1090px', display: 'flex' }}>
-            <span>{formatDate(note.createdAt)}</span>
-
-            <div style={{ position: 'relative' }}>
-              <p
-                style={{
-                  width: '250px',
-                  whiteSpace:
-                    'nowrap' /* Zapobiega zawijaniu tekstu na nową linię */,
-                  overflow:
-                    'hidden' /* Ukrywa tekst, który nie mieści się w divie */,
-                  textOverflow:
-                    'ellipsis' /* Dodaje "..." na końcu, jeśli tekst jest zbyt długi */,
-                }}
-              >
-                {note.text}
-              </p>
-              <button
-                tabIndex={0}
-                onClick={() => {
-                  setIsFullNote(true);
-                  setSelectedFullNote(note._id);
-                }}
-                onKeyDown={() => setIsFullNote(true)}
-                style={{
-                  position: 'absolute',
-                  width: '100%',
-                  top: 0,
-                  outline: 'none',
-                  opacity: '0',
-                }}
-              >
-                Full
-              </button>
-            </div>
-            <div>
-              <button onClick={() => handleEditNote(note)}>Edit</button>
-              <button onClick={() => onDelete(note._id)}>Remove</button>
-
-              {showModal && noteToDelete === note._id && (
-                <Modal
-                  title="Deleting note"
-                  content="Are you sure?"
-                  confirmText="Delete"
-                  cancelText="Cancel"
-                  showModal={showModal}
-                  onConfirm={() => {
-                    handleDeleteClick(note._id);
-                  }}
-                  onCancel={() => setNoteToDelete(null)}
-                  modalOnClick={true}
-                />
-              )}
-              {isFullNote && selectedFullNote === note._id && (
-                <NoteModal
-                  date={formatDate(note.createdAt)}
-                  text={note.text}
-                  onCancel={() => setIsFullNote(false)}
-                />
-              )}
-            </div>
-          </div>
+          <Notes
+            key={note._id}
+            note={note}
+            handleDeleteClick={handleDeleteClick}
+            isFullNote={isFullNote}
+            setIsFullNote={setIsFullNote}
+            setSelectedFullNote={setSelectedFullNote}
+            handleEditNote={() => handleEditNote(note)}
+            onDelete={() => onDelete(note._id)}
+            showModal={showModal}
+            noteToDelete={noteToDelete}
+            onCancel={() => setNoteToDelete(null)}
+            selectedFullNote={selectedFullNote}
+          />
         ))}
 
       {error && (
