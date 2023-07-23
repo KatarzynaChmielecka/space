@@ -1,7 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
 
+import Edit from '../assets/shared/edit.png';
 import Modal from './Modal';
 import NoteModal from './NoteModal';
+import Remove from '../assets/shared/delete.png';
+import classes from './Notes.module.css';
 import { Note } from '../types/interfaces';
 import { formatDate } from '../utils/formateDate';
 
@@ -32,11 +35,17 @@ const Notes = ({
   selectedFullNote,
 }: NotesProps) => {
   return (
-    <div key={note._id} style={{ width: '1090px', display: 'flex' }}>
-      <span>{formatDate(note.createdAt)}</span>
+    <div className={classes.note} style={{ width: '1090px', display: 'flex' }}>
+      <span className={classes['note__date']}>
+        {formatDate(note.createdAt)}
+      </span>
 
-      <div style={{ position: 'relative' }}>
+      <div
+        className={classes['note__text-wrapper']}
+        style={{ position: 'relative' }}
+      >
         <p
+          className={classes['note__text']}
           style={{
             width: '250px',
             whiteSpace: 'nowrap' /* Zapobiega zawijaniu tekstu na nową linię */,
@@ -48,6 +57,7 @@ const Notes = ({
           {note.text}
         </p>
         <button
+          className={classes['note__full-button']}
           tabIndex={0}
           onClick={() => {
             setIsFullNote(true);
@@ -65,32 +75,41 @@ const Notes = ({
           Full
         </button>
       </div>
-      <div>
-        <button onClick={handleEditNote}>Edit</button>
-        <button onClick={onDelete}>Remove</button>
-
-        {showModal && noteToDelete === note._id && (
-          <Modal
-            title="Deleting note"
-            content="Are you sure?"
-            confirmText="Delete"
-            cancelText="Cancel"
-            showModal={showModal}
-            onConfirm={() => {
-              handleDeleteClick(note._id);
-            }}
-            onCancel={onCancel}
-            modalOnClick={true}
-          />
-        )}
-        {isFullNote && selectedFullNote === note._id && (
-          <NoteModal
-            date={formatDate(note.createdAt)}
-            text={note.text}
-            onCancel={() => setIsFullNote(false)}
-          />
-        )}
+      <div className={classes['note__buttons-wrapper']}>
+        <button
+          onClick={handleEditNote}
+          style={{ border: 'none', background: 'none' }}
+        >
+          <img src={Edit} alt="Edit note icon" />
+        </button>
+        <button
+          onClick={onDelete}
+          style={{ border: 'none', background: 'none' }}
+        >
+          <img src={Remove} alt="Remove note icon" />
+        </button>
       </div>
+      {showModal && noteToDelete === note._id && (
+        <Modal
+          title="Deleting note"
+          content="Are you sure?"
+          confirmText="Delete"
+          cancelText="Cancel"
+          showModal={showModal}
+          onConfirm={() => {
+            handleDeleteClick(note._id);
+          }}
+          onCancel={onCancel}
+          modalOnClick={true}
+        />
+      )}
+      {isFullNote && selectedFullNote === note._id && (
+        <NoteModal
+          date={formatDate(note.createdAt)}
+          text={note.text}
+          onCancel={() => setIsFullNote(false)}
+        />
+      )}
     </div>
   );
 };

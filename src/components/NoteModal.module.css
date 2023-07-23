@@ -42,6 +42,7 @@
   overflow-y: auto;
   padding: 3.56rem;
   width: 100%;
+  overflow-wrap: break-word;
 }
 
 .note-modal__text::-webkit-scrollbar {
@@ -94,5 +95,6 @@
 
   .note-modal__text {
     width: 18.75rem;
+    padding: 1.56rem;
   }
 }
