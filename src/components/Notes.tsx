@@ -35,7 +35,7 @@ const Notes = ({
   selectedFullNote,
 }: NotesProps) => {
   return (
-    <div className={classes.note} style={{ width: '1090px', display: 'flex' }}>
+    <div className={classes.note}>
       <span className={classes['note__date']}>
         {formatDate(note.createdAt)}
       </span>

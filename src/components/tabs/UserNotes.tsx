@@ -3,6 +3,7 @@ import { ToastContentProps, toast } from 'react-toastify';
 import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import AvatarEmail from '../AvatarEmail';
 import ChangeNote from '../changeData/ChangeNote';
 import Loader from '../Loader';
 import Modal from '../Modal';
@@ -85,7 +86,9 @@ const UserNotes = () => {
   document.body.style.overflow = 'auto';
 
   return (
-    <>
+    <div
+    // style={{ outline: '1px solid red', overflowY: 'hidden', height: '100%' }}
+    >
       {loading ? <Loader /> : null}
 
       <ChangeNote
@@ -110,26 +113,37 @@ const UserNotes = () => {
       {!isAddingNote && userData && !isEditingNote && (
         <button onClick={() => setIsAddingNote(true)}>add note</button>
       )}
-
-      {userData &&
-        !isEditingNote &&
-        !isAddingNote &&
-        userData.user.notes.map((note: Note) => (
-          <Notes
-            key={note._id}
-            note={note}
-            handleDeleteClick={handleDeleteClick}
-            isFullNote={isFullNote}
-            setIsFullNote={setIsFullNote}
-            setSelectedFullNote={setSelectedFullNote}
-            handleEditNote={() => handleEditNote(note)}
-            onDelete={() => onDelete(note._id)}
-            showModal={showModal}
-            noteToDelete={noteToDelete}
-            onCancel={() => setNoteToDelete(null)}
-            selectedFullNote={selectedFullNote}
-          />
-        ))}
+      {userData && (
+        <AvatarEmail src={userData.user.avatar} email={userData.user.email} />
+      )}
+      <div
+      // style={{
+      //   background: '#ffffff1a',
+      //   // maxHeight: '300px',
+      //   height: '300px',
+      //   overflowY: 'scroll',
+      // }}
+      >
+        {userData &&
+          !isEditingNote &&
+          !isAddingNote &&
+          userData.user.notes.map((note: Note) => (
+            <Notes
+              key={note._id}
+              note={note}
+              handleDeleteClick={handleDeleteClick}
+              isFullNote={isFullNote}
+              setIsFullNote={setIsFullNote}
+              setSelectedFullNote={setSelectedFullNote}
+              handleEditNote={() => handleEditNote(note)}
+              onDelete={() => onDelete(note._id)}
+              showModal={showModal}
+              noteToDelete={noteToDelete}
+              onCancel={() => setNoteToDelete(null)}
+              selectedFullNote={selectedFullNote}
+            />
+          ))}
+      </div>
 
       {error && (
         <Modal
@@ -143,7 +157,7 @@ const UserNotes = () => {
           showModal={true}
         />
       )}
-    </>
+    </div>
   );
 };
 export default UserNotes;

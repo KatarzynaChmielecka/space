@@ -1,11 +1,12 @@
 import * as Yup from 'yup';
 import axios from 'axios';
-import { ChangeEvent, ReactEventHandler, useContext, useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import { ToastContentProps, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import AvatarEmail from '../AvatarEmail';
 import Delete from '../../assets/shared/delete.png';
 import Loader from '../Loader';
 import Modal from '../Modal';
@@ -14,7 +15,6 @@ import classes2 from '../../pages/Form.module.css';
 import useGet from '../../hooks/useGet';
 import { AuthContext } from '../../context/auth-context';
 import { Response } from '../../types/interfaces';
-import { errorImage } from '../../utils/errorImage';
 
 interface ImagesFormValues {
   images: FileList[];
@@ -173,18 +173,9 @@ const UserImages = () => {
       {loading ? <Loader /> : null}
 
       {token && userData && (
-        <>
-          <div className={classes['user-images-wrapper__user-data']}>
-            <img
-              src={userData.user.avatar}
-              alt="User avatar"
-              onError={errorImage as ReactEventHandler<HTMLImageElement>}
-            />
+        <div>
+          <AvatarEmail src={userData.user.avatar} email={userData.user.email} />
 
-            <p className={classes['user-images-wrapper__user-data-mail']}>
-              {userData.user.email}
-            </p>
-          </div>
           <div className={classes['user-images-wrapper__images']}>
             <h6 className={classes['user-images-wrapper__images-subtitle']}>
               YOUR PHOTOS
@@ -300,7 +291,7 @@ const UserImages = () => {
               )}
             </div>
           </div>
-        </>
+        </div>
       )}
 
       {error && (
