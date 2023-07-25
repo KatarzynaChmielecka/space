@@ -8,7 +8,9 @@ import ChangeNote from '../changeData/ChangeNote';
 import Loader from '../Loader';
 import Modal from '../Modal';
 import Notes from '../Notes';
+import Search from '../../assets/shared/search.png';
 import SubmitNote from '../SubmitNote';
+import classes from './UserNotes.module.css';
 import useGet from '../../hooks/useGet';
 import { AuthContext } from '../../context/auth-context';
 import { Note, Response } from '../../types/interfaces';
@@ -87,7 +89,8 @@ const UserNotes = () => {
 
   return (
     <div
-    // style={{ outline: '1px solid red', overflowY: 'hidden', height: '100%' }}
+      style={{ outline: '1px solid red' }}
+      className={classes['user-notes-wrapper']}
     >
       {loading ? <Loader /> : null}
 
@@ -111,19 +114,35 @@ const UserNotes = () => {
       />
 
       {!isAddingNote && userData && !isEditingNote && (
-        <button onClick={() => setIsAddingNote(true)}>add note</button>
+        <div className={classes['user-notes-wrapper__header']}>
+          <AvatarEmail src={userData.user.avatar} email={userData.user.email} />
+          <div className={classes['user-notes-wrapper__search-add']}>
+            <div
+              className={classes['user-notes-wrapper__input-search-wrapper']}
+            >
+              <img
+                src={Search}
+                alt="Search"
+                className={classes['user-notes-wrapper__input-icon']}
+              />
+              <input
+                type="search"
+                name="search"
+                placeholder="Search note..."
+                className={classes['user-notes-wrapper__input-search']}
+              />
+            </div>
+            <button
+              onClick={() => setIsAddingNote(true)}
+              className={classes['user-notes-wrapper__new-note']}
+            >
+              NEW NOTE
+            </button>
+          </div>
+        </div>
       )}
-      {userData && (
-        <AvatarEmail src={userData.user.avatar} email={userData.user.email} />
-      )}
-      <div
-      // style={{
-      //   background: '#ffffff1a',
-      //   // maxHeight: '300px',
-      //   height: '300px',
-      //   overflowY: 'scroll',
-      // }}
-      >
+
+      <div className={classes['user-notes-wrapper__notes-list']}>
         {userData &&
           !isEditingNote &&
           !isAddingNote &&

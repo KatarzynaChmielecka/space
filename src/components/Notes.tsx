@@ -40,22 +40,8 @@ const Notes = ({
         {formatDate(note.createdAt)}
       </span>
 
-      <div
-        className={classes['note__text-wrapper']}
-        style={{ position: 'relative' }}
-      >
-        <p
-          className={classes['note__text']}
-          style={{
-            width: '250px',
-            whiteSpace: 'nowrap' /* Zapobiega zawijaniu tekstu na nową linię */,
-            overflow: 'hidden' /* Ukrywa tekst, który nie mieści się w divie */,
-            textOverflow:
-              'ellipsis' /* Dodaje "..." na końcu, jeśli tekst jest zbyt długi */,
-          }}
-        >
-          {note.text}
-        </p>
+      <div className={classes['note__text-wrapper']}>
+        <p className={classes['note__text']}>{note.text}</p>
         <button
           className={classes['note__full-button']}
           tabIndex={0}
@@ -64,31 +50,26 @@ const Notes = ({
             setSelectedFullNote(note._id);
           }}
           onKeyDown={() => setIsFullNote(true)}
-          style={{
-            position: 'absolute',
-            width: '100%',
-            top: 0,
-            outline: 'none',
-            opacity: '0',
-          }}
         >
           Full
         </button>
       </div>
+
       <div className={classes['note__buttons-wrapper']}>
         <button
           onClick={handleEditNote}
-          style={{ border: 'none', background: 'none' }}
+          className={classes['note__buttons-edit-cancel']}
         >
           <img src={Edit} alt="Edit note icon" />
         </button>
         <button
           onClick={onDelete}
-          style={{ border: 'none', background: 'none' }}
+          className={classes['note__buttons-edit-cancel']}
         >
           <img src={Remove} alt="Remove note icon" />
         </button>
       </div>
+
       {showModal && noteToDelete === note._id && (
         <Modal
           title="Deleting note"
@@ -103,6 +84,7 @@ const Notes = ({
           modalOnClick={true}
         />
       )}
+
       {isFullNote && selectedFullNote === note._id && (
         <NoteModal
           date={formatDate(note.createdAt)}

@@ -1,3 +1,61 @@
 .note {
   display: flex;
+  justify-content: space-between;
+  margin: 0 0 30px 0;
+  max-width: 67.81rem;
+  outline: 1px solid lightblue;
+  width: 100%;
+}
+
+.note__date {
+  align-items: center;
+  display: flex;
+  margin: 0 65px 0 0;
+  width: 85px;
+}
+
+.note__text-wrapper {
+  position: relative;
+}
+
+.note__text {
+  background: #ffffff40;
+  height: 65px;
+  line-height: 3.5;
+  overflow: hidden;
+  padding: 0 40px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 760px;
+}
+
+.note__date,
+.note__text {
+  color: #d0d6f9;
+  font-family: Barlow;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.note__full-button {
+  cursor: pointer;
+  height: 100%;
+  opacity: 0;
+  outline: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.note__buttons-wrapper {
+  display: flex;
+  gap: 30px;
+  padding: 0 30px;
+}
+
+.note__buttons-edit-cancel {
+  background: none;
+  border: none;
+  cursor: pointer;
 }

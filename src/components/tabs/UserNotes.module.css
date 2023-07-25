@@ -1,0 +1,56 @@
+.user-notes-wrapper__header {
+  padding: 60px 25px 25px 25px;
+}
+
+.user-notes-wrapper__search-add {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 28px;
+}
+
+.user-notes-wrapper__input-search-wrapper {
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.user-notes-wrapper__input-icon {
+  position: absolute;
+  right: 11px;
+}
+
+.user-notes-wrapper__input-search {
+  align-items: center;
+  background: #282a33;
+  border: 1px solid #d0d6f9;
+  border-radius: 10px;
+  color: #616476;
+  display: flex;
+  font-size: 28px;
+  height: 40px;
+  padding: 11px;
+  width: 480px;
+}
+
+.user-notes-wrapper__new-note {
+  background: #fff;
+  border: 2px solid #d0d6f9;
+  border-radius: 0.63rem;
+  color: #0b0d17;
+  font-size: 1.75rem;
+  height: 3.75rem;
+  letter-spacing: 2px;
+  width: 13.13rem;
+}
+
+.user-notes-wrapper__new-note:hover {
+  cursor: pointer;
+  outline: 0.63rem solid #d9d9d94d;
+}
+
+.user-notes-wrapper__notes-list {
+  background: #ffffff1a;
+  outline: 1px solid green;
+  padding: 30px 0 30px 110px;
+  width: 100%;
+}
