@@ -49,8 +49,13 @@
 }
 
 .user-notes-wrapper__notes-list {
-  background: #ffffff1a;
-  outline: 1px solid green;
-  padding: 30px 0 30px 110px;
   width: 100%;
+  max-height: 500px;
 }
+
+.user-notes-wrapper__notes-list-content {
+  background: #ffffff1a;
+  width: 100%;
+  padding: 30px 0 30px 110px;
+}
+

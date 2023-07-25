@@ -15,6 +15,11 @@ import useGet from '../../hooks/useGet';
 import { AuthContext } from '../../context/auth-context';
 import { Note, Response } from '../../types/interfaces';
 
+// eslint-disable-next-line import/no-unresolved
+import 'overlayscrollbars/overlayscrollbars.css';
+
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+
 const UserNotes = () => {
   const [selectedNote, setSelectedNote] = useState<string | null>(null);
   const [isEditingNote, setIsEditingNote] = useState<boolean>(false);
@@ -88,10 +93,7 @@ const UserNotes = () => {
   document.body.style.overflow = 'auto';
 
   return (
-    <div
-      style={{ outline: '1px solid red' }}
-      className={classes['user-notes-wrapper']}
-    >
+    <div className={classes['user-notes-wrapper']}>
       {loading ? <Loader /> : null}
 
       <ChangeNote
@@ -142,27 +144,38 @@ const UserNotes = () => {
         </div>
       )}
 
-      <div className={classes['user-notes-wrapper__notes-list']}>
-        {userData &&
-          !isEditingNote &&
-          !isAddingNote &&
-          userData.user.notes.map((note: Note) => (
-            <Notes
-              key={note._id}
-              note={note}
-              handleDeleteClick={handleDeleteClick}
-              isFullNote={isFullNote}
-              setIsFullNote={setIsFullNote}
-              setSelectedFullNote={setSelectedFullNote}
-              handleEditNote={() => handleEditNote(note)}
-              onDelete={() => onDelete(note._id)}
-              showModal={showModal}
-              noteToDelete={noteToDelete}
-              onCancel={() => setNoteToDelete(null)}
-              selectedFullNote={selectedFullNote}
-            />
-          ))}
-      </div>
+      <OverlayScrollbarsComponent options={{
+        overflow: {
+          x: 'hidden',
+          y: 'scroll'
+        },
+        scrollbars: {
+          theme: 'os-theme-custom'
+        }}} defer={true}>
+        <div className={classes['user-notes-wrapper__notes-list']}>
+            <div className={classes['user-notes-wrapper__notes-list-content']}>
+                {userData &&
+                  !isEditingNote &&
+                  !isAddingNote &&
+                  userData.user.notes.map((note: Note) => (
+                    <Notes
+                      key={note._id}
+                      note={note}
+                      handleDeleteClick={handleDeleteClick}
+                      isFullNote={isFullNote}
+                      setIsFullNote={setIsFullNote}
+                      setSelectedFullNote={setSelectedFullNote}
+                      handleEditNote={() => handleEditNote(note)}
+                      onDelete={() => onDelete(note._id)}
+                      showModal={showModal}
+                      noteToDelete={noteToDelete}
+                      onCancel={() => setNoteToDelete(null)}
+                      selectedFullNote={selectedFullNote}
+                    />
+                  ))}
+              </div>
+        </div>
+        </OverlayScrollbarsComponent>
 
       {error && (
         <Modal

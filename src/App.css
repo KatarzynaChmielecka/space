@@ -88,3 +88,29 @@ a {
     align-items: flex-start;
   }
 }
+
+.os-theme-custom {
+  --os-size: 10px;
+}
+
+.os-theme-custom.os-scrollbar-horizontal {
+  --os-size: 10px;
+}
+
+.os-theme-custom.os-scrollbar-vertical {
+  --os-size: 15px;
+  background: rgba(76, 76, 76, 0.44);
+}
+
+.os-theme-custom.os-scrollbar-vertical > .os-scrollbar-track {
+  background: rgba(0, 0, 0, 0.36);
+}
+
+.os-theme-custom.os-scrollbar-vertical > .os-scrollbar-track > .os-scrollbar-handle {
+  background: rgba(55, 102, 127, 0.62);
+  border-radius: 7px;
+}
+
+.os-theme-custom.os-scrollbar-vertical > .os-scrollbar-track > .os-scrollbar-handle:hover {
+  cursor: pointer;
+}
