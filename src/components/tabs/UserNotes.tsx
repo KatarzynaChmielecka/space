@@ -88,10 +88,7 @@ const UserNotes = () => {
   document.body.style.overflow = 'auto';
 
   return (
-    <div
-      style={{ outline: '1px solid red' }}
-      className={classes['user-notes-wrapper']}
-    >
+    <div className={classes['user-notes-wrapper']}>
       {loading ? <Loader /> : null}
 
       <ChangeNote
@@ -142,11 +139,9 @@ const UserNotes = () => {
         </div>
       )}
 
-      <div className={classes['user-notes-wrapper__notes-list']}>
-        {userData &&
-          !isEditingNote &&
-          !isAddingNote &&
-          userData.user.notes.map((note: Note) => (
+      {userData && !isEditingNote && !isAddingNote && (
+        <div className={classes['user-notes-wrapper__notes-list']}>
+          {userData.user.notes.map((note: Note) => (
             <Notes
               key={note._id}
               note={note}
@@ -162,7 +157,8 @@ const UserNotes = () => {
               selectedFullNote={selectedFullNote}
             />
           ))}
-      </div>
+        </div>
+      )}
 
       {error && (
         <Modal
