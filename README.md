@@ -22,9 +22,9 @@ user can:
 - login
 - store his personal data in special protected site
 - change his data
-- add images to his personal collection (or remove) 
+- add images to his personal collection (or remove)
+- add/change/remove notes about space
 
-...more info soon
 
 ### Links
 
