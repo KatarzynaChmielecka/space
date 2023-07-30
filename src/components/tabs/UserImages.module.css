@@ -15,7 +15,8 @@
   flex-wrap: wrap;
   gap: 2.5rem 4.38rem;
   height: 14.38rem;
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: 1.25rem;
 }
 

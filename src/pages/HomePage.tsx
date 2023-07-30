@@ -18,12 +18,14 @@ const Home = () => {
             world experience!
           </p>
         </div>
-        <Link
-          to="/destination"
-          className={classes['home-page-wrapper__content-right']}
-        >
-          <p className={classes['home-page-wrapper__explore']}>EXPLORE</p>
-        </Link>
+        <div className={classes['home-page-wrapper__content-right']}>
+          <Link
+            to="/destination"
+            className={classes['home-page-wrapper__explore']}
+          >
+            EXPLORE
+          </Link>
+        </div>
       </div>
     </>
   );
