@@ -2,24 +2,6 @@
   padding: 3.75rem 0 2.5rem 2.5rem;
 }
 
-.user-images-wrapper__user-data {
-  align-items: center;
-  display: flex;
-  gap: 1.63rem;
-}
-
-.user-images-wrapper__user-data img {
-  border-radius: 50%;
-  height: 9.38rem;
-  width: 9.38rem;
-}
-
-.user-images-wrapper__user-data-mail {
-  font-family: 'Barlow Condensed';
-  font-size: 1.75rem;
-  letter-spacing: 0.29rem;
-}
-
 .user-images-wrapper__images-subtitle {
   color: #d0d6f9;
   font-family: 'Barlow';
@@ -32,12 +14,16 @@
   display: flex;
   flex-wrap: wrap;
   gap: 2.5rem 4.38rem;
+  height: 14.38rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1.25rem;
 }
 
 .user-images-wrapper__images-content {
+  height: 11.69rem;
   position: relative;
   width: 19.81rem;
-  height: 11.69rem;
 }
 
 .user-images-wrapper__main-image {
@@ -71,16 +57,8 @@
   .user-images-wrapper {
     padding: 1.25rem 1.25rem 2.5rem 1.25rem;
   }
-  .user-images-wrapper__user-data {
-    flex-direction: column;
-  }
 
   .user-images-wrapper__images-subtitle {
     text-align: center;
-  }
-
-  .user-images-wrapper__user-data img {
-    height: 4.63rem;
-    width: 4.63rem;
   }
 }

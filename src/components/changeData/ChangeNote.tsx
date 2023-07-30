@@ -1,62 +1,67 @@
 import * as Yup from 'yup';
-import { Dispatch, SetStateAction, useContext } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import classes from '../../pages/Form.module.css';
 import useChange from '../../hooks/useChange';
-import { AuthContext } from '../../context/auth-context';
 
 interface UserFormValues {
-  email: string | null;
+  text: string | null;
 }
+
 const UserFormSchema = () =>
   Yup.object({
-    email: Yup.string()
-      .email('Invalid email.')
-      .required('Your email is required.'),
+    text: Yup.string()
+      .required('Note is required.')
+      .min(20, 'Note should have at least 20 chars.'),
   });
 
-const ChangeEmail = ({
+const ChangeNote = ({
   isEditing,
-  userDataEmail,
+  userDataText,
   setIsEditing,
   fetchUserData,
-  setPreviewUrl,
+  noteId,
+  setSelectedNote,
 }: {
   isEditing: boolean;
-  userDataEmail: string | null;
+  userDataText: string | null;
   setIsEditing: Dispatch<SetStateAction<boolean>>;
   fetchUserData: () => void;
-  setPreviewUrl: Dispatch<SetStateAction<string | null>>;
+  noteId: string | null;
+  selectedNote: string | null;
+  setSelectedNote: Dispatch<SetStateAction<string | null>>;
 }) => {
-  const { token } = useContext(AuthContext);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<UserFormValues>({
-    values: { email: userDataEmail },
+    values: { text: userDataText },
     resolver: yupResolver(UserFormSchema()),
   });
 
   const { onSubmit } = useChange(
     isEditing,
     setIsEditing,
-    'email',
+    'notes',
     fetchUserData,
     reset,
     false,
-    setPreviewUrl,
+    true,
+    noteId,
+    setSelectedNote,
   );
+
   const handleFormSubmit = (data: UserFormValues) => {
-    onSubmit({ email: data.email as string });
+    onSubmit({ text: data.text as string });
   };
+
   return (
     <>
-      {isEditing && token && (
+      {isEditing && (
         <div className={classes['form-wrapper']}>
           <form
             onSubmit={handleSubmit(handleFormSubmit)}
@@ -66,17 +71,17 @@ const ChangeEmail = ({
               <div className={classes['field-wrapper']}>
                 <div className={classes['field-wrapper']}>
                   <div className={classes['input-wrapper']}>
-                    <label htmlFor="email" className={classes.label}>
-                      Email
+                    <label htmlFor="text" className={classes.label}>
+                      text
                     </label>
                     <input
-                      type="email"
-                      {...register('email')}
-                      placeholder="email"
+                      type="text"
+                      {...register('text')}
+                      placeholder="note text"
                       className={classes.input}
                     />
                   </div>
-                  <p className={classes.error}>{errors.email?.message}</p>
+                  <p className={classes.error}>{errors.text?.message}</p>
                 </div>
               </div>
             </fieldset>
@@ -86,6 +91,7 @@ const ChangeEmail = ({
               <button
                 onClick={() => {
                   setIsEditing(false);
+                  setSelectedNote(null);
                   reset();
                 }}
                 className={classes['form-wrapper__form-button-back']}
@@ -105,4 +111,4 @@ const ChangeEmail = ({
     </>
   );
 };
-export default ChangeEmail;
+export default ChangeNote;

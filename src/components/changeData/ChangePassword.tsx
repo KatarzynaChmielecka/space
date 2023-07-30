@@ -32,12 +32,10 @@ const ChangePassword = ({
   isEditing,
   setIsEditing,
   fetchUserData,
-  setPreviewUrl,
 }: {
   isEditing: boolean;
   setIsEditing: Dispatch<SetStateAction<boolean>>;
   fetchUserData: () => void;
-  setPreviewUrl: Dispatch<SetStateAction<string | null>>;
 }) => {
   const { token } = useContext(AuthContext);
 
@@ -57,7 +55,7 @@ const ChangePassword = ({
     fetchUserData,
     reset,
     false,
-    setPreviewUrl,
+    false,
   );
 
   const handleFormSubmit = (data: UserFormValues) => {

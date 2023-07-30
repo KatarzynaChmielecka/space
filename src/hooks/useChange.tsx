@@ -16,7 +16,10 @@ const useChange = (
   fetchUserData: () => void,
   reset: () => void,
   isAvatar: boolean,
-  setPreviewUrl: Dispatch<SetStateAction<string | null>>,
+  isNote: boolean,
+  noteId?: string | null,
+  setPreviewUrl?: Dispatch<SetStateAction<string | null>> | undefined,
+  setSelectedNote?: Dispatch<SetStateAction<string | null>>,
 ) => {
   const paramsUserId = useParams().userId;
   const { token } = useContext(AuthContext);
@@ -28,7 +31,9 @@ const useChange = (
 
     const response = await toast.promise(
       axios.patch(
-        `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/${path}`,
+        isNote
+          ? `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/${path}/${noteId}`
+          : `${process.env.REACT_APP_BACKEND_URL}/user/${paramsUserId}/${path}`,
         isAvatar ? formData : data,
         {
           headers: {
@@ -40,7 +45,8 @@ const useChange = (
         pending: 'Please, wait.',
         success: {
           render() {
-            isAvatar && setPreviewUrl(null);
+            isAvatar && setPreviewUrl?.(null);
+            isNote && setSelectedNote?.(null);
             setIsEditing(false);
             fetchUserData();
             reset();
@@ -53,7 +59,7 @@ const useChange = (
           }: ToastContentProps<{
             response: Response;
           }>) {
-            isAvatar && setPreviewUrl(null);
+            isAvatar && setPreviewUrl?.(null);
             reset();
             if (data && data.response && data?.response.status === 0) {
               return (

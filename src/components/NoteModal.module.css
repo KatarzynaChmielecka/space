@@ -1,0 +1,85 @@
+.note-modal__overlay {
+  background: #0f111c99;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.note-modal__content {
+  align-items: center;
+  background: #1b1e29;
+  color: #d0d6f9;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.13rem;
+  height: auto;
+  left: 50%;
+  max-height: 28.38rem;
+  max-width: 71.56rem;
+  padding: 4.06rem;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  z-index: 10000;
+}
+
+.note-modal__date {
+  align-self: flex-start;
+  font-family: Barlow;
+  font-weight: 400;
+}
+
+.note-modal__text {
+  background: #ffffff40;
+  font-family: Barlow;
+  margin: 1.56rem 0 0 0;
+  max-width: 63.38rem;
+  min-height: 14.31rem;
+  overflow-wrap: break-word;
+  overflow-y: auto;
+  padding: 3.56rem;
+  width: 100%;
+}
+
+.note-modal__back {
+  align-items: flex-start;
+  align-self: flex-start;
+  background: #ffffff08;
+  border: 2px solid #d0d6f9;
+  border-radius: 0.63rem;
+  color: #d0d6f9;
+  display: flex;
+  font-size: 1.75rem;
+  justify-content: center;
+  margin: 2rem 0 0 0;
+  padding: 0.81rem 3.31rem;
+  width: 13.13rem;
+}
+
+.note-modal__back:hover {
+  background: #d9d9d94d;
+  cursor: pointer;
+  outline: 0.63rem solid #d9d9d94d;
+}
+
+@media screen and (max-width: 1440px) {
+  .note-modal__content {
+    max-width: 43.75rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .note-modal__content {
+    max-width: 21.88rem;
+    padding: 1.69rem;
+  }
+
+  .note-modal__text {
+    padding: 1.56rem;
+    width: 18.75rem;
+  }
+}

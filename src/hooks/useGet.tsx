@@ -9,6 +9,11 @@ interface Image {
   _id: string;
   imageUrl: string;
 }
+interface Note {
+  _id: string;
+  createdAt: string;
+  text: string;
+}
 interface UserData {
   user: {
     _id: string;
@@ -16,6 +21,7 @@ interface UserData {
     email: string;
     avatar: string;
     images: Image[];
+    notes: Note[];
   };
 }
 
@@ -66,6 +72,6 @@ const useGet = () => {
   useEffect(() => {
     fetchUserData();
   }, []);
-  return { userData, error, fetchUserData, loading };
+  return { userData, error, fetchUserData, loading, setValue };
 };
 export default useGet;

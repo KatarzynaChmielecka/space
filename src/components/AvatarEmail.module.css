@@ -1,0 +1,28 @@
+.user-avatar-email {
+  align-items: center;
+  display: flex;
+  gap: 1.63rem;
+}
+
+.user-avatar-email img {
+  border-radius: 50%;
+  height: 9.38rem;
+  width: 9.38rem;
+}
+
+.user-avatar-email__user-data-mail {
+  font-family: 'Barlow Condensed';
+  font-size: 1.75rem;
+  letter-spacing: 0.29rem;
+}
+
+@media screen and (max-width: 768px) {
+  .user-avatar-email {
+    flex-direction: column;
+  }
+
+  .user-avatar-email img {
+    height: 4.63rem;
+    width: 4.63rem;
+  }
+}

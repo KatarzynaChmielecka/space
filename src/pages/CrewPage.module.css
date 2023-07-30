@@ -1,7 +1,6 @@
 .crew-page-wrapper {
   display: flex;
   flex-direction: column;
-  height: 100%;
   padding: 5rem 5.63rem 0 10.31rem;
   width: 100%;
 }
@@ -60,7 +59,6 @@
 
 @media screen and (max-width: 1440px) {
   .crew-page-wrapper {
-    height: 100%;
     padding: 0.63rem 3.13rem 0 3.13rem;
   }
 
@@ -96,7 +94,7 @@
     display: flex;
     justify-content: center;
   }
-  
+
   .crew-page-carousel__image {
     margin-bottom: -7.5rem;
     transform: scale(0.66);
@@ -105,6 +103,7 @@
 
 @media screen and (max-width: 768px) {
   .crew-page-wrapper {
+    height: fit-content;
     padding-top: 0;
   }
 
@@ -120,6 +119,7 @@
     order: -1;
     width: auto;
   }
+
   .crew-page-carousel__image {
     border-bottom: 1px solid #383b4b;
     margin: 0;

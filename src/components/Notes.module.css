@@ -1,0 +1,83 @@
+.note {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 1.88rem 0;
+  max-width: 67.81rem;
+  width: 100%;
+}
+
+.note__date {
+  align-items: center;
+  display: flex;
+  margin: 0 4.06rem 0 0;
+  width: 5.31rem;
+}
+
+.note__text-wrapper {
+  position: relative;
+}
+
+.note__text {
+  background: #ffffff40;
+  height: 4.06rem;
+  line-height: 3.5;
+  overflow: hidden;
+  padding: 0 2.5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 47.5rem;
+}
+
+.note__date,
+.note__text {
+  color: #d0d6f9;
+  font-family: Barlow;
+  font-size: 1.13rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.note__full-button {
+  cursor: pointer;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.note__buttons-wrapper {
+  display: flex;
+  gap: 1.88rem;
+  padding: 0 1.88rem;
+}
+
+.note__buttons-edit-cancel {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1440px) {
+  .note {
+    flex-wrap: wrap;
+  }
+
+  .note__date {
+    order: 0;
+  }
+
+  .note__buttons-wrapper {
+    order: 1;
+    padding: 0;
+  }
+
+  .note__text-wrapper {
+    order: 2;
+    width: 100%;
+  }
+
+  .note__text {
+    width: 100%;
+  }
+}

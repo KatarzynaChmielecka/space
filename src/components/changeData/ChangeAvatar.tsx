@@ -64,6 +64,8 @@ const ChangeAvatar = ({
     fetchUserData,
     reset,
     true,
+    false,
+    null,
     setPreviewUrl,
   );
   const handleFormSubmit = (data: UserFormValues) => {

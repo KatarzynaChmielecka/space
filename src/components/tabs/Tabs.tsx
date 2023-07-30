@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import UserData from './UserData';
 import UserImages from './UserImages';
+import UserNotes from './UserNotes';
 import classes from './Tabs.module.css';
 import { AuthContext } from '../../context/auth-context';
 import { Response } from '../../types/interfaces';
@@ -103,17 +104,7 @@ const Tabs: FC = () => {
 
         {activeTab === 'photos' && <UserImages />}
 
-        {activeTab === 'notes' && (
-          <div>
-            <h2>Notes</h2>
-
-            <ul>
-              <li>Note 1</li>
-              <li>Note 2</li>
-              <li>Note 3</li>
-            </ul>
-          </div>
-        )}
+        {activeTab === 'notes' && <UserNotes />}
       </div>
     </div>
   );
