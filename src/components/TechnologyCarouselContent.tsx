@@ -25,6 +25,7 @@ const TechnologyCarouselContent = ({
           src={src}
           alt={name}
           className={classes['technology-page-carousel__image']}
+          draggable="false"
         />
       </div>
     </div>
