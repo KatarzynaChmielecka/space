@@ -1,0 +1,35 @@
+.user-notes-wrapper__input-search-wrapper {
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.user-notes-wrapper__input-icon {
+    position: absolute;
+    right: 0.69rem;
+  }
+
+  .user-notes-wrapper__input-search {
+    align-items: center;
+    background: #282a33;
+    border: 1px solid #d0d6f9;
+    border-radius: 0.63rem;
+    color: #616476;
+    display: flex;
+    font-size: 1.75rem;
+    height: 2.5rem;
+    padding: 0.69rem;
+    width: 30rem;
+  }
+
+
+@media screen and (max-width: 1440px) {
+  .user-notes-wrapper__input-search-wrapper {
+    max-width: 30rem;
+    width: 100%;
+  }
+
+  .user-notes-wrapper__input-search {
+    width: 100%;
+  }
+}

@@ -83,6 +83,10 @@ a {
   border-radius: 5px;
 }
 
+input[type='search']::-webkit-search-cancel-button {
+  display: none;
+}
+
 @media screen and (max-width: 1440px) {
   .crew-page-wrapper .rec-pagination {
     left: auto;
