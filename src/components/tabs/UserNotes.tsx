@@ -8,7 +8,7 @@ import ChangeNote from '../changeData/ChangeNote';
 import Loader from '../Loader';
 import Modal from '../Modal';
 import Notes from '../Notes';
-import Search from '../../assets/shared/search.png';
+import SearchBar from '../SearchBar';
 import SubmitNote from '../SubmitNote';
 import classes from './UserNotes.module.css';
 import useGet from '../../hooks/useGet';
@@ -23,8 +23,9 @@ const UserNotes = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [noteToDelete, setNoteToDelete] = useState<string | null>(null);
   const [isAddingNote, setIsAddingNote] = useState<boolean>(false);
-  const paramsUserId = useParams().userId;
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
+  const paramsUserId = useParams().userId;
   const { token } = useContext(AuthContext);
   const { userData, setValue, fetchUserData, loading, error } = useGet();
 
@@ -85,6 +86,14 @@ const UserNotes = () => {
     );
   };
 
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+  };
+
+  const filteredNotes = userData?.user?.notes.filter((note: Note) =>
+    note.text.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
   document.body.style.overflow = 'auto';
 
   return (
@@ -114,21 +123,8 @@ const UserNotes = () => {
         <div className={classes['user-notes-wrapper__header']}>
           <AvatarEmail src={userData.user.avatar} email={userData.user.email} />
           <div className={classes['user-notes-wrapper__search-add']}>
-            <div
-              className={classes['user-notes-wrapper__input-search-wrapper']}
-            >
-              <img
-                src={Search}
-                alt="Search"
-                className={classes['user-notes-wrapper__input-icon']}
-              />
-              <input
-                type="search"
-                name="search"
-                placeholder="Search note..."
-                className={classes['user-notes-wrapper__input-search']}
-              />
-            </div>
+            <SearchBar onSearch={handleSearch} />
+
             <button
               onClick={() => setIsAddingNote(true)}
               className={classes['user-notes-wrapper__new-note']}
@@ -141,7 +137,11 @@ const UserNotes = () => {
 
       {userData && !isEditingNote && !isAddingNote && (
         <div className={classes['user-notes-wrapper__notes-list']}>
-          {userData.user.notes.map((note: Note) => (
+          {filteredNotes?.length === 0 && (
+            <p>You have 0 note with {searchQuery}.</p>
+          )}
+
+          {filteredNotes?.map((note: Note) => (
             <Notes
               key={note._id}
               note={note}
