@@ -1,4 +1,4 @@
-#### Fullstack app (in progress!) based on [frontendmentor.io](https://www.frontendmentor.io/challenges/space-tourism-multipage-website-gRWj1URZ3) challenge.
+#### Fullstack app based on [frontendmentor.io](https://www.frontendmentor.io/challenges/space-tourism-multipage-website-gRWj1URZ3) challenge.
 
 
 
@@ -24,6 +24,7 @@ user can:
 - change his data
 - add images to his personal collection (or remove)
 - add/change/remove notes about space
+- search notes by text
 
 
 ### Links
