@@ -45,8 +45,8 @@
 .destination-page-wrapper__tab:hover {
   border-bottom: 0.19rem solid #8a8b90;
   cursor: pointer;
-  margin: 0 0 0 1.25rem;
 }
+
 .destination-page-wrapper__tab.active {
   border-bottom: 0.19rem solid #fff;
 }
@@ -54,6 +54,7 @@
 .destination-page-tab-panel {
   display: flex;
 }
+
 @media screen and (max-width: 1440px) {
   .destination-page-wrapper {
     overflow-y: auto;
@@ -85,6 +86,7 @@
   .destination-page-wrapper {
     padding: 0 1.5rem 3.75rem 1.5rem;
   }
+
   .destination-page-wrapper__title {
     font-size: 1rem;
     margin: 0 0 -1.25rem 2.5rem;

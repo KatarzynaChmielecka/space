@@ -30,6 +30,7 @@ const Crew = () => {
                 src={index.images.webp}
                 alt={index.name}
                 className={classes['crew-page-carousel__image']}
+                draggable="false"
               />
             </div>
           </div>
