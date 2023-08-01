@@ -10,7 +10,7 @@
 - [Process](#process)
   - [Built with](#built-with)
   - [Continued development](#continued-development)
-- [Author](#author)
+- [Authors](#authors)
 -  [Screenshots](#screenshots)
 
 ## Overview
@@ -53,9 +53,12 @@ user can:
 - prettier
 
 
-## Author
+## Authors
 
- - [Katarzyna Chmielecka](https://github.com/KatarzynaChmielecka)
+ - [Katarzyna Chmielecka](https://github.com/KatarzynaChmielecka) Fullstack developer
+ - [Izabela Kaim-Kalinowska](http://www.kikmotif.pl/) UI/UX designer
+ - [Emilia Markiewicz](https://emcia.design/) UI/UX designer
+ - and of course https://www.frontendmentor.io
 
 
 
