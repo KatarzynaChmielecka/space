@@ -32,6 +32,7 @@ user can:
 - [Demo](https://space-katarzynachmielecka.vercel.app/)
 - [Backend part](https://github.com/KatarzynaChmielecka/space-backend)
 - [Figma](https://www.figma.com/file/0zdTKUMiUV9XMi3ehL8Ufc/space-tourism-website?t=mYdOOJdEsjyFpilJ-0)
+- [Figma2](https://www.figma.com/file/0lsdnCNrHzX93X4Od6Bv3p/EMA-for-Kasia---space-tourism-website?node-id=0%3A424&mode=dev)
 - [Loaders](https://cssloaders.github.io/)
 
 
