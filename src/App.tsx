@@ -5,6 +5,7 @@ import { Suspense, lazy } from 'react';
 
 import Layout from './components/layout/Layout';
 import Loader from './components/Loader';
+import NotFound from './pages/NotFound';
 import { AuthContext } from './context/auth-context';
 import { useAuth } from './hooks/auth-hook';
 
@@ -37,6 +38,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/user/:userId" element={<User />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </Suspense>

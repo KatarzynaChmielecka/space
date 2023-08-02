@@ -12,6 +12,7 @@ interface Props {
   onCancel?: () => void;
   showModal?: boolean;
   modalOnClick: boolean;
+  notFound?: boolean;
 }
 
 const Modal = ({
@@ -23,6 +24,7 @@ const Modal = ({
   onCancel,
   showModal,
   modalOnClick,
+  notFound,
 }: Props) => {
   const handleBodyScroll = (showModal: boolean) => {
     document.body.style.overflow = showModal ? 'hidden' : 'auto';
@@ -65,21 +67,42 @@ const Modal = ({
 
           {!modalOnClick && (
             <>
-              <button
-                className={`${classes.modal__button} ${classes['modal__button--cancel']}`}
-                onClick={() => {
-                  handleBodyScroll(false);
-                  window.location.reload();
-                }}
-              >
-                Refresh
-              </button>
-              <Link
-                className={`${classes.modal__button} ${classes['modal__button--confirm']}`}
-                to={'/login'}
-              >
-                Log in
-              </Link>
+              {!notFound && (
+                <>
+                  <button
+                    className={`${classes.modal__button} ${classes['modal__button--cancel']}`}
+                    onClick={() => {
+                      handleBodyScroll(false);
+                      window.location.reload();
+                    }}
+                  >
+                    Refresh
+                  </button>
+                  <Link
+                    className={`${classes.modal__button} ${classes['modal__button--confirm']}`}
+                    to={'/login'}
+                  >
+                    Log in
+                  </Link>
+                </>
+              )}
+
+              {notFound && (
+                <>
+                  <Link
+                    className={`${classes.modal__button} ${classes['modal__button--confirm']}`}
+                    to={'/'}
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    className={`${classes.modal__button} ${classes['modal__button--confirm']}`}
+                    to={'/login'}
+                  >
+                    Log in
+                  </Link>
+                </>
+              )}
             </>
           )}
         </div>
