@@ -138,7 +138,7 @@ const UserNotes = () => {
       {userData && !isEditingNote && !isAddingNote && (
         <div className={classes['user-notes-wrapper__notes-list']}>
           {filteredNotes?.length === 0 && (
-            <p>You have 0 note with {searchQuery}.</p>
+            <p>You have 0 notes with {searchQuery}.</p>
           )}
 
           {filteredNotes?.map((note: Note) => (
