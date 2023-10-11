@@ -27,9 +27,11 @@ const Nav = () => {
 
   const showNavigation = navigationLink.some((page) => isPageFound(page.href));
 
+  const isRegisterPage = location.pathname === '/register';
+
   return (
     <>
-      {showNavigation && (
+      {(showNavigation || isRegisterPage) && (
         <nav className={classes.nav}>
           <img src={Logo} alt="App logo" />
 
